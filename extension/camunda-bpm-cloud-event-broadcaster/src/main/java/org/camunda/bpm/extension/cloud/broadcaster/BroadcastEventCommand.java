@@ -2,10 +2,14 @@ package org.camunda.bpm.extension.cloud.broadcaster;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
 
 public class BroadcastEventCommand extends HystrixCommand<String> {
+
+  public static final Logger LOGGER = LoggerFactory.getLogger(BroadcastEventCommand.class);
 
   private final String url;
   private final HttpEntity<String> request;
@@ -21,5 +25,11 @@ public class BroadcastEventCommand extends HystrixCommand<String> {
   @Override
   protected String run() throws Exception {
     return rest.postForObject(url, request, String.class);
+  }
+
+  @Override
+  protected String getFallback() {
+    LOGGER.error("Broadcast of event failed.");
+    return "{'status' : 'failed'}";
   }
 }
