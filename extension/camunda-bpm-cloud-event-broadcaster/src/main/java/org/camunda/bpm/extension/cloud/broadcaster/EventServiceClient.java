@@ -8,13 +8,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Component
 public class EventServiceClient {
 
   public static final Logger LOGGER = LoggerFactory.getLogger(EventServiceClient.class);
-  private final RestTemplate rest = new RestTemplate();
 
   @Value(value = "${eventServiceBaseUrl}")
   private String baseUrl;
@@ -23,7 +21,7 @@ public class EventServiceClient {
 
     final String url = baseUrl + "/task";
 
-    String result = rest.postForObject(url, fromTask(task), String.class);
+    String result = new BroadcastEventCommand(url, fromTask(task)).execute();
 
     LOGGER.info("Result: {}", result);
   }
