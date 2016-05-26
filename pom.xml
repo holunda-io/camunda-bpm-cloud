@@ -12,7 +12,7 @@
   </parent>
 
   <groupId>org.camunda.bpm.extension</groupId>
-  <artifactId>camunda-bpm-spring-boot-cloud-root</artifactId>
+  <artifactId>camunda-bpm-cloud-root</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <packaging>pom</packaging>

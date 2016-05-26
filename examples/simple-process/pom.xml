@@ -3,11 +3,11 @@
 
   <parent>
     <groupId>org.camunda.bpm.extension.example</groupId>
-    <artifactId>camunda-bpm-spring-boot-cloud-example-root</artifactId>
+    <artifactId>camunda-bpm-cloud-example-root</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>camunda-bpm-spring-boot-cloud-example-simple-process</artifactId>
+  <artifactId>camunda-bpm-cloud-example-simple-process</artifactId>
 
   <properties>
     <start-class>org.camunda.bpm.spring.boot.cloud.example.SimpleProcessApplication</start-class>
@@ -36,7 +36,7 @@
 
     <dependency>
       <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-spring-boot-cloud-test</artifactId>
+      <artifactId>camunda-bpm-cloud-test</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
       <type>pom</type>
