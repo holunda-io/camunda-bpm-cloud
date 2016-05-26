@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>camunda-bpm-spring-boot-cloud-extension-root</artifactId>
+    <artifactId>camunda-bpm-cloud-extension-root</artifactId>
     <groupId>org.camunda.bpm.extension</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
