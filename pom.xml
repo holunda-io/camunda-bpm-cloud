@@ -21,6 +21,7 @@
     <module>docs</module>
 	<module>test</module>
 	<module>examples</module>
+	<module>extension</module>
   </modules>
 
   <properties>
