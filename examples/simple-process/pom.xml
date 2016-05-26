@@ -21,7 +21,7 @@
 
     <dependency>
       <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
     </dependency>
 
     <dependency>
