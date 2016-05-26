@@ -6,7 +6,9 @@ import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @CamundaSelector(type = "userTask", event = TaskListener.EVENTNAME_DELETE)
 public class TaskDeleteListener implements TaskListener {
 
