@@ -12,6 +12,7 @@
 
   <modules>
     <module>camunda-bpm-cloud-event-broadcaster</module>
+	<module>camunda-bpm-cloud-event-service</module>
   </modules>
 
   <dependencyManagement>

@@ -5,3 +5,7 @@ camunda.bpm:
   database:
     schema-update: drop-create
     type: h2
+
+    
+eventServiceBaseUrl: http://localhost:8081
+  
