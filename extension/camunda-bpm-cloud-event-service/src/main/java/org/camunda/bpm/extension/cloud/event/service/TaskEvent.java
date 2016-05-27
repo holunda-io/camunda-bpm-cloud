@@ -2,9 +2,27 @@ package org.camunda.bpm.extension.cloud.event.service;
 
 public class TaskEvent {
 
+  private String eventType;
   private String taskDefinitionKey;
   private String taskId;
   private String formKey;
+  private String engineUrl;
+
+  public String getEventType() {
+    return eventType;
+  }
+
+  public void setEventType(String eventType) {
+    this.eventType = eventType;
+  }
+
+  public String getEngineUrl() {
+    return engineUrl;
+  }
+
+  public void setEngineUrl(String engineUrl) {
+    this.engineUrl = engineUrl;
+  }
 
   public String getTaskDefinitionKey() {
     return taskDefinitionKey;
@@ -32,7 +50,8 @@ public class TaskEvent {
 
   @Override
   public String toString() {
-    return "TaskEvent [taskDefinitionKey=" + taskDefinitionKey + ", taskId=" + taskId + ", formKey=" + formKey + "]";
+    return "TaskEvent [eventType=" + eventType + ", taskDefinitionKey=" + taskDefinitionKey + ", taskId=" + taskId
+        + ", formKey=" + formKey + ", engineUrl=" + engineUrl + "]";
   }
 
 }

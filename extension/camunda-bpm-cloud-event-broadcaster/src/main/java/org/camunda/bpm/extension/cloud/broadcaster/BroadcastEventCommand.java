@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Command for sending events using hystrix.
+ */
 public class BroadcastEventCommand extends HystrixCommand<String> {
 
   public static final Logger LOGGER = LoggerFactory.getLogger(BroadcastEventCommand.class);
