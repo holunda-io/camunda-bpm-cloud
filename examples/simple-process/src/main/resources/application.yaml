@@ -6,6 +6,27 @@ camunda.bpm:
     schema-update: drop-create
     type: h2
 
-    
+
 eventServiceBaseUrl: http://localhost:8081
-  
+
+spring:
+  application:
+    name: SimpleProcess
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+
+endpoints:
+  info:
+    enabled: true
+
+info:
+  app:
+    engine: camunda
+    version: 7.4
+    instance: simpleProcess
+    java:
+      source: 1.8
+      target: 1.8
