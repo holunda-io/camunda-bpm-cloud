@@ -53,7 +53,7 @@ public class SimpleProcessTest {
   }
 
   private Task startInstanceAndGetTask() {
-    ProcessInstance instance = runtimeService.startProcessInstanceByKey("Process_1");
+    ProcessInstance instance = runtimeService.startProcessInstanceByKey("SimpleProcess");
     assertNotNull(instance);
 
     return taskService.createTaskQuery().active().singleResult();
