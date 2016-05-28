@@ -11,36 +11,49 @@ angular.module('SimpleCamundaClient', [])
         }
 
         function completeTask(task) {
-            TaskModel.complete(task.id)
+            TaskModel.complete(task.taskId)
                 .then(function (result) {
                     getTasks();
                 });
         }
 
-        function createProcessInstance() {
-            TaskModel.createProcessInstance('SimpleProcess')
+        function createProcessInstance(processDefinitionKey) {
+            TaskModel.createProcessInstance(processDefinitionKey)
                 .then(function (result) {
                     getTasks();
+                });
+        }
+
+        function getProcessDefinitions() {
+            TaskModel.getProcessDefinitions()
+                .then(function (result) {
+                    main.processDefinitions = result.data;
                 });
         }
 
         main.tasks = [];
         main.getTasks = getTasks;
         main.completeTask = completeTask;
+        main.processDefinitions = getProcessDefinitions;
         main.createProcessInstance = createProcessInstance;
 
         getTasks();
+        getProcessDefinitions();
     })
     .service('TaskModel', function ($http, ENDPOINT_URI) {
         var service = this,
-            path = 'task/';
+            path = 'http://localhost:8081/eventService/tasks';
 
         function getUrl() {
-            return ENDPOINT_URI + path;
+            return path;
         }
 
         function getUrlForId(taskId) {
-            return getUrl(path) + taskId;
+            return ENDPOINT_URI + 'task/' + taskId;
+        }
+
+        function getUrlForProcessDefinitionKey(processDefinitionKey) {
+            return ENDPOINT_URI + 'process-definition/key/' + processDefinitionKey;
         }
 
         function getUrlForProcessDefinitionKey(processDefinitionKey) {
@@ -49,6 +62,10 @@ angular.module('SimpleCamundaClient', [])
 
         function getUrlForInstanceCreation(processDefinitionKey) {
             return getUrlForProcessDefinitionKey(processDefinitionKey) + '/start';
+        }
+
+        function getUrlForProcessDefinitions() {
+          return ENDPOINT_URI + 'process-definition/';
         }
 
         service.all = function () {
@@ -67,4 +84,7 @@ angular.module('SimpleCamundaClient', [])
             return $http.post(getUrlForInstanceCreation(processDefinitionKey), '{}');
         };
 
+        service.getProcessDefinitions = function () {
+            return $http.get(getUrlForProcessDefinitions());
+        };
     });
