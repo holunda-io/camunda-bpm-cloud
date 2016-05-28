@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.0.0">
+  <bpmn:collaboration id="Collaboration_0oq882o">
+    <bpmn:participant id="Participant_0wollu6" processRef="TrivialProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="TrivialProcess" name="TrivialProcess" isExecutable="true">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_1p7oyak" name="Trivial User">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>user_trivialTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_012lbj8</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:sequenceFlow id="SequenceFlow_0zjpiy7" sourceRef="StartEvent_1" targetRef="user_trivialTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_1e7jwal" sourceRef="user_trivialTask" targetRef="EndEvent_012lbj8" />
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_0zjpiy7</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="user_trivialTask" name="Trivial Task" camunda:formKey="trivialTask">
+      <bpmn:incoming>SequenceFlow_0zjpiy7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1e7jwal</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_012lbj8">
+      <bpmn:incoming>SequenceFlow_1e7jwal</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0oq882o">
+      <bpmndi:BPMNShape id="Participant_0wollu5_di" bpmnElement="Participant_0wollu6">
+        <dc:Bounds x="143" y="37" width="465" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="215" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="188" y="135" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_012lbj8_di" bpmnElement="EndEvent_012lbj8">
+        <dc:Bounds x="502" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475" y="135" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zjpiy7_di" bpmnElement="SequenceFlow_0zjpiy7">
+        <di:waypoint xsi:type="dc:Point" x="251" y="117" />
+        <di:waypoint xsi:type="dc:Point" x="283" y="117" />
+        <di:waypoint xsi:type="dc:Point" x="283" y="117" />
+        <di:waypoint xsi:type="dc:Point" x="325" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="225.5" y="174" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1e7jwal_di" bpmnElement="SequenceFlow_1e7jwal">
+        <di:waypoint xsi:type="dc:Point" x="425" y="117" />
+        <di:waypoint xsi:type="dc:Point" x="502" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="467.5" y="92" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_04ab9t8_di" bpmnElement="user_trivialTask">
+        <dc:Bounds x="325" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1p7oyak_di" bpmnElement="Lane_1p7oyak">
+        <dc:Bounds x="173" y="37" width="435" height="160" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,12 @@
+camunda.bpm:
+  metrics.enabled: false
+  history-level: auto
+
+  database:
+    schema-update: drop-create
+    type: h2
+
+server:
+  port: 8082
+
+eventServiceBaseUrl: http://localhost:8081

@@ -13,6 +13,7 @@
 
   <modules>
     <module>simple-process</module>
+    <module>trivial-process</module>
 	</modules>
   <!-- examples should be usable standalone, do not add common deps/buils here! -->
 </project>
