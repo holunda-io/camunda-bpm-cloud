@@ -1,5 +1,5 @@
 angular.module('SimpleCamundaClient', [])
-    .constant('EVENT_SERVICE_URI', 'http://localhost:8081/eventService/tasks')
+    .constant('EVENT_SERVICE_URI', 'http://localhost:8081/eventService/')
     .constant('ENGINE_URI', 'http://localhost:8080/rest/engine/default/')
     .controller('TaskCtrl', function (TaskModel) {
         var main = this;
@@ -23,12 +23,12 @@ angular.module('SimpleCamundaClient', [])
             main.currentTask = task;
         }
 
-        function isCurrentTask(taskId) {
-            return main.currentTask !== null && main.currentTask.taskId === taskId;
+        function isCurrentTask(taskId, formKey) {
+            return main.currentTask !== null && main.currentTask.taskId === taskId && main.currentTask.formKey === formKey;
         }
 
-        function createProcessInstance(processDefinitionKey) {
-            TaskModel.createProcessInstance(processDefinitionKey)
+        function createProcessInstance(processDefinition) {
+            TaskModel.createProcessInstance(processDefinition)
                 .then(function (result) {
                     getTasks();
                 });
@@ -50,12 +50,11 @@ angular.module('SimpleCamundaClient', [])
         main.processDefinitions = getProcessDefinitions;
         main.createProcessInstance = createProcessInstance;
 
-        getTasks();
         getProcessDefinitions();
+        getTasks();
     })
     .service('TaskModel', function ($http, EVENT_SERVICE_URI, ENGINE_URI) {
-        var service = this,
-            path = 'http://localhost:8081/eventService/tasks';
+        var service = this;
 
         function getEventServiceUrl() {
             return EVENT_SERVICE_URI;
@@ -73,39 +72,36 @@ angular.module('SimpleCamundaClient', [])
           return getUrlForTask(task)  + '/complete/';
         }
 
-        function getUrlForProcessDefinitionKey(processDefinitionKey) {
-            return getEngineUrl() + 'process-definition/key/' + processDefinitionKey;
+        function getUrlForProcessDefinition(processDefinition) {
+            return processDefinition.engineUrl + 'rest/engine/default/process-definition/key/' + processDefinition.key;
         }
 
-        function getUrlForProcessDefinitionKey(processDefinitionKey) {
-            return getEngineUrl() + 'process-definition/key/' + processDefinitionKey;
-        }
-
-        function getUrlForInstanceCreation(processDefinitionKey) {
-            return getUrlForProcessDefinitionKey(processDefinitionKey) + '/start';
+        function getUrlForInstanceCreation(processDefinition) {
+            return getUrlForProcessDefinition(processDefinition) + '/start';
         }
 
         function getUrlForProcessDefinitions() {
-          return getEngineUrl() + 'process-definition/';
+          return getEventServiceUrl() + 'process';
         }
 
         service.all = function () {
-            return $http.get(getEventServiceUrl());
+            return $http.get(getEventServiceUrl() + 'tasks');
         };
 
-        service.fetch = function (taskId) {
-            return $http.get(getUrlForId(taskId));
+        service.fetch = function (task) {
+            return $http.get(getUrlForTask(task));
         };
 
         service.complete = function (task) {
             return $http.post(getUrlForTaskComplete(task), '{}');
         };
 
-        service.createProcessInstance = function (processDefinitionKey) {
-            return $http.post(getUrlForInstanceCreation(processDefinitionKey), '{}');
+        service.createProcessInstance = function (processDefinition) {
+            return $http.post(getUrlForInstanceCreation(processDefinition), '{}');
         };
 
         service.getProcessDefinitions = function () {
+        console.log($http.get(getUrlForProcessDefinitions()));
             return $http.get(getUrlForProcessDefinitions());
         };
     });

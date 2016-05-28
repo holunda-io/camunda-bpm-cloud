@@ -20,14 +20,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
-      <div ng-repeat="processDefinition in main.processDefinitions" >
-        <button type="submit" class="btn btn-primary" ng-click="main.createProcessInstance(processDefinition.key)">Create {{processDefinition.name}}</button>
+      <div ng-repeat="processDefinition in main.processDefinitions" class="item">
+        <button type="submit" class="btn btn-primary" ng-click="main.createProcessInstance(processDefinition)">Create {{processDefinition.name}}</button>
       </div>
     </div>
     <div class="col-md-4">
       <div class="item" ng-repeat="task in main.tasks" ng-click="main.setCurrentTask(task)"
-           ng-class="{'active':main.isCurrentTask(task.taskId)}">
-        
+           ng-class="{'active':main.isCurrentTask(task.taskId, task.formKey)}">
+
         <h3>{{task.taskId}}</h3>
         <p><strong>{{task.formKey}}</strong></p>
       </div>
