@@ -18,14 +18,14 @@ public class TaskCreateListener implements TaskListener {
 
   @Autowired
   private EventServiceClient client;
-  
+
   @Autowired
   private FormService formService;
 
   @Override
   public void notify(DelegateTask delegateTask) {
     final String formKey = formService.getTaskFormKey(delegateTask.getProcessDefinitionId(), delegateTask.getTaskDefinitionKey());
-    client.broadcastEvent(delegateTask, EventType.CRETATED, formKey);
+    client.broadcastEvent(delegateTask, EventType.CREATED, formKey);
     LOGGER.info("New task created: {}", delegateTask.getTaskDefinitionKey());
   }
 

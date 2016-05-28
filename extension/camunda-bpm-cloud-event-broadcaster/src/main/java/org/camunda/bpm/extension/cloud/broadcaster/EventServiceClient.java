@@ -22,7 +22,7 @@ public class EventServiceClient {
    * Event type.
    */
   public static enum EventType {
-    CRETATED, COMPLETED, DELETED
+    CREATED, COMPLETED, DELETED
   }
 
   @Value(value = "${eventServiceBaseUrl}")
@@ -30,7 +30,7 @@ public class EventServiceClient {
 
   /**
    * Sends the task event to the event service.
-   * 
+   *
    * @param task
    *          task delegate.
    * @param eventType
@@ -46,7 +46,7 @@ public class EventServiceClient {
 
   /**
    * Creates a JSON representation of the task.
-   * 
+   *
    * @param task
    *          task delegate
    * @return HTTP entity to be sent to the event service.
