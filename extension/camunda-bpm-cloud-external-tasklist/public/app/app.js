@@ -15,7 +15,16 @@ angular.module('SimpleCamundaClient', [])
             TaskModel.complete(task)
                 .then(function (result) {
                     getTasks();
+                    main.currentTask = null;
                 });
+        }
+
+        function setCurrentTask(task) {
+            main.currentTask = task;
+        }
+
+        function isCurrentTask(taskId) {
+            return main.currentTask !== null && main.currentTask.taskId === taskId;
         }
 
         function createProcessInstance(processDefinitionKey) {
@@ -34,6 +43,9 @@ angular.module('SimpleCamundaClient', [])
 
         main.tasks = [];
         main.getTasks = getTasks;
+        main.currentTask = null;
+        main.setCurrentTask = setCurrentTask;
+        main.isCurrentTask = isCurrentTask;
         main.completeTask = completeTask;
         main.processDefinitions = getProcessDefinitions;
         main.createProcessInstance = createProcessInstance;

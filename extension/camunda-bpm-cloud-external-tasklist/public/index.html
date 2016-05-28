@@ -20,16 +20,26 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
-      <div ng-repeat="processDefinition in main.processDefinitions">
-        <button type="submit" class="btn btn-default" ng-click="main.createProcessInstance(processDefinition.key)">Create {{processDefinition.name}}</button>
+      <div ng-repeat="processDefinition in main.processDefinitions" >
+        <button type="submit" class="btn btn-primary" ng-click="main.createProcessInstance(processDefinition.key)">Create {{processDefinition.name}}</button>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="item" ng-repeat="task in main.tasks">
-
-        <button type="button" class="close" ng-click="main.completeTask(task)">Complete Task</button>
+      <div class="item" ng-repeat="task in main.tasks" ng-click="main.setCurrentTask(task)"
+           ng-class="{'active':main.isCurrentTask(task.taskId)}">
+        
         <h3>{{task.taskId}}</h3>
         <p><strong>{{task.formKey}}</strong></p>
+      </div>
+    </div>
+    <div class="col-md-4" ng-show="main.currentTask">
+      <div class="item">
+        <button type="button" class="close" ng-click="main.completeTask(main.currentTask)">Complete Task</button>
+        <h3>{{main.currentTask.taskId}}</h3>
+        <p><strong>{{main.currentTask.taskDefinitionKey}}</strong></p>
+        <p><strong>{{main.currentTask.formKey}}</strong></p>
+        <p><strong>{{main.currentTask.engineUrl}}</strong></p>
+        <p><strong>{{main.currentTask.eventType}}</strong></p>
       </div>
     </div>
   </div>
