@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="SimpleCamundaClient">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Simple RESTful Website</title>
+
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-animate.min.js"></script>
+</head>
+<body ng-controller="TaskCtrl as main">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <button type="submit" class="btn btn-default" ng-click="main.createProcessInstance()">Create Process Instance</button>
+    </div>
+    <div class="col-md-4">
+      <div class="item" ng-repeat="task in main.tasks">
+
+        <button type="button" class="close" ng-click="main.completeTask(task)">Complete Task</button>
+        <h3>{{task.id}}</h3>
+        <p><strong>{{task.name}}</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app/app.js"></script>
+</body>
+</html>
