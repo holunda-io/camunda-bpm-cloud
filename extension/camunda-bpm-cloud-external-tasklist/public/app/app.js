@@ -81,11 +81,11 @@ angular.module('SimpleCamundaClient', [])
         }
 
         function getUrlForProcessDefinitions() {
-          return getEventServiceUrl() + 'process';
+          return getEventServiceUrl() + 'process-definition';
         }
 
         service.all = function () {
-            return $http.get(getEventServiceUrl() + 'tasks');
+            return $http.get(getEventServiceUrl() + 'task');
         };
 
         service.fetch = function (task) {
