@@ -18,7 +18,7 @@ public class EventService {
   @Autowired
   private EventCache eventCache;
 
-  @RequestMapping(produces = "application/json", value = "/eventService/tasks", method = RequestMethod.GET)
+  @RequestMapping(produces = "application/json", value = "/eventService/task", method = RequestMethod.GET)
   public HttpEntity<String> getTasks(){
     Collection<TaskEvent> events = eventCache.getEvents();
     return generateTaskCollectionJson(events);
@@ -32,7 +32,7 @@ public class EventService {
       .toString(), headers);
   }
 
-  @RequestMapping(produces = "application/json", value = "/eventService/process", method = RequestMethod.GET)
+  @RequestMapping(produces = "application/json", value = "/eventService/process-definition", method = RequestMethod.GET)
   public HttpEntity<String> getProcessDefinitions(){
     Collection<ProcessDefinition> processDefinitions = new ArrayList<ProcessDefinition>() { // anonymous subclass
       { // engines/processDefinitions should be retrieved from service registry. For the time being, static content
