@@ -101,7 +101,6 @@ angular.module('SimpleCamundaClient', [])
         };
 
         service.getProcessDefinitions = function () {
-        console.log($http.get(getUrlForProcessDefinitions()));
             return $http.get(getUrlForProcessDefinitions());
         };
     });
