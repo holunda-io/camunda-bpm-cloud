@@ -10,3 +10,18 @@ server:
   port: 8082
 
 eventServiceBaseUrl: http://localhost:8081
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+
+endpoints:
+  info:
+    enabled: true
+
+info:
+  app:
+    engine: camunda
+    version: 7.4
+    instance: trivialEngine
