@@ -9,10 +9,6 @@ camunda.bpm:
 
 eventServiceBaseUrl: http://localhost:8081
 
-spring:
-  application:
-    name: SimpleProcess
-
 eureka:
   client:
     healthcheck:
@@ -26,7 +22,4 @@ info:
   app:
     engine: camunda
     version: 7.4
-    instance: simpleProcess
-    java:
-      source: 1.8
-      target: 1.8
+    instance: simpleEngine
