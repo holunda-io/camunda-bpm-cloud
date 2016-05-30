@@ -7,6 +7,7 @@ angular.module('SimpleCamundaClient', [])
         function getTasks() {
             TaskModel.all()
                 .then(function (result) {
+                    getProcessDefinitions();
                     main.tasks = result.data;
                 });
         }
