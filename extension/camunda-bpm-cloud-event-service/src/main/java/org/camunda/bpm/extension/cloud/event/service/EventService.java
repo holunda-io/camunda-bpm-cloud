@@ -1,7 +1,11 @@
 package org.camunda.bpm.extension.cloud.event.service;
 
 import org.json.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,12 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class EventService {
 
   @Autowired
   private EventCache eventCache;
+
+  @Autowired
+  private CamundaRestClient camundaRestClient;
+
+  @Autowired
+  private DiscoveryClient discoveryClient;
+
+  public static final Logger LOGGER = LoggerFactory.getLogger(EventService.class);
 
   @RequestMapping(produces = "application/json", value = "/eventService/task", method = RequestMethod.GET)
   public HttpEntity<String> getTasks(){
@@ -34,12 +47,15 @@ public class EventService {
 
   @RequestMapping(produces = "application/json", value = "/eventService/process-definition", method = RequestMethod.GET)
   public HttpEntity<String> getProcessDefinitions(){
-    Collection<ProcessDefinition> processDefinitions = new ArrayList<ProcessDefinition>() { // anonymous subclass
-      { // engines/processDefinitions should be retrieved from service registry. For the time being, static content
-        add(new ProcessDefinition("SimpleProcess", "http://localhost:8080/", "SimpleProcess"));
-        add(new ProcessDefinition("TrivialProcess", "http://localhost:8082/", "TrivialProcess"));
-      }
-    };
+    Collection<ProcessDefinition> processDefinitions = new ArrayList<ProcessDefinition>();
+    getProcessEngines().forEach((ServiceInstance s) -> {
+      camundaRestClient.getProcessDefinitions(s.getUri().toString()).forEach((ProcessDefinition processDefinition) -> {
+        // processDefinition.setEngineUrl(s.getUri().toString());
+        // hack needed, to prevent cross origin resource sharing problem
+        processDefinition.setEngineUrl(String.format("http://localhost:%s/", s.getPort()));
+        processDefinitions.add(processDefinition);
+      });
+    });
     return generateProcessDefinitionCollectionJson(processDefinitions);
   }
 
@@ -49,5 +65,10 @@ public class EventService {
 
     return new HttpEntity<String>(new JSONArray(processDefinitions) //
       .toString(), headers);
+  }
+
+  private List<ServiceInstance> getProcessEngines(){
+    List<ServiceInstance> camundaEngineInstances = discoveryClient.getInstances("CamundaEngine");
+    return camundaEngineInstances;
   }
 }
