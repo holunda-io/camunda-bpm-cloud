@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -12,20 +13,11 @@
 
   <modules>
     <module>camunda-bpm-cloud-event-broadcaster</module>
-	<module>camunda-bpm-cloud-event-service</module>
+    <module>camunda-bpm-cloud-event-service</module>
   </modules>
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <!-- Import dependency management from camunda -->
-        <groupId>org.camunda.bpm</groupId>
-        <artifactId>camunda-bom</artifactId>
-        <version>${camunda.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-
       <dependency>
         <groupId>org.camunda.bpm.webapp</groupId>
         <artifactId>camunda-webapp-webjar</artifactId>
@@ -44,12 +36,12 @@
       <dependency>
         <groupId>org.camunda.bpm.extension</groupId>
         <artifactId>camunda-bpm-spring-boot-starter</artifactId>
-        <version>${project.version}</version>
+        <version>${camunda-springboot.version}</version>
       </dependency>
       <dependency>
         <groupId>org.camunda.bpm.extension</groupId>
         <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-        <version>${project.version}</version>
+        <version>${camunda-springboot.version}</version>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>

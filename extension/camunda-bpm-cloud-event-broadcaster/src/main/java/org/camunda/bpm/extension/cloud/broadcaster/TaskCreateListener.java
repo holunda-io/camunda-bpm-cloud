@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.extension.cloud.broadcaster.EventServiceClient.EventType;
 import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
+import org.camunda.bpm.extension.reactor.spring.listener.ReactorTaskListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @CamundaSelector(type = "userTask", event = TaskListener.EVENTNAME_CREATE)
-public class TaskCreateListener implements TaskListener {
+public class TaskCreateListener extends ReactorTaskListener {
 
   private final static Logger LOGGER = LoggerFactory.getLogger(TaskCreateListener.class);
 
