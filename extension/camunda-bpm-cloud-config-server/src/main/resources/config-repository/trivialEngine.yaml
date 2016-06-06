@@ -6,22 +6,17 @@ camunda.bpm:
     schema-update: drop-create
     type: h2
 
-server:
-  port: 8082
-
-eventServiceBaseUrl: http://localhost:8081
-
-eureka:
-  client:
-    healthcheck:
-      enabled: true
-
-endpoints:
-  info:
-    enabled: true
-
 info:
   app:
     engine: camunda
     version: 7.4
     instance: trivialEngine
+
+eureka:
+  instance:
+    metadata-map:
+      engine: camunda
+
+server:
+  port: 8082
+

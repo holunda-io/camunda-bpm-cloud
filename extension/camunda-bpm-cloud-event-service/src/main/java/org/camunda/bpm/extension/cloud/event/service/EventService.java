@@ -68,7 +68,14 @@ public class EventService {
   }
 
   private List<ServiceInstance> getProcessEngines(){
-    List<ServiceInstance> camundaEngineInstances = discoveryClient.getInstances("CamundaEngine");
-    return camundaEngineInstances;
+    List<String> services = discoveryClient.getServices();
+    List<ServiceInstance> camundaEngines = new ArrayList<ServiceInstance>();
+    for (String service : services) {
+      ServiceInstance serviceInstance = discoveryClient.getInstances(service).get(0);
+      if (serviceInstance.getMetadata().get("engine") != null && serviceInstance.getMetadata().get("engine").equals("camunda") ){
+        camundaEngines.add(serviceInstance);
+      }
+    }
+    return camundaEngines;
   }
 }

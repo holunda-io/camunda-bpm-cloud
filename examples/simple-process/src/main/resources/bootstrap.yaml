@@ -1,3 +1,8 @@
 spring:
   application:
-    name: CamundaEngine
+    name: simpleEngine
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: configServer
