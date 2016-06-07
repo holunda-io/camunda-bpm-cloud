@@ -18,7 +18,7 @@
     </dependency>
     <dependency>
       <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-reactor-spring-starter</artifactId>
+      <artifactId>camunda-bpm-reactor-core</artifactId>
       <version>${camunda-reactor.version}</version>
     </dependency>
     <dependency>

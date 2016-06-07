@@ -40,11 +40,13 @@
         <artifactId>camunda-bpm-spring-boot-starter</artifactId>
         <version>${camunda-springboot.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.camunda.bpm.extension</groupId>
         <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
         <version>${camunda-springboot.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>

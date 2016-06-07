@@ -11,9 +11,6 @@
 
   <artifactId>camunda-bpm-cloud-event-service</artifactId>
 
-  <properties>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>

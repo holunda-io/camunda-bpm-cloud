@@ -4,8 +4,8 @@ import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.extension.cloud.broadcaster.EventServiceClient.EventType;
+import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
-import org.camunda.bpm.extension.reactor.spring.listener.ReactorTaskListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @CamundaSelector(type = "userTask", event = TaskListener.EVENTNAME_COMPLETE)
-public class TaskCompleteListener extends ReactorTaskListener {
+public class TaskCompleteListener implements TaskListener {
 
   private final static Logger LOGGER = LoggerFactory.getLogger(TaskCompleteListener.class);
 
@@ -22,6 +22,11 @@ public class TaskCompleteListener extends ReactorTaskListener {
 
   @Autowired
   private FormService formService;
+
+  @Autowired
+  public void register(CamundaEventBus camundaEventBus) {
+    camundaEventBus.register(this);
+  }
 
   @Override
   public void notify(DelegateTask delegateTask) {
