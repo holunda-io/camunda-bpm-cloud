@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: trivialEngine
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: configServer

@@ -11,10 +11,6 @@
 
   <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
 
-  <properties>
-    <camunda.reactover.version>1.1</camunda.reactover.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.camunda.bpm</groupId>
@@ -22,8 +18,8 @@
     </dependency>
     <dependency>
       <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-reactor-core</artifactId>
-      <version>${camunda.reactover.version}</version>
+      <artifactId>camunda-bpm-reactor-spring-starter</artifactId>
+      <version>${camunda-reactor.version}</version>
     </dependency>
     <dependency>
       <groupId>com.netflix.hystrix</groupId>

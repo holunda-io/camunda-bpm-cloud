@@ -1,0 +1,18 @@
+camunda.bpm:
+  metrics.enabled: false
+  history-level: auto
+
+  database:
+    schema-update: drop-create
+    type: h2
+
+info:
+  app:
+    engine: camunda
+    version: 7.4
+    instance: simpleEngine
+
+eureka:
+  instance:
+    metadata-map:
+      engine: camunda

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: simpleEngine
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: configServer

@@ -1,6 +1,3 @@
-server:
-  port: 8081
-
 eureka:
   client:
     healthcheck:
@@ -9,3 +6,5 @@ eureka:
 endpoints:
   info:
     enabled: true
+
+eventServiceBaseUrl: http://localhost:8081

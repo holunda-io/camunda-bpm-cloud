@@ -1,12 +1,14 @@
 package org.camunda.bpm.extension.cloud.event.service;
 
-/**
- * Created by martingunther on 28.05.16.
- */
 public class ProcessDefinition {
 
   private String key;
   private String name;
+  private String engineUrl;
+
+  public ProcessDefinition() {
+    super();
+  }
 
   public String getName() {
     return name;
@@ -14,12 +16,6 @@ public class ProcessDefinition {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  private String engineUrl;
-
-  public ProcessDefinition() {
-    super();
   }
 
   public ProcessDefinition(String key, String engineUrl, String name) {

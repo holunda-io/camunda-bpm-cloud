@@ -16,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+@Deployment(resources = "trivial-process.bpmn")
 public class TrivialProcessTest {
 
   @Rule
@@ -28,13 +29,11 @@ public class TrivialProcessTest {
   TaskService taskService;
 
   @Test
-  @Deployment(resources = "trivial-process.bpmn")
   public void testDeploy() {
     // nothing to do.
   }
 
   @Test
-  @Deployment(resources = "trivial-process.bpmn")
   public void testStart() {
     Task task = startInstanceAndGetTask();
 
@@ -43,7 +42,6 @@ public class TrivialProcessTest {
   }
 
   @Test
-  @Deployment(resources = "trivial-process.bpmn")
   public void testCompleteTask() {
     Task task = startInstanceAndGetTask();
 
