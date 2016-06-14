@@ -9,15 +9,13 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  
   <artifactId>camunda-bpm-cloud-test</artifactId>
   <packaging>pom</packaging>
 
   <properties>
-    <assertj.version>3.2.0</assertj.version>
-    <camunda.assert.version>1.2</camunda.assert.version>
-    <camunda.mockito.version>2.1</camunda.mockito.version>
-    <camunda.needle.version>1.1</camunda.needle.version>
+    <assertj.version>3.4.1</assertj.version>
+    <camunda-assert.version>1.2</camunda-assert.version>
+    <camunda-mockito.version>2.2</camunda-mockito.version>
   </properties>
 
   <dependencies>
@@ -35,19 +33,13 @@
     <dependency>
       <groupId>org.camunda.bpm.extension</groupId>
       <artifactId>camunda-bpm-assert</artifactId>
-      <version>${camunda.assert.version}</version>
+      <version>${camunda-assert.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.camunda.bpm.extension</groupId>
       <artifactId>camunda-bpm-mockito</artifactId>
-      <version>${camunda.mockito.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-needle</artifactId>
-      <version>${camunda.needle.version}</version>
+      <version>${camunda-mockito.version}</version>
     </dependency>
 
     <dependency>
@@ -55,12 +47,12 @@
       <artifactId>h2</artifactId>
     </dependency>
 
-<!-- 
+<!--
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
     </dependency>
  -->
-	
+
   </dependencies>
 </project>

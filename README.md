@@ -2,9 +2,9 @@
 
 ## How to run the example
 
-1. Start EurekaServer
+1. Start EurekaServer - [http://localhost:8761/](http://localhost:8761/)
 
-2. Start ConfigServer
+2. Start ConfigServer - [http://localhost:8888/](http://localhost:8888/)
 
 3. Start EventService application
 
