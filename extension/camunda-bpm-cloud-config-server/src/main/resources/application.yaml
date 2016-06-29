@@ -11,3 +11,14 @@ spring:
           searchLocations: classpath:/config-repository
   application:
       name: configServer
+
+eureka:
+  instance:
+    ipAddress: 192.168.99.100
+    prefer-ip-address: true
+    non-secure-port: 8181
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/

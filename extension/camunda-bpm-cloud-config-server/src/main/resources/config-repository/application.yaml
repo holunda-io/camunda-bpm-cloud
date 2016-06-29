@@ -7,4 +7,4 @@ endpoints:
   info:
     enabled: true
 
-eventServiceBaseUrl: http://localhost:8081
+eventServiceBaseUrl: http://192.168.100.99:8081
