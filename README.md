@@ -1,17 +1,46 @@
 # Camunda BPM Cloud
 
+## Problem Statement
+
+Process applications are following the BPM/SOA orchestration pattern invented many years ago. This promotes the separation of orchestration and the business functions. Since the existence of BPMN 2.0 standard, the orchestration is performed by the business process engine executing the BPMN 2.0 directly - which fosters the business-IT alignment. 
+
+The bad part of the story is, that this pattern is implemented in the same way, as 20 years ago: as a monolith. In the early 90-ties the workflow engine (the predecessor of business process engines) were large installations hosted on big servers (fostered by big manufacturers). The were two reasonable runtime strategies: hosting business functions on the same machine as the business process engine, or deploying the business functions to other machines and strong distributed transactions to guarantee the consistency of the data. Both strategies result in a system thats runtime behaviour corresponds to those of a monolith, with all drawbacks and pains related to it operations.
+
+In the ara of cloud computing, Microservices and self-contained systems those runtime strategies are not state of the art.
+
+## Mission Statement
+
+The goal of Camunda BPM Cloud project is to provide a implementation strategy of the BPM/SOA orchstration pattern that fosters louse coupling, dynamic scaling and resilience of the resulting system. In doing so, the following principles are applied:
+
+- The orchestration layer (process engine with BPMN 2.0 model) must not have runtime dependencies to business/domain services (Usage of External Service Tasks)
+- The high availability (HA) of the process engine can be reached by creating a homogenous cluster (clustered BPE, clustered shared DB, same deployments).
+- The co-existence of several process engines must not rely on shared database.
+- The user needs a single workload view, independing from the amount of process engine.
+
+## Implementation Strategy
+
+### Configuration and Registry
+The engines are using Camunda BPM Spring in order to achieve maximum flexibility in ad-hoc deployment. In order to ease the management and configuration of the engines, a registry and a config server is used (from Spring Cloud project).
+
+### Workload Service
+In order to achive maximum decoupling from the engines to the business services and the task list application, a workload service should collect user and external service task from multiple engines. 
+
+### Edge Service
+In order to provide a single point of integration for a common task list (displaying the united workload of all process engines) an edge service should be provided.
+
+### Runtime and Deployment strategy
+In order to automate the runtime deployment docker shoould be used as a container for any component.
+
+
 ## How to run the example
 
+Needs to be replaced by the start of Docker Compose:
+
 1. Start EurekaServer - [http://localhost:8761/](http://localhost:8761/)
-
 2. Start ConfigServer - [http://localhost:8888/](http://localhost:8888/)
-
 3. Start EventService application
-
 4. Start SimpleProcess and/or TrivialProcess apllication
-
 5. Start external tasklist
-
 6. Visit the [external tasklist](http:localhost:1338)
 
 ## Current status
