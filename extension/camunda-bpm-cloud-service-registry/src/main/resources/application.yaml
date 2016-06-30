@@ -9,6 +9,6 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.ipAddress}:${server.port}/eureka/
+      defaultZone: http://${DOCKER_IP:127.0.0.1}:${server.port}/eureka/
     server:
       waitTimeInMsWhenSyncEmpty: 0
