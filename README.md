@@ -47,18 +47,60 @@ Needs to be replaced by the start of Docker Compose:
 
 ### Start-up
 
+We run all services in docker containers. To build the images, use the `dockerBuild` profile:
+
+    mvn -PdockerBuild clean install
+
+This will create docker images (prefix `camunda-bpm-cloud`) that you can check with `docker images`. (Hint old images 
+will be "dangling", you can delete them via `docker images -f "dangling=true" -q | xargs docker rmi`).
+
+**Run with Docker**
+
+We all use native docker hosts on our machines, no need for additional VBox configurations. Start all containers with
+
+* `-P` map all ports
+* `--net="host"` use hosts network device directly, so 'localhost' works, [found here](http://stackoverflow.com/questions/29971909/use-eureka-despite-having-random-external-port-of-docker-containers)
+
+#### service-discovery (eureka)
+
 * The EurekaServer starts up and serves as service-registry. You can visit its dashboard at http://localhost:8761/.
+
+```bash
+docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-service-registry
+```
+
+#### config-service (configuration)
+
 * When the ConfigServer is started, it registers itself as _CONFIGSERVER_ at EurekaServer.
+
+```bash
+docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-config-server
+```
+
+#### event service
+
 * The EventService registers itself as _EVENTSERVICE_ at EurekaServer and provides .
     * a REST endpoint for the EventBroadcasters used in ProcessApplications (not yet discovarable via EurekaServer),
     * an in-memory TaskEventCache (currently a HashMap is used for the sake of simplicity) and
     * a REST endpoint for the external task list (stripped down camunda REST-API having one additional field _engineUrl_).
+    
+```bash
+docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-event-service
+```
+
+#### Example process applications
+
 * When starting one of the example ProcessApplications, these register as _SIMPLEENGINE_/_TRIVIALENGINE_ at EurekaServer.
 * The simple external task list queries the EventService for processDefinitions:
     * Therefore, the EventService fetches all ServiceInstances from EurekaServer and uses Metadata to identify all camunda engines.
     * For each camunda engine found, the EventService directly queries the engine's REST endpoint to retrieve all ProcessDefinitions.
     * The List of ProcessDefinitions is returned to the simple external task list.
 * For each ProcessDefinition retrieved, the simple external task list provides a button to create an instance.
+
+```bash
+docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
+docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
+```
 
 ### Working with the simple external task lsit
 
@@ -67,3 +109,8 @@ Needs to be replaced by the start of Docker Compose:
 * The external tasklist queries the EventService for all cached TaskEvents.
 * By clicking on a task, details of the task are shown and a complete button is present.
 * When using the complete button, the task list sends a request to complete the task directly to the engine identified by the task.engineUrl field.
+
+
+## Resources
+
+* [ASCII banner generator](http://www.network-science.de/ascii/), font: standard

@@ -3,11 +3,12 @@ server:
 
 eureka:
   instance:
-    ipAddress: 192.168.100.99 
+    prefer-ip-address: true
+    ipAddress: ${DOCKER_IP:127.0.0.1}
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.ipAddress}:${server.port}/eureka/
     server:
       waitTimeInMsWhenSyncEmpty: 0

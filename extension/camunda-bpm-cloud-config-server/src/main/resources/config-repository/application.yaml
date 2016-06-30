@@ -7,4 +7,4 @@ endpoints:
   info:
     enabled: true
 
-eventServiceBaseUrl: http://192.168.100.99:8081
+eventServiceBaseUrl: http://${DOCKER_IP:localhost}:8081
