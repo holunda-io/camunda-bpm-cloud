@@ -3,12 +3,13 @@ server:
 
 eureka:
   instance:
-    prefer-ip-address: true
-    ipAddress: ${DOCKER_IP:127.0.0.1}
+    hostname: discovery
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${DOCKER_IP:127.0.0.1}:${server.port}/eureka/
+      defaultZone: http://discovery:${server.port}/eureka/
     server:
-      waitTimeInMsWhenSyncEmpty: 0
+          waitTimeInMsWhenSyncEmpty: 0
+
+spring.cloud.config.discovery.enabled: true

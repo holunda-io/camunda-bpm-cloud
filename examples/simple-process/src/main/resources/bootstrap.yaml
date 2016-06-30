@@ -6,3 +6,11 @@ spring:
       discovery:
         enabled: true
         serviceId: configServer
+eureka:
+  instance:
+    hostname: simpleprocess
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/

@@ -14,9 +14,9 @@ spring:
 
 eureka:
   instance:
-    prefer-ip-address: true
+    hostname: configserver
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://${DOCKER_IP:127.0.0.1}:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/

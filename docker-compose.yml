@@ -1,30 +1,33 @@
-config-service:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-config-server
-  environment:
-    - DOCKER_IP = $DOCKER_IP
-  ports:
-    - 8888:8888
-    
-service-registry:
+discovery:
   image: camunda-bpm-cloud/camunda-bpm-cloud-service-registry
   ports:
-   - 8761:8761
-  environment:
-   - DOCKER_IP=$DOCKER_IP
+   - "8761:8761"
 
-event-service:
+configserver:
+  image: camunda-bpm-cloud/camunda-bpm-cloud-config-server
+  ports:
+   - "8888:8888"
+  links:
+   - discovery
+
+eventservice:
   image: camunda-bpm-cloud/camunda-bpm-cloud-event-service
   ports:
-   - 8081:8081
-  environment:
-   - DOCKER_IP=$DOCKER_IP
-   
-#simple-process:
-#  image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
-#  environment:
-#   - DOCKER_IP=$DOCKER_IP
-#   
-#trivial-process:
-#  image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
-#  environment:
-#   - DOCKER_IP=$DOCKER_IP
+   - "8081:8081"
+  links:
+   - discovery
+   - configserver
+
+simpleprocess:
+  image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
+  links:
+   - discovery
+   - configserver
+   - eventservice
+
+trivialprocess:
+  image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
+  links:
+   - discovery
+   - configserver
+   - eventservice
