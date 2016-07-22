@@ -3,17 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.camunda.bpm.extension.example</groupId>
+    <groupId>org.camunda.bpm.extension.cloud.example</groupId>
     <artifactId>camunda-bpm-cloud-example-root</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>camunda-bpm-cloud-example-simple-process</artifactId>
-
-  <properties>
-    <start-class>org.camunda.bpm.spring.boot.cloud.example.SimpleProcessApplication</start-class>
-
-  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -66,13 +61,13 @@
     </dependency>
 
     <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-test</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
@@ -88,7 +83,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -100,7 +94,7 @@
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-      </plugin>            
+      </plugin>
     </plugins>
   </build>
 

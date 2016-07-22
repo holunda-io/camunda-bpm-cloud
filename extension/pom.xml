@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.camunda.bpm.extension</groupId>
+    <groupId>org.camunda.bpm.extension.cloud</groupId>
     <artifactId>camunda-bpm-cloud-root</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
@@ -12,15 +12,15 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>camunda-bpm-cloud-event-broadcaster</module>
-    <module>camunda-bpm-cloud-event-service</module>
-    <module>camunda-bpm-cloud-config-server</module>
-    <module>camunda-bpm-cloud-service-registry</module>
+    <module>broadcaster</module>
+    <module>event-service</module>
+    <module>config-service</module>
+    <module>discovery-service</module>
   </modules>
 
   <dependencies>
     <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-test</artifactId>
       <type>pom</type>
       <scope>test</scope>
