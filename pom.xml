@@ -170,6 +170,7 @@
               <configuration>
                 <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
                 <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                <noCache>true</noCache>
                 <resources>
                   <resource>
                     <targetPath>/</targetPath>

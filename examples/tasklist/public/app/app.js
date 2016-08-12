@@ -7,6 +7,7 @@ angular.module('SimpleCamundaClient', [])
         function getTasks() {
             TaskModel.all()
                 .then(function (result) {
+                  console.log("getting tasks ", result);
                     getProcessDefinitions();
                     main.tasks = result.data;
                 });
@@ -38,6 +39,7 @@ angular.module('SimpleCamundaClient', [])
         function getProcessDefinitions() {
             TaskModel.getProcessDefinitions()
                 .then(function (result) {
+                  console.log("getting definitions ", result);
                     main.processDefinitions = result.data;
                 });
         }
@@ -66,7 +68,7 @@ angular.module('SimpleCamundaClient', [])
         }
 
         function getUrlForTask(task) {
-          return task.engineUrl + 'rest/engine/default/task/' + task.taskId;
+          return task.engineUrl + '/rest/engine/default/task/' + task.taskId;
         }
 
         function getUrlForTaskComplete(task) {
@@ -74,7 +76,7 @@ angular.module('SimpleCamundaClient', [])
         }
 
         function getUrlForProcessDefinition(processDefinition) {
-            return processDefinition.engineUrl + 'rest/engine/default/process-definition/key/' + processDefinition.key;
+            return processDefinition.engineUrl + '/rest/engine/default/process-definition/key/' + processDefinition.key;
         }
 
         function getUrlForInstanceCreation(processDefinition) {
@@ -82,11 +84,11 @@ angular.module('SimpleCamundaClient', [])
         }
 
         function getUrlForProcessDefinitions() {
-          return getEventServiceUrl() + 'process-definition';
+          return getEventServiceUrl() + '/process-definition';
         }
 
         service.all = function () {
-            return $http.get(getEventServiceUrl() + 'task');
+            return $http.get(getEventServiceUrl() + '/task');
         };
 
         service.fetch = function (task) {
@@ -94,7 +96,9 @@ angular.module('SimpleCamundaClient', [])
         };
 
         service.complete = function (task) {
-            return $http.post(getUrlForTaskComplete(task), '{}');
+            var url = getUrlForTaskComplete(task);
+          console.log(url);
+            return $http.post(url, '{}');
         };
 
         service.createProcessInstance = function (processDefinition) {

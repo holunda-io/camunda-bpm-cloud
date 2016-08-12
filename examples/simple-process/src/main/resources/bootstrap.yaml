@@ -3,9 +3,8 @@ spring:
     name: simpleEngine
   cloud:
     config:
-      discovery:
-        enabled: true
-        serviceId: configServer
+      url: http://configserver:8888
+
 eureka:
   instance:
     hostname: simpleprocess
@@ -14,3 +13,6 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
+
+server:
+  port: 9998

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,8 +20,9 @@ public class EventServiceClient {
 
   public static final Logger LOGGER = LoggerFactory.getLogger(EventServiceClient.class);
 
-  @Autowired
-  private BroadcasterConfiguration broadcasterConfiguration;
+  @Value(value = "${server.port}")
+  private int port;
+
 
   /**
    * Event type.
@@ -29,8 +31,12 @@ public class EventServiceClient {
     CREATED, COMPLETED, DELETED
   }
 
-  @Value(value = "${eventServiceBaseUrl}")
-  private String baseUrl;
+  //@Value(value = "${eventServiceBaseUrl}")
+  private String baseUrl ="http://eventservice:8081";
+
+  @Value(value = "${eureka.instance.hostname}")
+  private String hostname;
+
 
   /**
    * Sends the task event to the event service.
@@ -44,7 +50,12 @@ public class EventServiceClient {
    */
   public void broadcastEvent(final DelegateTask task, final EventType eventType, final String formKey) {
     final String url = baseUrl + "/task";
-    final String result = new BroadcastEventCommand(url, fromTask(task, eventType, formKey, broadcasterConfiguration.getEngineUrl())).execute();
+    final String engineUrl = String.format("http://%s:%d", hostname, port);
+    BroadcastEventCommand command = new BroadcastEventCommand(url, fromTask(task, eventType, formKey, engineUrl));
+
+    LOGGER.info("sending {}",command);
+    final String result = command.execute();
+
     LOGGER.info("Result: {}", result);
   }
 

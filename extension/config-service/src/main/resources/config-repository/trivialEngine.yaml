@@ -16,6 +16,7 @@ eureka:
     metadata-map:
       engine: camunda
 
-server:
-  port: 0
+#server:
+#  port: 0
 
+eventServiceBaseUrl: "http://eventservice:8081"

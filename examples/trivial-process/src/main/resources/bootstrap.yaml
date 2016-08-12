@@ -3,9 +3,7 @@ spring:
     name: trivialEngine
   cloud:
     config:
-      discovery:
-        enabled: true
-        serviceId: configServer
+      url: http://configserver:8888
 
 eureka:
   instance:
@@ -15,3 +13,6 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
+
+server:
+  port: 9999
