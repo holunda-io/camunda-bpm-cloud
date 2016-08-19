@@ -1,10 +1,10 @@
 discovery:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-service-registry
+  image: camunda-bpm-cloud/camunda-bpm-cloud-discovery-service
   ports:
    - "8761:8761"
 
 configserver:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-config-server
+  image: camunda-bpm-cloud/camunda-bpm-cloud-config-service
   ports:
    - "8888:8888"
   links:
