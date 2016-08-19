@@ -3,7 +3,7 @@ spring:
     name: simpleEngine
   cloud:
     config:
-      url: http://configserver:8888
+      uri: http://configserver:8888
 
 eureka:
   instance:

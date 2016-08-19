@@ -4,9 +4,7 @@ import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,8 +29,8 @@ public class EventServiceClient {
     CREATED, COMPLETED, DELETED
   }
 
-  //@Value(value = "${eventServiceBaseUrl}")
-  private String baseUrl ="http://eventservice:8081";
+  @Value(value = "${eventServiceBaseUrl}")
+  private String baseUrl;
 
   @Value(value = "${eureka.instance.hostname}")
   private String hostname;
