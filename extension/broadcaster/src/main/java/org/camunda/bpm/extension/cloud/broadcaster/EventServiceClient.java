@@ -49,7 +49,7 @@ public class EventServiceClient {
   public void broadcastEvent(final DelegateTask task, final EventType eventType, final String formKey) {
     final String url = baseUrl + "/task";
     final String engineUrl = String.format("http://%s:%d", hostname, port);
-    BroadcastEventCommand command = new BroadcastEventCommand(url, fromTask(task, eventType, formKey, engineUrl));
+    BroadcastEventCommand command = new BroadcastEventCommand(url, fromTask(task, eventType, formKey, hostname));
 
     LOGGER.info("sending {}",command);
     final String result = command.execute();
@@ -64,7 +64,7 @@ public class EventServiceClient {
    *          task delegate
    * @return HTTP entity to be sent to the event service.
    */
-  public static HttpEntity<String> fromTask(final DelegateTask task, final EventType eventType, final String formKey, final String engineUrl) {
+  public static HttpEntity<String> fromTask(final DelegateTask task, final EventType eventType, final String formKey, final String engineId) {
     final HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -72,7 +72,7 @@ public class EventServiceClient {
         .put("taskDefinitionKey", task.getTaskDefinitionKey()) //
         .put("taskId", task.getId()) //
         .put("formKey", formKey) //
-        .put("engineUrl", engineUrl) //
+        .put("engineId", engineId) //
         .put("eventType", eventType.name()) //
         .toString(), headers);
   }
