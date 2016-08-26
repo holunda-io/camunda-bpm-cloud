@@ -1,0 +1,25 @@
+server:
+  port: 8082
+
+eureka:
+  instance:
+    hostname: edgeservice
+  client:
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+
+endpoints:
+  info:
+    enabled: true
+zuul:
+  routes:
+    simple:
+      path: /simpleprocess/**
+      url: http://simpleprocess:9998
+    trivial:
+      path: /trivialprocess/**
+      url: http://trivialprocess:9999

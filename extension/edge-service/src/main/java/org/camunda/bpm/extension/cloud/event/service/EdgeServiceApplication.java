@@ -11,10 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 @EnableEurekaClient
-public class EventServiceApplication {
+@EnableZuulProxy
+public class EdgeServiceApplication {
 
   public static void main(String... args) {
-    SpringApplication.run(EventServiceApplication.class, args);
+    SpringApplication.run(EdgeServiceApplication.class, args);
   }
 
   @Bean

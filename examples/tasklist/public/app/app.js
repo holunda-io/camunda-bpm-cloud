@@ -1,6 +1,6 @@
 angular.module('SimpleCamundaClient', [])
-    .constant('EVENT_SERVICE_URI', 'http://localhost:8081/eventService/')
-    .constant('ENGINE_URI', 'http://localhost:8080/rest/engine/default/')
+    .constant('EVENT_SERVICE_URI', 'http://localhost:8081/eventService')
+    .constant('ENGINE_URI', 'http://localhost:8080/rest/engine/default')
     .controller('TaskCtrl', function (TaskModel) {
         var main = this;
 
