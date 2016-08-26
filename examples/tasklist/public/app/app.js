@@ -1,6 +1,6 @@
 angular.module('SimpleCamundaClient', [])
     .constant('EVENT_SERVICE_URI', 'http://192.168.99.100:8081/eventService')
-    .constant('ENGINE_URI', 'http://192.168.99.100:8080/rest/engine/default')
+    .constant('EDGE_URI', 'http://192.168.99.100:8082')
     .controller('TaskCtrl', function (TaskModel) {
         var main = this;
 
@@ -56,19 +56,15 @@ angular.module('SimpleCamundaClient', [])
         getProcessDefinitions();
         getTasks();
     })
-    .service('TaskModel', function ($http, EVENT_SERVICE_URI, ENGINE_URI) {
+    .service('TaskModel', function ($http, EVENT_SERVICE_URI, EDGE_URI) {
         var service = this;
 
         function getEventServiceUrl() {
             return EVENT_SERVICE_URI;
         }
 
-        function getEngineUrl() {
-          return ENGINE_URI;
-        }
-
         function getUrlForTask(task) {
-          return task.engineUrl + '/rest/engine/default/task/' + task.taskId;
+          return EDGE_URI + '/' + task.engineId + '/rest/engine/default/task/' + task.taskId;
         }
 
         function getUrlForTaskComplete(task) {
