@@ -7,7 +7,7 @@ var server = app.listen(1338, function() {
   console.log('Listening on port %d', server.address().port);
 });
 
-app.all('/*', function(req, res, next) {
+app.all('*', function(req, res, next) {
   // CORS headers
   res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');

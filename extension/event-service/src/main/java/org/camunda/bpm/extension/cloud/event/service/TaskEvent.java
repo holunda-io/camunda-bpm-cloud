@@ -6,7 +6,7 @@ public class TaskEvent {
   private String taskDefinitionKey;
   private String taskId;
   private String formKey;
-  private String engineUrl;
+  private String engineId;
 
   public String getEventType() {
     return eventType;
@@ -16,12 +16,12 @@ public class TaskEvent {
     this.eventType = eventType;
   }
 
-  public String getEngineUrl() {
-    return engineUrl;
+  public String getEngineId() {
+    return engineId;
   }
 
-  public void setEngineUrl(String engineUrl) {
-    this.engineUrl = engineUrl;
+  public void setEngineId(String engineId) {
+    this.engineId = engineId;
   }
 
   public String getTaskDefinitionKey() {
@@ -51,7 +51,7 @@ public class TaskEvent {
   @Override
   public String toString() {
     return "TaskEvent [eventType=" + eventType + ", taskDefinitionKey=" + taskDefinitionKey + ", taskId=" + taskId
-        + ", formKey=" + formKey + ", engineUrl=" + engineUrl + "]";
+        + ", formKey=" + formKey + ", engineUrl=" + engineId + "]";
   }
 
 }

@@ -41,6 +41,6 @@ public class EventCache {
   }
 
   public String generateKey(TaskEvent taskEvent){
-    return String.format("%s:%s:%s", taskEvent.getEngineUrl(), taskEvent.getTaskDefinitionKey(), taskEvent.getTaskId());
+    return String.format("%s:%s:%s", taskEvent.getEngineId(), taskEvent.getTaskDefinitionKey(), taskEvent.getTaskId());
   }
 }

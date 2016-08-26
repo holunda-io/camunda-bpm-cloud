@@ -16,6 +16,7 @@
     <module>event-service</module>
     <module>config-service</module>
     <module>discovery-service</module>
+    <module>edge-service</module>
   </modules>
 
   <dependencies>

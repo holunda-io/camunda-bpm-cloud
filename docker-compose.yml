@@ -12,11 +12,20 @@ configserver:
 
 eventservice:
   image: camunda-bpm-cloud/camunda-bpm-cloud-event-service
-  ports:
-   - "8081:8081"
   links:
    - discovery
    - configserver
+
+edgeservice:
+  image: camunda-bpm-cloud/camunda-bpm-cloud-edge-service
+  ports:
+   - "8082:8082"
+  links:
+   - eventservice
+   - discovery
+   - configserver
+   - simpleprocess
+   - trivialprocess
 
 simpleprocess:
   image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
