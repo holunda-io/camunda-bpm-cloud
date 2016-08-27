@@ -32,8 +32,8 @@ public class EventServiceClient {
   @Value(value = "${eventServiceBaseUrl}")
   private String baseUrl;
 
-  @Value(value = "${eureka.instance.hostname}")
-  private String hostname;
+  @Value(value = "${spring.application.name}")
+  private String appName;
 
 
   /**
@@ -48,8 +48,8 @@ public class EventServiceClient {
    */
   public void broadcastEvent(final DelegateTask task, final EventType eventType, final String formKey) {
     final String url = baseUrl + "/task";
-    final String engineUrl = String.format("http://%s:%d", hostname, port);
-    BroadcastEventCommand command = new BroadcastEventCommand(url, fromTask(task, eventType, formKey, hostname));
+
+    final BroadcastEventCommand command = new BroadcastEventCommand(url, fromTask(task, eventType, formKey, appName));
 
     LOGGER.info("sending {}",command);
     final String result = command.execute();
