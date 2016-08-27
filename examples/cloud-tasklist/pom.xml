@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.camunda.bpm.extension.cloud.example</groupId>
+    <artifactId>camunda-bpm-cloud-example-root</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>camunda-bpm-cloud-example-cloud-tasklist</artifactId>
+
+  <properties>
+        <yeomanProjectDirectory>.</yeomanProjectDirectory>
+        <yeomanGruntTargetDir>${basedir}/target/yo</yeomanGruntTargetDir>
+        <yeomanTargetDirectory>${basedir}/target/classes/static</yeomanTargetDirectory>
+        <yeoman.dist.dir>${yeomanProjectDirectory}/dist</yeoman.dist.dir>
+        <yo.test.skip>true</yo.test.skip>
+        <bower.install.skip>true</bower.install.skip>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>frontend</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+              <filesets>
+                <fileset>
+                  <directory>${yeomanGruntTargetDir}</directory>
+                </fileset>
+                <fileset>
+                  <directory>${yeoman.dist.dir}</directory>
+                </fileset>
+              </filesets>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>com.github.trecloux</groupId>
+            <artifactId>yeoman-maven-plugin</artifactId>
+            <version>0.5</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <configuration>
+                  <!-- this is a workaround for 0.5 because bower.install.skip 
+                    is not working yet -->
+                  <bowerInstallArgs>--version</bowerInstallArgs>
+                  <buildTool>grunt</buildTool>
+                  <buildArgs>build --no-color --no-interactive</buildArgs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.0</version>
+            <configuration>
+              <workingDirectory>${yeomanProjectDirectory}</workingDirectory>
+            </configuration>
+
+            <executions>
+              <execution>
+                <id>npm install</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>resolve</phase>
+                <configuration>
+                  <arguments>install</arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm run version:minor</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <!-- optional: default phase is "generate-resources" -->
+                <phase>rewrite-poms-for-release</phase>
+                <configuration>
+                  <!-- optional: The default argument is actually "install", 
+                    so unless you need to run some other npm command, you can remove this whole 
+                    <configuration> section. -->
+                  <arguments>run version:minor</arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+              <failOnMissingWebXml>false</failOnMissingWebXml>
+              <webResources>
+                <resource>
+                  <directory>${yeoman.dist.dir}</directory>
+                </resource>
+              </webResources>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

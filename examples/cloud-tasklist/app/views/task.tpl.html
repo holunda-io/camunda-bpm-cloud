@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-10 col-md-8 col-lg-6">
+    <h1 class="page-title page-title-fixed-top">Tasks</h1>
+    <p>A list of tasks gathered from Camunda BPM Cloud.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div ng-repeat="processDefinition in processDefinitions" class="item">
+      <button type="submit" class="btn btn-primary" ng-click="createProcessInstance(processDefinition)">Start {{processDefinition.name}}</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="item" ng-repeat="task in tasks" ng-click="setCurrentTask(task)" ng-class="{'active' : isCurrentTask(task)}">
+      <h3>{{task.taskId}}</h3>
+      <p><strong>{{task.formKey}}</strong></p>
+    </div>
+  </div>
+
+  <div class="col-md-6" ng-show="currentTask">
+    <div class="item">
+      <button type="button" class="close" ng-click="completeTask(currentTask)">Complete Task</button>
+      <h3>{{currentTask.taskId}}</h3>
+      <p><strong>{{currentTask.taskDefinitionKey}}</strong></p>
+      <p><strong>{{currentTask.formKey}}</strong></p>
+      <p><strong>{{currentTask.engineId}}</strong></p>
+      <p><strong>{{currentTask.eventType}}</strong></p>
+    </div>
+  </div>
+
+
+</div>

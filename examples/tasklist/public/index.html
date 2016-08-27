@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-4" ng-show="main.currentTask">
       <div class="item">
-        <button type="button" class="close" ng-click="main.completeTask(main.currentTask)">Complete Task</button>
+        <button type="button" class="close" ng-click="completeTask(currentTask)">Complete Task</button>
         <h3>{{main.currentTask.taskId}}</h3>
         <p><strong>{{main.currentTask.taskDefinitionKey}}</strong></p>
         <p><strong>{{main.currentTask.formKey}}</strong></p>

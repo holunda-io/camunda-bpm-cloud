@@ -31,7 +31,7 @@ public class EventService {
 
   public static final Logger LOGGER = LoggerFactory.getLogger(EventService.class);
 
-  @RequestMapping(produces = "application/json", value = "/eventService/task", method = RequestMethod.GET)
+  @RequestMapping(produces = "application/json", value = "/task", method = RequestMethod.GET)
   public HttpEntity<String> getTasks(){
     Collection<TaskEvent> events = eventCache.getEvents();
     return generateTaskCollectionJson(events);
@@ -45,7 +45,7 @@ public class EventService {
       .toString(), headers);
   }
 
-  @RequestMapping(produces = "application/json", value = "/eventService/process-definition", method = RequestMethod.GET)
+  @RequestMapping(produces = "application/json", value = "/process-definition", method = RequestMethod.GET)
   public HttpEntity<String> getProcessDefinitions(){
     Collection<ProcessDefinition> processDefinitions = new ArrayList<ProcessDefinition>();
     getProcessEngines().forEach((ServiceInstance s) -> {
