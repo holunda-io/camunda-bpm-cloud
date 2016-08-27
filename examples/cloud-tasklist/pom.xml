@@ -9,9 +9,11 @@
   </parent>
 
   <artifactId>camunda-bpm-cloud-example-cloud-tasklist</artifactId>
+  <packaging>jar</packaging>
+
 
   <properties>
-        <yeomanProjectDirectory>.</yeomanProjectDirectory>
+        <yeomanProjectDirectory>yo</yeomanProjectDirectory>
         <yeomanGruntTargetDir>${basedir}/target/yo</yeomanGruntTargetDir>
         <yeomanTargetDirectory>${basedir}/target/classes/static</yeomanTargetDirectory>
         <yeoman.dist.dir>${yeomanProjectDirectory}/dist</yeoman.dist.dir>
@@ -38,6 +40,7 @@
               </filesets>
             </configuration>
           </plugin>
+		  
           <plugin>
             <groupId>com.github.trecloux</groupId>
             <artifactId>yeoman-maven-plugin</artifactId>
@@ -57,7 +60,8 @@
               </execution>
             </executions>
           </plugin>
-          <plugin>
+          
+		  <plugin>
             <groupId>com.github.eirslett</groupId>
             <artifactId>frontend-maven-plugin</artifactId>
             <version>1.0</version>
@@ -92,20 +96,31 @@
               </execution>
             </executions>
           </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>2.6</version>
-            <configuration>
-              <failOnMissingWebXml>false</failOnMissingWebXml>
-              <webResources>
-                <resource>
-                  <directory>${yeoman.dist.dir}</directory>
-                </resource>
-              </webResources>
-            </configuration>
-          </plugin>
-        </plugins>
+
+		  <plugin>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>3.0.1</version>
+			<executions>
+			  <execution>
+				<id>copy-resources</id>
+				<!-- here the phase you need -->
+				<phase>validate</phase>
+				<goals>
+				  <goal>copy-resources</goal>
+				</goals>
+				<configuration>
+				  <outputDirectory>${basedir}/target/resources/static</outputDirectory>
+				  <resources>          
+					<resource>
+					  <directory>${yeoman.dist.dir}</directory>
+					  <filtering>false</filtering>
+					</resource>
+				  </resources>              
+				</configuration>            
+			  </execution>
+			</executions>
+			</plugin>
+		  </plugins>
       </build>
     </profile>
   </profiles>

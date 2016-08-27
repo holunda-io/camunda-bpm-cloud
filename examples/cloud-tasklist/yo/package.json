@@ -30,6 +30,7 @@
     "jasmine": "2.4.1",
     "jit-grunt": "^0.9.1",
     "jquery": "2.2.4",
+    "jshint-stylish": "2.2.1",
     "karma": "1.1.1",
     "karma-coverage": "1.1.0",
     "karma-jasmine": "1.0.2",
@@ -38,13 +39,12 @@
     "load-grunt-tasks": "3.5.0",
     "requirejs": "2.2.0",
     "st": "1.2.0",
-    "time-grunt": "^1.0.0"
+    "time-grunt": "1.0.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.4.3"
   },
   "scripts": {
-    "test": "grunt browserify:dist && karma start",
     "start": "grunt serve",
     "dist": "grunt build"
   }
