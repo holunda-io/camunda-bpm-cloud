@@ -17,13 +17,20 @@ endpoints:
     enabled: true
 
 zuul:
+  debug:
+    request: true
   routes:
     eventservice:
       path: /eventservice/**
       serviceId: eventService
     simpleprocess:
-      path: /simpleprocess/**
+      path: /simpleEngine/**
       serviceId: simpleEngine
     trivialprocess:
-      path: /trivialprocess/**
+      path: /trivialEngine/**
       serviceId: trivialEngine
+
+logging:
+  level:
+    com:
+      netflix: debug
