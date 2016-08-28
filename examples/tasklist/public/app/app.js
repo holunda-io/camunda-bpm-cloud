@@ -1,5 +1,5 @@
 angular.module('SimpleCamundaClient', [])
-    .constant('EVENT_SERVICE_URI', 'http://localhost:8082/eventservice/eventService')
+    .constant('EVENT_SERVICE_URI', 'http://localhost:8082/eventservice')
     .constant('EDGE_URI', 'http://localhost:8082')
     .controller('TaskCtrl', function (TaskModel) {
         var main = this;
