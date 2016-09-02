@@ -9,7 +9,6 @@ import org.camunda.bpm.extension.reactor.plugin.ReactorProcessEnginePlugin;
 import org.camunda.bpm.spring.boot.starter.SpringBootProcessApplication;
 import org.camunda.bpm.spring.boot.starter.rest.CamundaJerseyResourceConfig;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,12 +17,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import static org.slf4j.LoggerFactory.getLogger;
+import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
 @ProcessApplication
 @EnableEurekaClient
 @Import(BroadcasterConfiguration.class)
+@Slf4j
 public class TrivialProcessApplication extends SpringBootProcessApplication {
 
   public static void main(String[] args) {
@@ -50,15 +50,12 @@ public class TrivialProcessApplication extends SpringBootProcessApplication {
 
   }
 
-  private final Logger logger = getLogger(this.getClass());
-
   @Autowired
   private RuntimeService runtimeService;
 
   @Scheduled(initialDelay = 5000L, fixedRate = 20000L)
   public void start() {
-    logger.info("starting {}",
-      runtimeService.startProcessInstanceByKey("TrivialProcess").getId());
+    log.info("Starting {}", runtimeService.startProcessInstanceByKey("TrivialProcess").getId());
   }
 
 }

@@ -6,16 +6,15 @@ import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.extension.cloud.broadcaster.EventServiceClient.EventType;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
 @CamundaSelector(type = "userTask", event = TaskListener.EVENTNAME_CREATE)
-public class TaskCreateListener implements  TaskListener {
-
-  private final static Logger LOGGER = LoggerFactory.getLogger(TaskCreateListener.class);
+@Slf4j
+public class TaskCreateListener implements TaskListener {
 
   @Autowired
   private EventServiceClient client;
@@ -30,9 +29,10 @@ public class TaskCreateListener implements  TaskListener {
 
   @Override
   public void notify(DelegateTask delegateTask) {
-    final String formKey = formService.getTaskFormKey(delegateTask.getProcessDefinitionId(), delegateTask.getTaskDefinitionKey());
+    final String formKey = formService.getTaskFormKey(delegateTask.getProcessDefinitionId(),
+        delegateTask.getTaskDefinitionKey());
     client.broadcastEvent(delegateTask, EventType.CREATED, formKey);
-    LOGGER.info("New task created: {}", delegateTask.getTaskDefinitionKey());
+    log.info("New task created: {}", delegateTask.getTaskDefinitionKey());
   }
 
 }
