@@ -1,12 +1,11 @@
 package org.camunda.bpm.extension.cloud.event.service;
 
-import java.util.Collection;
-import java.util.HashMap;
-
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.extension.cloud.event.service.rest.TaskEvent;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collection;
+import java.util.HashMap;
 
 @Component
 @Slf4j
@@ -23,8 +22,8 @@ public class EventCache {
   }
 
   public void putEvent(TaskEvent task) {
+    eventCash.put(task.getTaskId(), task);
     log.info("Event cached: {}", task);
-    eventCash.put(generateKey(task), task);
   }
 
   public TaskEvent getEvent(String key) {
@@ -36,11 +35,8 @@ public class EventCache {
   }
 
   public void removeEvent(TaskEvent task) {
+    this.eventCash.remove(task.getTaskId());
     log.info("Event removed from cache: {}", task);
-    this.eventCash.remove(generateKey(task));
   }
 
-  public String generateKey(TaskEvent taskEvent) {
-    return String.format("%s:%s:%s", taskEvent.getEngineId(), taskEvent.getTaskDefinitionKey(), taskEvent.getTaskId());
-  }
 }
