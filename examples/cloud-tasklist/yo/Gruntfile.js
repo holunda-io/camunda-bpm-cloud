@@ -8,7 +8,8 @@ module.exports = function (grunt) {
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
     ngtemplates: 'grunt-angular-templates',
-    configureProxies: 'grunt-connect-proxy'
+    configureProxies: 'grunt-connect-proxy',
+    newer: 'grunt-newer'
   });
 
   // Configurable paths for the application
