@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.Maps;
 
 import feign.Feign;
+import feign.codec.Encoder;
 import feign.slf4j.Slf4jLogger;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,7 +42,9 @@ public class CamundaClientFactory {
           log.info("Found engine id:{} uri:{} meta:{}", serviceInstance.getServiceId(), serviceInstance.getUri(),
               serviceInstance.getMetadata());
           return Optional
-              .of(Feign.builder().logger(new Slf4jLogger()).target(CamundaRestClient.class, serviceInstance.getUri().toString()));
+              .of(Feign.builder()
+                  .logger(new Slf4jLogger())
+                  .target(CamundaRestClient.class, serviceInstance.getUri().toString()));
         }
       }
     }

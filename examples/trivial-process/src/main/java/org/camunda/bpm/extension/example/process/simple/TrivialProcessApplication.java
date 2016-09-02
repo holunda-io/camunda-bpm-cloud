@@ -5,7 +5,6 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.impl.cfg.AbstractProcessEnginePlugin;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
-import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator;
 import org.camunda.bpm.extension.cloud.broadcaster.BroadcasterConfiguration;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;

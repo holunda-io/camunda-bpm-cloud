@@ -11,6 +11,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,18 +35,16 @@ public class TaskResource {
   }
 
   @RequestMapping(produces = "application/json", value = "/task/{taskId}/complete", method = RequestMethod.POST)
-  public HttpEntity<String> completeTask(@PathVariable("taskId") final String taskId) {
+  public HttpEntity<String> completeTask(@PathVariable("taskId") final String taskId, @RequestBody final String body) {
 
     log.info("Completing task {}", taskId);
     // FIXME functional!
     final TaskEvent event = eventCache.getEvent(taskId);
     if (event != null) {
-      final Optional<CamundaRestClient> clientForEngine = camundaClientBuilder
-          .getClientForEngine(event.getEngineId());
+      final Optional<CamundaRestClient> clientForEngine = camundaClientBuilder.getClientForEngine(event.getEngineId());
       if (clientForEngine.isPresent()) {
         log.info("Completing task {} on the engine", taskId, event.getEngineId());
-        String response = clientForEngine.get().completeTask(taskId);
-        log.info("Received response {}", response);
+        clientForEngine.get().completeTask(taskId, body);
         return new ResponseEntity<>(HttpStatus.OK);
       } else {
         log.warn("No Engine found for id {}", event.getEngineId());
