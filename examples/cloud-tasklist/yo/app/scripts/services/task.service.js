@@ -7,7 +7,7 @@ module.exports = function ($http, EDGE_URI) {
     }
 
     function urlForTaskComplete(task) {
-        return EDGE_URI + '/' + task.engineId + '/rest/engine/default/task/' + task.taskId + '/complete';
+        return EDGE_URI + '/eventservice/task/' + task.taskId + '/complete';
     }
 
     function all() {
@@ -15,7 +15,9 @@ module.exports = function ($http, EDGE_URI) {
     }
 
     function complete(task) {
-        return $http.post(urlForTaskComplete(task), '{}');
+    	var url =urlForTaskComplete(task);
+    	console.log("completing task", url);
+        return $http.post(url, '{}');
     }
 
     return {
