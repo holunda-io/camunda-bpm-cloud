@@ -72,8 +72,8 @@ module.exports = function (grunt) {
       },
       proxies: [
           {
-              context: ['/eventservice', '/simpleprocess', '/trivialprocess'],
-              host: '192.168.99.100',
+              context: ['/eventservice', '/simpleengine', '/trivialengine'],
+              host: 'localhost',
               port: 8082,
               https: false,
               changeOrigin: false

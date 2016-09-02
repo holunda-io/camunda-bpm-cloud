@@ -15,15 +15,22 @@ eureka:
 endpoints:
   info:
     enabled: true
-    
+
 zuul:
+  debug:
+    request: true
   routes:
     eventservice:
       path: /eventservice/**
-      url: http://eventservice:8081
+      serviceId: eventService
     simpleprocess:
-      path: /simpleprocess/**
-      url: http://simpleprocess:9998
+      path: /simpleEngine/**
+      serviceId: simpleEngine
     trivialprocess:
-      path: /trivialprocess/**
-      url: http://trivialprocess:9999
+      path: /trivialEngine/**
+      serviceId: trivialEngine
+
+logging:
+  level:
+    com:
+      netflix: debug
