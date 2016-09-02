@@ -1,4 +1,4 @@
-package org.camunda.bpm.extension.cloud.event.service;
+package org.camunda.bpm.extension.cloud.event.service.rest;
 
 public class ProcessDefinition {
 

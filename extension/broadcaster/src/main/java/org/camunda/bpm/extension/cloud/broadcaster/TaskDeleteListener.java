@@ -6,16 +6,15 @@ import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.extension.cloud.broadcaster.EventServiceClient.EventType;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 @CamundaSelector(type = "userTask", event = TaskListener.EVENTNAME_DELETE)
 public class TaskDeleteListener implements TaskListener {
-
-  private final static Logger LOGGER = LoggerFactory.getLogger(TaskDeleteListener.class);
 
   @Autowired
   private EventServiceClient client;
@@ -30,9 +29,10 @@ public class TaskDeleteListener implements TaskListener {
 
   @Override
   public void notify(DelegateTask delegateTask) {
-    final String formKey = formService.getTaskFormKey(delegateTask.getProcessDefinitionId(), delegateTask.getTaskDefinitionKey());
+    final String formKey = formService.getTaskFormKey(delegateTask.getProcessDefinitionId(),
+        delegateTask.getTaskDefinitionKey());
     client.broadcastEvent(delegateTask, EventType.DELETED, formKey);
-    LOGGER.info("Task deleted: {}", delegateTask.getTaskDefinitionKey());
+    log.info("Task deleted: {}", delegateTask.getTaskDefinitionKey());
   }
 
 }

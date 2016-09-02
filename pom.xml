@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -8,7 +8,7 @@
     <artifactId>camunda-release-parent</artifactId>
     <version>2.5</version>
     <!-- DO NOT REMOVE EMPTY TAG https://issues.apache.org/jira/browse/MNG-4687 -->
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <groupId>org.camunda.bpm.extension.cloud</groupId>
@@ -90,8 +90,10 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.10</version>
+      <scope>provided</scope>
     </dependency>
 
     <!--dependency>
@@ -123,14 +125,13 @@
           <configuration>
             <archive>
               <manifest>
-                <addDefaultImplementationEntries/>
+                <addDefaultImplementationEntries />
               </manifest>
             </archive>
           </configuration>
         </plugin>
-        <!-- set version for spring-boot-maven-plugin because we use the spring-boot-parent only in dependencyManagement section,
-          not as parent.
-        -->
+        <!-- set version for spring-boot-maven-plugin because we use the 
+          spring-boot-parent only in dependencyManagement section, not as parent. -->
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>

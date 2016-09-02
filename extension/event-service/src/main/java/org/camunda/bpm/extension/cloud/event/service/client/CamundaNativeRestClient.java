@@ -1,7 +1,9 @@
-package org.camunda.bpm.extension.cloud.event.service;
+package org.camunda.bpm.extension.cloud.event.service.client;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
+
+import org.camunda.bpm.extension.cloud.event.service.rest.ProcessDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CamundaRestClient {
+public class CamundaNativeRestClient {
 
-  public static final Logger LOGGER = LoggerFactory.getLogger(CamundaRestClient.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(CamundaNativeRestClient.class);
 
   public List<ProcessDefinition> getProcessDefinitions(final String engineUrl){
     final String url = engineUrl + "/rest/engine/default/process-definition/";
