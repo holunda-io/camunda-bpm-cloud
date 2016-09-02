@@ -1,10 +1,3 @@
-camunda.bpm:
-  metrics.enabled: false
-  history-level: auto
-  database:
-    schema-update: drop-create
-    type: h2
-
 info:
   app:
     engine: camunda

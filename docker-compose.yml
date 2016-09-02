@@ -1,42 +1,25 @@
-discovery:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-discovery-service
-  ports:
-   - "8761:8761"
+version: '2'
+services:
+  discovery:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-discovery-service
+    ports:
+      - "8761:8761"
 
-configserver:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-config-service
-  ports:
-   - "8888:8888"
-  links:
-   - discovery
+  configserver:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-config-service
+    ports:
+     - "8888:8888"
 
-eventservice:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-event-service
-  links:
-   - discovery
-   - configserver
+  eventservice:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-event-service
 
-edgeservice:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-edge-service
-  ports:
-   - "8082:8082"
-  links:
-   - eventservice
-   - discovery
-   - configserver
-   - simpleprocess
-   - trivialprocess
+  edgeservice:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-edge-service
+    ports:
+     - "8082:8082"
 
-simpleprocess:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
-  links:
-   - discovery
-   - configserver
-   - eventservice
+  simpleprocess:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
 
-trivialprocess:
-  image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
-  links:
-   - discovery
-   - configserver
-   - eventservice
+  trivialprocess:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process

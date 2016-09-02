@@ -86,6 +86,13 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.uuid</groupId>
+      <artifactId>java-uuid-generator</artifactId>
+      <scope>provided</scope>
+      <version>3.1.2</version>
+    </dependency>
   </dependencies>
 
   <build>

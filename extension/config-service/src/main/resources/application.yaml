@@ -4,19 +4,8 @@ server:
 spring:
   profiles:
     active: native
-  cloud:
-    config:
-      server:
-        native:
-          searchLocations: classpath:/config-repository
   application:
       name: configServer
-
----
-
-spring:
-  profiles: docker
-
 
 eureka:
   instance:

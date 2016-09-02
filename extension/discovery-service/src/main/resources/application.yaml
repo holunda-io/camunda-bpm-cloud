@@ -1,6 +1,6 @@
 eureka:
   instance:
-    hostname: localhost
+    hostname: discovery
   client:
     registerWithEureka: false
     fetchRegistry: false
@@ -8,12 +8,3 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     server:
           waitTimeInMsWhenSyncEmpty: 0
-
----
-
-spring:
-    profiles: docker
-
-eureka:
-  instance:
-    hostname: discovery
