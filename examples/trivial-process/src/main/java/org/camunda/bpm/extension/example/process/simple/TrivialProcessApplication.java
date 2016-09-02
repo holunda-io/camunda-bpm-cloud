@@ -64,7 +64,7 @@ public class TrivialProcessApplication extends SpringBootProcessApplication {
   @Autowired
   private RuntimeService runtimeService;
 
-  @Scheduled(initialDelay = 5000L, fixedRate = 2000L)
+  @Scheduled(initialDelay = 5000L, fixedRate = 20000L)
   public void start() {
     logger.info("starting {}",
       runtimeService.startProcessInstanceByKey("TrivialProcess").getId());
