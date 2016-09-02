@@ -102,7 +102,7 @@ docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-example-simple-pr
 docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
 ```
 
-### Working with the simple external task lsit
+### Working with the simple external task list
 
 * If an instance of a process is created, the SimpleProcess and/or TrivialProcess broadcast TaskEvents for every task that is created, completed or deleted to the EventService.
 * The EventService caches the TaskEvents using its HashMap.

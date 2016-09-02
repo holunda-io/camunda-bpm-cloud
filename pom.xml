@@ -32,6 +32,8 @@
     <camunda.version>7.5.0</camunda.version>
     <camunda-springboot.version>1.2.0</camunda-springboot.version>
     <camunda-reactor.version>1.2</camunda-reactor.version>
+
+    <spring-cloud.version>Brixton.SR4</spring-cloud.version>
   </properties>
 
   <dependencyManagement>

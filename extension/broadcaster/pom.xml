@@ -35,6 +35,13 @@
       <artifactId>json</artifactId>
       <version>20160212</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
+      <artifactId>camunda-bpm-cloud-test</artifactId>
+      <scope>test</scope>
+      <type>pom</type>
+    </dependency>
   </dependencies>
 
 </project>

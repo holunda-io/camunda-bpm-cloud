@@ -12,6 +12,12 @@ spring:
   application:
       name: configServer
 
+---
+
+spring:
+  profiles: docker
+
+
 eureka:
   instance:
     hostname: configserver

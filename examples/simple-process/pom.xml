@@ -83,6 +83,13 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.uuid</groupId>
+      <artifactId>java-uuid-generator</artifactId>
+      <scope>provided</scope>
+      <version>3.1.2</version>
+    </dependency>
   </dependencies>
 
   <build>
