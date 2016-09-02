@@ -1,2 +1,2 @@
-spring.application:
-    name: discovery
+spring.application.name: discovery
+server.port: ${EUREKA_PORT:8761}

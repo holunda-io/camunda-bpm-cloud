@@ -2,7 +2,11 @@ package org.camunda.bpm.extension.example.process.simple;
 
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.impl.cfg.AbstractProcessEnginePlugin;
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
 import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration;
+import org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator;
 import org.camunda.bpm.extension.cloud.broadcaster.BroadcasterConfiguration;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.camunda.bpm.extension.reactor.plugin.ReactorProcessEnginePlugin;
@@ -17,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,10 +48,16 @@ public class SimpleProcessApplication extends SpringBootProcessApplication {
   }
 
   @Bean
-  public static StandaloneInMemProcessEngineConfiguration configuration(CamundaEventBus camundaEventBus) {
-    return new StandaloneInMemProcessEngineConfiguration() {
-      {
-        this.getProcessEnginePlugins().add(new ReactorProcessEnginePlugin(camundaEventBus));
+  public static ReactorProcessEnginePlugin reactorProcessEnginePlugin(CamundaEventBus camundaEventBus) {
+    return new ReactorProcessEnginePlugin(camundaEventBus);
+  }
+
+  @Bean
+  public static ProcessEnginePlugin uuidGenerator() {
+    return new AbstractProcessEnginePlugin(){
+      @Override
+      public void preInit(ProcessEngineConfigurationImpl processEngineConfiguration) {
+        processEngineConfiguration.setIdGenerator(new StrongUuidGenerator());
       }
     };
   }
