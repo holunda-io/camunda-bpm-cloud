@@ -123,3 +123,4 @@ docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-p
 ## Resources
 
 * [ASCII banner generator](http://www.network-science.de/ascii/), font: standard
+* [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/spring-cloud-config.html)

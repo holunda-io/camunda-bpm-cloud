@@ -1,3 +1,4 @@
-spring:
-  application:
-    name: eventService
+spring.application.name: eventservice
+server.port: 8081
+
+

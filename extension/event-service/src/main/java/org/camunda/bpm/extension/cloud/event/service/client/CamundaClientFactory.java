@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import feign.hystrix.HystrixFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -25,7 +26,7 @@ public class CamundaClientFactory {
 
   /**
    * Retrieves a feign client for the engine.
-   * 
+   *
    * @param engineId
    *          engine id as registered in the discovery.
    * @return service.
@@ -42,7 +43,7 @@ public class CamundaClientFactory {
           log.info("Found engine id:{} uri:{} meta:{}", serviceInstance.getServiceId(), serviceInstance.getUri(),
               serviceInstance.getMetadata());
           return Optional
-              .of(Feign.builder()
+              .of(HystrixFeign.builder()
                   .logger(new Slf4jLogger())
                   .target(CamundaRestClient.class, serviceInstance.getUri().toString()));
         }
@@ -54,7 +55,7 @@ public class CamundaClientFactory {
 
   /**
    * Retrieves all Camunda BPM Engines registered in the discovery service.
-   * 
+   *
    * @return Map with serviceId as key and engine instance as value.
    */
   public Map<String, ServiceInstance> getProcessEngines() {
