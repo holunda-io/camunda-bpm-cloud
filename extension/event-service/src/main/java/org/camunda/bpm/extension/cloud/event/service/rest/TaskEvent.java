@@ -1,7 +1,6 @@
 package org.camunda.bpm.extension.cloud.event.service.rest;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class TaskEvent {
@@ -15,6 +14,7 @@ public class TaskEvent {
   private String formKey;
   private String engineId;
   private String eventType;
+  private String name;
   private String owner;
   private String priority;
   private String processInstanceId;

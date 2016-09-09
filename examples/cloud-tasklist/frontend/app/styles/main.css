@@ -15,10 +15,6 @@ body {
     border-bottom: 1px #CCC solid;
 }
 
-.active {
-    background-color: #EEE;
-}
-
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -46,6 +42,27 @@ body {
   margin-bottom: 0;
   line-height: 40px;
   padding-bottom: 19px;
+}
+
+
+.navbar-default, .navbar-default .container {
+    background-color: #205081;
+}
+
+.navbar-default .navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+}
+
+.navbar-default .navbar-nav .active {
+  background-color: #b5152b;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #ffffff;
 }
 
 /* Custom page footer */

@@ -7,15 +7,6 @@
 
 <div class="row">
   <div class="col-md-6">
-    <div ng-repeat="processDefinition in processDefinitions" class="item">
-      <button type="submit" class="btn btn-primary" ng-click="createProcessInstance(processDefinition)">Start {{processDefinition.name}}</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-6">
     <div class="item" ng-repeat="task in tasks" ng-click="setCurrentTask(task)" ng-class="{'active' : isCurrentTask(task)}">
       <h3>{{task.name}}</h3>
       <p><strong>{{task.formKey}}</strong></p>
@@ -28,6 +19,8 @@
       <h3>{{currentTask.name}}</h3>
       <p><strong>{{currentTask.description}}</strong></p>
       <p><strong>{{currentTask.createTime}}</strong></p>
+      <p><strong>{{currentTask.assignee}}</strong></p>
+      <p><strong>{{currentTask.priority}}</strong></p>
       <p><strong>{{currentTask.taskDefinitionKey}}</strong></p>
       <p><strong>{{currentTask.formKey}}</strong></p>
       <p><strong>{{currentTask.engineId}}</strong></p>

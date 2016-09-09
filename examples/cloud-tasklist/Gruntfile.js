@@ -73,14 +73,14 @@ module.exports = function (grunt) {
       },
       proxies: [
           {
-              context: ['/eventservice', '/simpleEngine', '/trivialEngine'],
-              host: '192.168.99.100',
+              context: ['/cloud'],
+              host: process.env.DOCKER_IP || 'localhost',
               port: 8082,
               https: false,
-              changeOrigin: false
-              // rewrite: {
-              //     '^/target': '/mocks'
-              // }
+              changeOrigin: false,
+              rewrite: {
+                   '^/cloud': '/eventservice'
+              }
           }
       ],
       dist: {
@@ -97,9 +97,9 @@ module.exports = function (grunt) {
 
               // Serve static files.
               options.base.forEach(function (base) {
-                  middlewares.push(require('st')({ 
-                	  path: base, 
-                	  url: '/', 
+                  middlewares.push(require('st')({
+                	  path: base,
+                	  url: '/',
                 	  index: 'index.html', passthrough: true, gzip: false, cache: false }));
               });
               return middlewares;
