@@ -1,5 +1,7 @@
 # Camunda BPM Cloud
 
+[![Travis CI](https://travis-ci.org/holisticon/camunda-bpm-cloud.svg?branch=master)](https://travis-ci.org/holisticon/camunda-bpm-cloud)
+
 ## Problem Statement
 
 Process applications are following the BPM/SOA orchestration pattern invented many years ago. This promotes the separation of orchestration and the business functions. Since the existence of BPMN 2.0 standard, the orchestration is performed by the business process engine executing the BPMN 2.0 directly - which fosters the business-IT alignment. 
