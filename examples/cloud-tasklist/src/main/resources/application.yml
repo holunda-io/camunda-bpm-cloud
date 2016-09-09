@@ -1,0 +1,9 @@
+server.port: 9001
+
+zuul:
+  debug:
+    request: true
+  routes:
+    tasklist:
+      path: /cloud/**
+      url: http://192.168.99.100:8082/eventservice/**

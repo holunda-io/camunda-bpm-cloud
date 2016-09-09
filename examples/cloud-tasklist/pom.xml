@@ -13,29 +13,65 @@
 
 
   <properties>
-    <yeomanProjectDirectory>yo</yeomanProjectDirectory>
-    <yeomanGruntTargetDir>${basedir}/target/yo</yeomanGruntTargetDir>
-    <yeomanTargetDirectory>${basedir}/target/classes/static</yeomanTargetDirectory>
-    <yeoman.dist.dir>${yeomanProjectDirectory}/dist</yeoman.dist.dir>
+    <yeomanGruntTargetDir>${project.basedir}/src/main/resources/static</yeomanGruntTargetDir>
     <yo.test.skip>true</yo.test.skip>
     <bower.install.skip>true</bower.install.skip>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-netflix</artifactId>
+        <version>1.1.0.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-zuul</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
   <profiles>
     <profile>
       <id>frontend</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <build>
         <plugins>
           <plugin>
             <artifactId>maven-clean-plugin</artifactId>
-            <version>2.6</version>
             <configuration>
               <filesets>
                 <fileset>
                   <directory>${yeomanGruntTargetDir}</directory>
-                </fileset>
-                <fileset>
-                  <directory>${yeoman.dist.dir}</directory>
                 </fileset>
               </filesets>
             </configuration>
@@ -50,69 +86,14 @@
                 <goals>
                   <goal>build</goal>
                 </goals>
+                <phase>generate-resources</phase>
                 <configuration>
+                  <yeomanProjectDirectory>${project.basedir}</yeomanProjectDirectory>
                   <!-- this is a workaround for 0.5 because bower.install.skip 
                     is not working yet -->
                   <bowerInstallArgs>--version</bowerInstallArgs>
                   <buildTool>grunt</buildTool>
                   <buildArgs>build --no-color --no-interactive</buildArgs>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-
-          <plugin>
-            <groupId>com.github.eirslett</groupId>
-            <artifactId>frontend-maven-plugin</artifactId>
-            <version>1.0</version>
-            <configuration>
-              <workingDirectory>${yeomanProjectDirectory}</workingDirectory>
-            </configuration>
-
-            <executions>
-              <execution>
-                <id>npm install</id>
-                <goals>
-                  <goal>npm</goal>
-                </goals>
-                <phase>resolve</phase>
-                <configuration>
-                  <arguments>install</arguments>
-                </configuration>
-              </execution>
-              <execution>
-                <id>npm run version:minor</id>
-                <goals>
-                  <goal>npm</goal>
-                </goals>
-                <!-- optional: default phase is "generate-resources" -->
-                <phase>rewrite-poms-for-release</phase>
-                <configuration>
-                  <!-- optional: The default argument is actually "install", 
-                    so unless you need to run some other npm command, you can remove this whole 
-                    <configuration> section. -->
-                  <arguments>run version:minor</arguments>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>3.0.1</version>
-            <executions>
-              <execution>
-                <id>copy-resources</id>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${yeomanTargetDirectory}</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>${yeoman.dist.dir}</directory>
-                      <filtering>false</filtering>
-                    </resource>
-                  </resources>
                 </configuration>
               </execution>
             </executions>

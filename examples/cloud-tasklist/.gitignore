@@ -1,4 +1,3 @@
-yo/node_modules
-yo/dist
-yo/.tmp
+node_modules
 .tmp
+src/main/resources/static

@@ -14,8 +14,9 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: 'app',
-    dist: 'dist'
+    app: 'frontend/app',
+    dist: 'src/main/resources/static',
+    tmp: 'target/css'
   };
 
   // Define the configuration for all the tasks
@@ -34,7 +35,7 @@ module.exports = function (grunt) {
         }
       },
       index: {
-        files: ['index.html'],
+        files: ['frontend/index.html'],
         tasks: ['copy:dist'],
         options: { livereload: true }
       },
@@ -56,7 +57,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
+          '<%= yeoman.tmp %>/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
@@ -85,7 +86,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: true,
-          base: 'dist',
+          base: '<%= yeoman.dist %>',
           middleware: function (connect, options) {
               if (!Array.isArray(options.base)) {
                   options.base = [options.base];
@@ -96,7 +97,10 @@ module.exports = function (grunt) {
 
               // Serve static files.
               options.base.forEach(function (base) {
-                  middlewares.push(require('st')({ path: base, url: '/', index: 'index.html', passthrough: true, gzip: false, cache: false }));
+                  middlewares.push(require('st')({ 
+                	  path: base, 
+                	  url: '/', 
+                	  index: 'index.html', passthrough: true, gzip: false, cache: false }));
               });
               return middlewares;
           }
@@ -138,7 +142,7 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%= yeoman.tmp %>',
             '<%= yeoman.dist %>/{,*/}*',
             '!<%= yeoman.dist %>/.git{,*/}*',
           ]
@@ -156,9 +160,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
+          cwd: '<%= yeoman.tmp %>/styles/',
           src: '{,*/}*.css',
-          dest: 'dist/styles/'
+          dest: '<%= yeoman.dist %>/styles/'
         }]
       }
     },
@@ -172,7 +176,7 @@ module.exports = function (grunt) {
                 // if the source file has an extension of es6 then
                 // we change the name of the source file accordingly.
                 // The result file's extension is always .js
-                'dist/app.js': ['<%= yeoman.app %>/scripts/app.js', '<%= yeoman.app %>/scripts/app.constant.js']
+                '<%= yeoman.dist %>/app.js': ['<%= yeoman.app %>/scripts/app.js', '<%= yeoman.app %>/scripts/app.constant.js']
             }
         }
     },
@@ -198,13 +202,13 @@ module.exports = function (grunt) {
       dist: {
         files: [
           {
-              src: 'index.html',
-              dest: 'dist/index.html'
+              src: 'frontend/index.html',
+              dest: '<%= yeoman.dist %>/index.html'
           },
           {
               cwd: 'node_modules/bootstrap/dist',
               src: '**/*',
-              dest: 'dist/bootstrap',
+              dest: '<%= yeoman.dist %>/bootstrap',
               expand: true
           },
         ]
@@ -212,7 +216,7 @@ module.exports = function (grunt) {
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
+        dest: '<%= yeoman.tmp %>/styles/',
         src: '{,*/}*.css'
       }
     }
