@@ -6,4 +6,4 @@ zuul:
   routes:
     tasklist:
       path: /cloud/**
-      url: http://${dockerip:localhost}:8082/eventservice/
+      url: http://${DOCKER_IP:localhost}:8082/eventservice/
