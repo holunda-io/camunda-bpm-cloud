@@ -10,3 +10,8 @@ eureka:
       engine: camunda
 
 eventServiceBaseUrl: "http://eventservice:8081"
+
+spring.datasource:
+  url: jdbc:mysql://mysql:3306/${spring.application.name}
+  username: camunda
+  password: camunda
