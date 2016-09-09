@@ -1,3 +1,4 @@
+<img src="https://www.holisticon.de/wp-content/uploads/2013/05/holisticon-logo-hamburg.gif" align="right" />
 # Camunda BPM Cloud
 
 [![Travis CI](https://travis-ci.org/holisticon/camunda-bpm-cloud.svg?branch=master)](https://travis-ci.org/holisticon/camunda-bpm-cloud)
@@ -30,22 +31,19 @@ In order to achive maximum decoupling from the engines to the business services 
 ### Edge Service
 In order to provide a single point of integration for a common task list (displaying the united workload of all process engines) an edge service should be provided.
 
-### Runtime and Deployment strategy
+## Runtime and Deployment strategy
 In order to automate the runtime deployment docker shoould be used as a container for any component.
 
+### Requirements
 
-## How to run the example
+You would need the following software in your environment to run the example:
 
-Needs to be replaced by the start of Docker Compose:
-
-1. Start EurekaServer - [http://localhost:8761/](http://localhost:8761/)
-2. Start ConfigServer - [http://localhost:8888/](http://localhost:8888/)
-3. Start EventService application
-4. Start SimpleProcess and/or TrivialProcess apllication
-5. Start external tasklist
-6. Visit the [external tasklist](http:localhost:1338)
-
-## Current status
+  * Java 8
+  * Maven 3.3
+  * Docker 1.11 (native or via VirtualBox)
+  * Docker Compose 1.7.1
+  * npm >= 3.9.6
+  * node 4.4.3
 
 ### Start-up
 
@@ -53,69 +51,74 @@ We run all services in docker containers. To build the images, use the `dockerBu
 
     mvn -PdockerBuild clean install
 
-This will create docker images (prefix `camunda-bpm-cloud`) that you can check with `docker images`. (Hint old images 
-will be "dangling", you can delete them via `docker images -f "dangling=true" -q | xargs docker rmi`).
+This will create docker images (prefix `camunda-bpm-cloud`) that you can check with `docker images`. (Hint old images will be "dangling", you can delete them via `docker images -f "dangling=true" -q | xargs docker rmi`).
 
-**Run with Docker**
+The containers are configured using `docker-compose`, but they have to be started in a certain order. In order to simplify the start, the run script is provided. Just call from console:
 
-We all use native docker hosts on our machines, no need for additional VBox configurations. Start all containers with
+    ./run.sh
+
+This will start the services:
+
+* discovery
+* config
+* edge
+* simpleprocess
+* trivialservice
+
+In order to start the Cloud Tasklist please run:
+
+     ./tasklist.sh
+ 
+
+**Runing with Docker**
+
+If you use native docker hosts on our machines, no need for additional VBox configurations is required. If you run docker based on VirtualBox, please make sure to expose the IP address of the Docker host by exeucting the following line of code: `export DOCKER_IP=$(docker-machine ip $(docker-machine active))
+`
+
+Start all containers with
 
 * `-P` map all ports
-* `--net="host"` use hosts network device directly, so 'localhost' works, [found here](http://stackoverflow.com/questions/29971909/use-eureka-despite-having-random-external-port-of-docker-containers)
+* `--net="host"` use hosts network device directly, so `localhost` works fine, [found here](http://stackoverflow.com/questions/29971909/use-eureka-despite-having-random-external-port-of-docker-containers)
 
-#### Restarting a single container
+**Restarting a single container**
 
-    docker stop camundabpmcloud_eventservice_1
+    docker-compose stop camundabpmcloud_eventservice_1
     mvn clean install -f extension/event-service/ -PdockerBuild
     docker-compose up -d eventservice
     docker logs -f camundabpmcloud_eventservice_1
 
-#### service-discovery (eureka)
+## Components
 
-* The EurekaServer starts up and serves as service-registry. You can visit its dashboard at http://localhost:8761/.
+### Service-discovery / Registry (eureka)
 
-```bash
-docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-service-registry
-```
+The EurekaServer starts up and serves as service-registry.
 
-#### config-service (configuration)
+### Config-service (configuration)
 
-* When the ConfigServer is started, it registers itself as _CONFIGSERVER_ at EurekaServer.
+When the ConfigServer is started, it registers itself as _CONFIGSERVER_ at EurekaServer.
 
-```bash
-docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-config-server
-```
+### Event service
 
-#### event service
+The EventService registers itself as _EVENTSERVICE_ at EurekaServer and provides .
 
-* The EventService registers itself as _EVENTSERVICE_ at EurekaServer and provides .
-    * a REST endpoint for the EventBroadcasters used in ProcessApplications (not yet discovarable via EurekaServer),
-    * an in-memory TaskEventCache (currently a HashMap is used for the sake of simplicity) and
-    * a REST endpoint for the external task list (stripped down camunda REST-API having one additional field _engineUrl_).
+* a REST endpoint for the EventBroadcasters used in ProcessApplications,
+* an in-memory TaskEventCache (currently a HashMap is used for the sake of simplicity) and
+* a REST endpoint for the external task list (stripped down camunda REST-API having one additional field _engineUrl_).
     
-```bash
-docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-event-service
-```
+### Edge Service (zuul)
 
-#### Example process applications
+The edge service acts as a reverse proxy to access the event service from outside of the cloud.
 
-* When starting one of the example ProcessApplications, these register as _SIMPLEENGINE_/_TRIVIALENGINE_ at EurekaServer.
-* The simple external task list queries the EventService for processDefinitions:
-    * Therefore, the EventService fetches all ServiceInstances from EurekaServer and uses Metadata to identify all camunda engines.
-    * For each camunda engine found, the EventService directly queries the engine's REST endpoint to retrieve all ProcessDefinitions.
-    * The List of ProcessDefinitions is returned to the simple external task list.
-* For each ProcessDefinition retrieved, the simple external task list provides a button to create an instance.
+### Cloud Tasklist
 
-```bash
-docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
-docker run -P --net="host" camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
-```
+The Cloud task list is a SpringBoot Application containing a task list and a component which connects to the Camunda cloud vias edge service. 
 
-### Working with the simple external task list
+
+## Example Scenarios
 
 * If an instance of a process is created, the SimpleProcess and/or TrivialProcess broadcast TaskEvents for every task that is created, completed or deleted to the EventService.
 * The EventService caches the TaskEvents using its HashMap.
-* The external tasklist queries the EventService for all cached TaskEvents.
+* The Cloud tasklist queries the EventService for all cached TaskEvents.
 * By clicking on a task, details of the task are shown and a complete button is present.
 * When using the complete button, the task list sends a request to complete the task directly to the engine identified by the task.engineUrl field.
 
