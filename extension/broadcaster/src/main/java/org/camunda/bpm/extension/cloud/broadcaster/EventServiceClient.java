@@ -17,9 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EventServiceClient {
 
-  @Value(value = "${server.port}")
-  private int port;
-
   /**
    * Event type.
    */

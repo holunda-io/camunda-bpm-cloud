@@ -8,12 +8,12 @@ services:
   configserver:
     image: camunda-bpm-cloud/camunda-bpm-cloud-config-service
     ports:
-     - "8888:8888"
+      - "8888:8888"
 
   edgeservice:
     image: camunda-bpm-cloud/camunda-bpm-cloud-edge-service
     ports:
-     - "8082:8082"
+      - "8082:8082"
 
   eventservice:
     image: camunda-bpm-cloud/camunda-bpm-cloud-event-service
@@ -23,3 +23,15 @@ services:
 
   trivialprocess:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
+
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=camunda
+      - MYSQL_PASSWORD=camunda
+      - CAMUNDA_DATABASES=simpleprocess,trivialprocess
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d

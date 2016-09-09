@@ -2,14 +2,11 @@ info:
   app:
     engine: camunda
     version: 7.5
-    instance: simpleEngine
+    instance: simpleprocess
 
 eureka:
   instance:
     metadata-map:
       engine: camunda
-
-#server:
-#  port: 0
 
 eventServiceBaseUrl: "http://eventservice:8081"
