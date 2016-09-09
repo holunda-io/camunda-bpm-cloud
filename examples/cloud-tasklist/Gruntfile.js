@@ -73,14 +73,14 @@ module.exports = function (grunt) {
       },
       proxies: [
           {
-              context: ['/eventservice', '/simpleEngine', '/trivialEngine'],
-              host: 'localhost',
+              context: ['/cloud'],
+              host: process.env.DOCKER_IP || 'localhost',
               port: 8082,
               https: false,
-              changeOrigin: false
-              // rewrite: {
-              //     '^/target': '/mocks'
-              // }
+              changeOrigin: false,
+              rewrite: {
+                   '^/cloud': '/eventservice'
+              }
           }
       ],
       dist: {
@@ -211,6 +211,12 @@ module.exports = function (grunt) {
               dest: '<%= yeoman.dist %>/bootstrap',
               expand: true
           },
+          {
+              cwd: '<%= yeoman.app %>/images',
+              src: '**/*',
+              dest: '<%= yeoman.dist %>/images',
+              expand: true
+          }
         ]
       },
       styles: {

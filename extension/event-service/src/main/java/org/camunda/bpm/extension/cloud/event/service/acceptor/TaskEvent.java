@@ -14,6 +14,7 @@ public class TaskEvent {
   private String formKey;
   private String engineId;
   private String eventType;
+  private String name;
   private String owner;
   private String priority;
   private String processInstanceId;

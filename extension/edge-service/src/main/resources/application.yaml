@@ -33,6 +33,9 @@ hystrix:
       execution:
         timeout:
           enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
 
 logging:
   level:

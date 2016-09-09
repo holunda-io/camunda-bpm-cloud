@@ -15,7 +15,7 @@ module.exports = function ($http, EDGE_URI) {
     }
 
     function complete(task) {
-    	var url =urlForTaskComplete(task);
+    	var url = urlForTaskComplete(task);
     	console.log("completing task", url);
         return $http.post(url, '{}');
     }

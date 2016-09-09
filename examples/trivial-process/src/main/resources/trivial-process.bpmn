@@ -5,7 +5,7 @@
   </bpmn:collaboration>
   <bpmn:process id="TrivialProcess" name="TrivialProcess" isExecutable="true">
     <bpmn:laneSet>
-      <bpmn:lane id="Lane_1p7oyak" name="Trivial User">
+      <bpmn:lane id="Lane_1p7oyak" name="BPM Craftsman">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>user_trivialTask</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_012lbj8</bpmn:flowNodeRef>
@@ -16,7 +16,8 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_0zjpiy7</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="user_trivialTask" name="Trivial Task" camunda:formKey="trivialTask">
+    <bpmn:userTask id="user_trivialTask" name="Trivial Task" camunda:formKey="trivialTask" camunda:assignee="BPM Craftsman" camunda:priority="1">
+      <bpmn:documentation>Please complete this trivial task.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_0zjpiy7</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1e7jwal</bpmn:outgoing>
     </bpmn:userTask>

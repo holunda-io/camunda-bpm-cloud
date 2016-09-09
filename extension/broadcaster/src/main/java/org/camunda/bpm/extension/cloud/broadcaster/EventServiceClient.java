@@ -71,11 +71,14 @@ public class EventServiceClient {
         .put("dueDate", task.getDueDate()) //
         .put("formKey", formKey) //
         .put("engineId", engineId) //
+        .put("name", task.getName()) //
         .put("eventType", eventType.name()) //
         .put("owner", task.getOwner()) //
         .put("priority", task.getPriority()) //
-        .put("processInstanceId", task.getProcessInstanceId()).put("taskDefinitionKey", task.getTaskDefinitionKey()) //
-        .put("tenantId", task.getTenantId()).put("taskId", task.getId()) //
+        .put("processInstanceId", task.getProcessInstanceId()) //
+        .put("taskDefinitionKey", task.getTaskDefinitionKey()) //
+        .put("tenantId", task.getTenantId()) //
+        .put("taskId", task.getId()) //
         .toString(), headers);
   }
 

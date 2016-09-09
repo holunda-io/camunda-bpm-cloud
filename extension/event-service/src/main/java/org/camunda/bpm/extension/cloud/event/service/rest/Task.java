@@ -17,6 +17,7 @@ public class Task {
   private String formKey;
   private String engineId;
   private TaskStateEnum eventType;
+  private String name;
   private String owner;
   private String priority;
   private String processInstanceId;
@@ -35,6 +36,7 @@ public class Task {
       .formKey(taskEvent.getFormKey())
       .engineId(taskEvent.getEngineId())
       .eventType(TaskStateEnum.valueOf(taskEvent.getEventType()))
+      .name(taskEvent.getName())
       .owner(taskEvent.getOwner())
       .priority(taskEvent.getPriority())
       .processInstanceId(taskEvent.getProcessInstanceId())
