@@ -1,7 +1,6 @@
-package org.camunda.bpm.extension.cloud.event.service.rest;
+package org.camunda.bpm.extension.cloud.event.service.acceptor;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class TaskEvent {
