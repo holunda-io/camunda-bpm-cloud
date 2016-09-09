@@ -1,9 +1,6 @@
-server:
-  port: 8081
-
 eureka:
   instance:
-    hostname: eventservice
+    hostname: ${spring.application.name}
   client:
     healthcheck:
       enabled: true

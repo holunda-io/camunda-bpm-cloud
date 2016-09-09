@@ -1,13 +1,13 @@
 spring:
   application:
-    name: simpleEngine
+    name: simpleprocess
   cloud:
     config:
       uri: http://configserver:8888
 
 eureka:
   instance:
-    hostname: simpleprocess
+    hostname: ${spring.application.name}
   client:
     registerWithEureka: true
     fetchRegistry: true

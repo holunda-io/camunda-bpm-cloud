@@ -1,9 +1,6 @@
-server:
-  port: 8082
-
 eureka:
   instance:
-    hostname: edgeservice
+    hostname: ${spring.application.name}
   client:
     healthcheck:
       enabled: true
@@ -22,21 +19,20 @@ zuul:
   routes:
     eventservice:
       path: /eventservice/**
-      serviceId: eventService
+      serviceId: eventservice
     simpleprocess:
-      path: /simpleEngine/**
-      # serviceId: simpleEngine
-      url: http://simpleprocess:9998
+      path: /simpleprocess/**
+      serviceId: simpleprocess
     trivialprocess:
-      path: /trivialEngine/**
-      serviceId: trivialEngine
+      path: /trivialprocess/**
+      serviceId: trivialprocess
 
 hystrix:
   command:
     default:
       execution:
         timeout:
-          enabled: false      
+          enabled: false
 
 logging:
   level:

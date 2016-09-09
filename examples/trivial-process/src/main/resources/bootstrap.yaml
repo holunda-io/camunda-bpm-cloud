@@ -1,13 +1,13 @@
 spring:
   application:
-    name: trivialEngine
+    name: trivialprocess
   cloud:
     config:
       uri: http://configserver:8888
 
 eureka:
   instance:
-    hostname: trivialprocess
+    hostname: ${spring.application.name}
   client:
     registerWithEureka: true
     fetchRegistry: true

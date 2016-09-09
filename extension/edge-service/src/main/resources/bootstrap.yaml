@@ -1,3 +1,2 @@
-spring:
-  application:
-    name: edgeService
+spring.application.name: edgeservice
+server.port: 8082

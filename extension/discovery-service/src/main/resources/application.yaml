@@ -1,6 +1,6 @@
 eureka:
   instance:
-    hostname: discovery
+    hostname: ${spring.application.name}
   client:
     registerWithEureka: false
     fetchRegistry: false
