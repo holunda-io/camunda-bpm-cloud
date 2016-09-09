@@ -1,6 +1,5 @@
 package org.camunda.bpm.extension.cloud.event.service;
 
-import org.camunda.bpm.extension.cloud.event.service.filter.CamundaCloudZuulFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -29,8 +28,4 @@ public class EdgeServiceApplication {
     };
   }
 
-  @Bean
-  public CamundaCloudZuulFilter camundaCloudZuulFilter() {
-    return new CamundaCloudZuulFilter();
-  }
 }

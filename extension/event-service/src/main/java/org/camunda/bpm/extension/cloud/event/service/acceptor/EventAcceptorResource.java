@@ -1,7 +1,7 @@
 package org.camunda.bpm.extension.cloud.event.service.acceptor;
 
 import org.camunda.bpm.extension.cloud.event.service.EventCache;
-import org.camunda.bpm.extension.cloud.event.service.rest.TaskEvent;
+import org.camunda.bpm.extension.cloud.event.service.rest.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,13 +19,13 @@ public class EventAcceptorResource {
   private EventCache eventCache;
 
   @RequestMapping(consumes = "application/json", produces = "application/json", value = "/task", method = RequestMethod.POST)
-  public HttpEntity<String> eventReceived(@RequestBody(required = true) final TaskEvent task) {
-    if (task.getEventType().equals("CREATED")) {
-      eventCache.putEvent(task);
-    } else if (task.getEventType().equals("COMPLETED")) {
-      eventCache.removeEvent(task);
+  public HttpEntity<String> eventReceived(@RequestBody(required = true) final TaskEvent taskEvent) {
+    if (taskEvent.getEventType().equals("CREATED")) {
+      eventCache.putEvent(Task.from(taskEvent));
+    } else if (taskEvent.getEventType().equals("COMPLETED")) {
+      eventCache.removeEvent(Task.from(taskEvent));
     } else {
-      log.info("Task with unknown eventType {} received {}", task.getEventType(), task);
+      log.info("Task with unknown eventType {} received {}", taskEvent.getEventType(), taskEvent);
     }
     return new HttpEntity<String>("{'status' : 'ok'}");
   }

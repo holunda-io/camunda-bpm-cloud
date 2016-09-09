@@ -38,11 +38,6 @@ public class SimpleProcessApplication extends SpringBootProcessApplication {
   }
 
   @Bean
-  public ResourceConfig jerseyConfig() {
-    return new CamundaJerseyResourceConfig();
-  }
-
-  @Bean
   public static CamundaEventBus camundaEventBus() {
     return new CamundaEventBus();
   }

@@ -1,9 +1,6 @@
 package org.camunda.bpm.extension.cloud.event.service.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.extension.cloud.event.service.client.CamundaNativeRestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -13,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -26,7 +25,7 @@ public class ProcessResource {
   private DiscoveryClient discoveryClient;
 
   @RequestMapping(produces = "application/json", value = "/process-definition", method = RequestMethod.GET)
-  public HttpEntity<String> getProcessDefinitions() {
+  public HttpEntity<Collection<ProcessDefinition>> getProcessDefinitions() {
     Collection<ProcessDefinition> processDefinitions = new ArrayList<ProcessDefinition>();
     getProcessEngines().forEach((ServiceInstance s) -> {
       camundaRestClient.getProcessDefinitions(s.getUri().toString()).forEach((ProcessDefinition processDefinition) -> {
@@ -36,7 +35,7 @@ public class ProcessResource {
         processDefinitions.add(processDefinition);
       });
     });
-    return Util.toJson(processDefinitions);
+    return new HttpEntity<Collection<ProcessDefinition>>(processDefinitions);
   }
 
   private List<ServiceInstance> getProcessEngines() {
