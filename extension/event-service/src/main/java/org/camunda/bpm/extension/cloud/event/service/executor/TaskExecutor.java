@@ -26,7 +26,7 @@ public class TaskExecutor {
   @Autowired
   private CamundaClientFactory camundaClientBuilder;
 
-  @Scheduled(initialDelay = 10000L, fixedRate = 1000L)
+  @Scheduled(initialDelay = 10000L, fixedRate = 5000L)
   public void work()
   {
     log.info("Trying to get tasks from queue");

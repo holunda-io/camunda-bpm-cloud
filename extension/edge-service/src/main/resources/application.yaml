@@ -36,7 +36,10 @@ hystrix:
     default:
       execution:
         timeout:
-          enabled: false      
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
 
 logging:
   level:
