@@ -6,25 +6,55 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6">
-    <div class="item" ng-repeat="task in tasks" ng-click="setCurrentTask(task)" ng-class="{'active' : isCurrentTask(task)}">
-      <h3>{{task.name}}</h3>
-      <p><strong>{{task.formKey}}</strong></p>
-    </div>
-  </div>
+  <div class="col-md-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">All Tasks</div>
+			<div class="panel-body">
+			<table class="table">
+				<thead><tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Created</th>
+					<th>Assigned</th>
+					<th>Prio</th>
+				</tr></thead>
+				<tbody>
+					<tr dir-paginate="task in tasks | orderBy: '-createTime' | itemsPerPage: 10" ng-click="setCurrentTask(task)" ng-class="{'activeTask' : isCurrentTask(task)}">
+						<td>{{ task.name }}</td>
+						<td>{{ task.description }}</td>
+						<td>{{ task.createTime }}</td>
+						<td>{{ task.assignee }}</td>
+						<td>{{ task.priority }}</td>
+					</tr>
+          <tr ng-hide="tasks.length">
+          	<td colspan="6">No tasks available.</td>
+          </tr>
+				</tbody>
+			</table>
 
-  <div class="col-md-6" ng-show="currentTask">
-    <div class="item">
-      <button type="button" class="close" ng-click="completeTask(currentTask)">Complete Task</button>
-      <h3>{{currentTask.name}}</h3>
-      <p><strong>{{currentTask.description}}</strong></p>
-      <p><strong>{{currentTask.createTime}}</strong></p>
-      <p><strong>{{currentTask.assignee}}</strong></p>
-      <p><strong>{{currentTask.priority}}</strong></p>
-      <p><strong>{{currentTask.taskDefinitionKey}}</strong></p>
-      <p><strong>{{currentTask.formKey}}</strong></p>
-      <p><strong>{{currentTask.engineId}}</strong></p>
-    </div>
+			<dir-pagination-controls boundary-links="true" template-url="views/dirPagination.tpl.html"></dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+
+
+  <div class="col-md-4" ng-show="currentTask">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Current task</div>
+			<div class="panel-body">
+
+	      <h3>{{currentTask.name}}</h3>
+	      <p>{{currentTask.description}}</p>
+	      <p><strong>Created:</strong> {{currentTask.createTime}}</p>
+	      <p><strong>Assignee:</strong> {{currentTask.assignee}}</p>
+	      <p><strong>Priority:</strong> {{currentTask.priority}}</p>
+				<p><strong>Process Engine:</strong> {{currentTask.engineId}}</p>
+				<p><strong>Task Id:</strong> {{currentTask.taskDefinitionKey}}</p>
+				<p><strong>Task Definition Key:</strong> {{currentTask.taskDefinitionKey}}</p>
+	      <p><strong>Form Key:</strong> {{currentTask.formKey}}</p>
+				<button type="button" class="btn btn-primary" ng-click="completeTask(currentTask)">Complete Task</button>
+			</div>
+		</div>
   </div>
 
 
