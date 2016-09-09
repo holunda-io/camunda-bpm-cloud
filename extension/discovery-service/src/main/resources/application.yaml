@@ -7,4 +7,4 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     server:
-          waitTimeInMsWhenSyncEmpty: 0
+      waitTimeInMsWhenSyncEmpty: 0

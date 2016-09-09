@@ -1,3 +1,6 @@
+server:
+  port: 0
+
 spring:
   application:
     name: trivialprocess
@@ -14,5 +17,3 @@ eureka:
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
 
-server:
-  port: 9999

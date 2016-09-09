@@ -7,8 +7,6 @@ endpoints:
   info:
     enabled: true
 
-eventServiceBaseUrl: http://${DOCKER_IP:localhost}:8081
-
 camunda.bpm:
   metrics.enabled: false
   history-level: auto
