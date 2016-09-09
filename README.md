@@ -63,6 +63,13 @@ We all use native docker hosts on our machines, no need for additional VBox conf
 * `-P` map all ports
 * `--net="host"` use hosts network device directly, so 'localhost' works, [found here](http://stackoverflow.com/questions/29971909/use-eureka-despite-having-random-external-port-of-docker-containers)
 
+#### Restarting a single container
+
+    docker stop camundabpmcloud_eventservice_1
+    mvn clean install -f extension/event-service/ -PdockerBuild
+    docker-compose up -d eventservice
+    docker logs -f camundabpmcloud_eventservice_1
+
 #### service-discovery (eureka)
 
 * The EurekaServer starts up and serves as service-registry. You can visit its dashboard at http://localhost:8761/.
