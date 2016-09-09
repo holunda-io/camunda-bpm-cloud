@@ -16,7 +16,6 @@
     <module>simple-process</module>
     <module>trivial-process</module>
     <module>cloud-tasklist</module>
-    <module>process-template</module>
   </modules>
 
   <dependencies>
