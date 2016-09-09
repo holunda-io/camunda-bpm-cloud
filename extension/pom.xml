@@ -23,8 +23,6 @@
     <dependency>
       <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-test</artifactId>
-      <type>pom</type>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

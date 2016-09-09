@@ -10,10 +10,9 @@
   </parent>
 
   <artifactId>camunda-bpm-cloud-test</artifactId>
-  <packaging>pom</packaging>
 
   <properties>
-    <assertj.version>3.5.1</assertj.version>
+    <assertj.version>3.5.2</assertj.version>
     <camunda-assert.version>2.0-alpha1</camunda-assert.version>
     <camunda-mockito.version>2.2</camunda-mockito.version>
   </properties>
