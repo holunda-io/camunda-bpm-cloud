@@ -1,5 +1,6 @@
 package org.camunda.bpm.extension.cloud.event.service.executor;
 
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.extension.cloud.event.service.EventCache;
 import org.camunda.bpm.extension.cloud.event.service.client.CamundaClientFactory;
@@ -38,9 +39,19 @@ public class TaskExecutor {
   private void completeTask(final Task task) {
     final Optional<CamundaRestClient> clientForEngine = camundaClientBuilder.getClientForEngine(task.getEngineId());
     if (clientForEngine.isPresent()) {
-      log.info("Completing task {} on the engine", task.getTaskId(), task.getEngineId());
-      clientForEngine.get().completeTask(task.getTaskId(), "{}");
-      task.setEventType(task.getEventType().next());
+
+      try {
+        log.info("Completing task {} on the engine", task.getTaskId(), task.getEngineId());
+        clientForEngine.get().completeTask(task.getTaskId(), "{}");
+        task.setEventType(task.getEventType().next());
+      } catch (Exception e) {
+        if (e.getCause() instanceof FeignException && ((FeignException) e.getCause()).status() == 500) {
+          log.info("Status 500 ... Task not found ... Removing it from Queue");
+          eventCache.removeEvent(task);
+        }
+        else
+          log.error("Unexpected error ...", e);
+      }
     } else {
       log.warn("No Engine found for id {}", task.getEngineId());
     }
