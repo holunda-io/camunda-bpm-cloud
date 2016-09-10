@@ -1,4 +1,2 @@
 spring.application.name: eventservice
-server.port: 8081
-
-
+server.port: 0

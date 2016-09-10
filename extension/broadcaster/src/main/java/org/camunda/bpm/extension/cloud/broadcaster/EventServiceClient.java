@@ -1,7 +1,10 @@
 package org.camunda.bpm.extension.cloud.broadcaster;
 
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,8 +27,8 @@ public class EventServiceClient {
     CREATED, COMPLETED, DELETED
   }
 
-  @Value(value = "${eventServiceBaseUrl}")
-  private String baseUrl;
+  @Autowired
+  private EurekaClient discoveryClient;
 
   @Value(value = "${spring.application.name}")
   private String appName;
@@ -41,7 +44,9 @@ public class EventServiceClient {
    *          form key of the task.
    */
   public void broadcastEvent(final DelegateTask task, final EventType eventType, final String formKey) {
-    final String url = baseUrl + "/task";
+    final InstanceInfo instance = discoveryClient.getNextServerFromEureka("eventservice", false);
+
+    final String url = instance.getHomePageUrl() + "/task";
 
     final BroadcastEventCommand command = new BroadcastEventCommand(url, fromTask(task, eventType, formKey, appName));
 
