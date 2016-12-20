@@ -43,4 +43,4 @@ done
 docker-compose up -d
 
 # Attach to the log output of the cluster
-docker-compose logs
+docker-compose logs -f
