@@ -24,8 +24,14 @@ services:
   trivialprocess:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
 
+  rabbitmq:
+    image: rabbitmq:3.6.6
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+
   mysql:
-    image: mysql:latest
+    image: mysql:5.7.17
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=camunda
