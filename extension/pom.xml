@@ -13,10 +13,10 @@
 
   <modules>
     <module>broadcaster</module>
-    <module>event-service</module>
     <module>config-service</module>
     <module>discovery-service</module>
     <module>edge-service</module>
+    <module>workload-service</module>
   </modules>
 
   <dependencies>

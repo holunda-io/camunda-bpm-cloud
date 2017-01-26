@@ -1,7 +1,10 @@
 package org.camunda.bpm.extension.cloud.event.service.acceptor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.extension.cloud.event.service.EventCache;
+import org.camunda.bpm.extension.cloud.event.service.acceptor.command.CreateTaskCommand;
 import org.camunda.bpm.extension.cloud.event.service.rest.Task;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.slf4j.Slf4j;
+import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 @RestController
 @Slf4j
@@ -21,7 +24,9 @@ public class EventAcceptorResource {
   @RequestMapping(consumes = "application/json", produces = "application/json", value = "/task", method = RequestMethod.POST)
   public HttpEntity<String> eventReceived(@RequestBody(required = true) final TaskEvent taskEvent) {
     if (taskEvent.getEventType().equals("CREATED")) {
-      eventCache.putEvent(Task.from(taskEvent));
+      CreateTaskCommand createTaskCommand = new CreateTaskCommand();
+      BeanUtils.copyProperties(taskEvent, createTaskCommand);
+      apply(createTaskCommand);
     } else if (taskEvent.getEventType().equals("COMPLETED")) {
       eventCache.removeEvent(Task.from(taskEvent));
     } else {
