@@ -1,6 +1,5 @@
 package org.camunda.bpm.extension.cloud.event.service;
 
-import org.axonframework.spring.config.EnableAxon;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableEurekaClient
 @EnableFeignClients
 @EnableScheduling
-@EnableAxon
 public class WorkloadServiceApplication {
 
   public static void main(String... args) {
@@ -31,4 +29,5 @@ public class WorkloadServiceApplication {
       }
     };
   }
+
 }

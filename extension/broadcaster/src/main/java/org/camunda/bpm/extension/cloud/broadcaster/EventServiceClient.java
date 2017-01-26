@@ -44,7 +44,7 @@ public class EventServiceClient {
    *          form key of the task.
    */
   public void broadcastEvent(final DelegateTask task, final EventType eventType, final String formKey) {
-    final InstanceInfo instance = discoveryClient.getNextServerFromEureka("eventservice", false);
+    final InstanceInfo instance = discoveryClient.getNextServerFromEureka("workloadservice", false);
 
     final String url = instance.getHomePageUrl() + "/task";
 
