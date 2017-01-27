@@ -19,6 +19,7 @@ docker-compose rm -f
 # Start the mysql service
 docker-compose up -d mysql
 
+sleep 5
 
 # Start the discovery service next and wait
 docker-compose up -d discovery
