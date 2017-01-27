@@ -7,8 +7,10 @@ import org.camunda.bpm.extension.cloud.event.service.domain.TaskCreatedEvent;
 import org.camunda.bpm.extension.cloud.event.service.rest.Task;
 import org.camunda.bpm.extension.cloud.event.service.rest.TaskStateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class TaskCreatedEventHandler {
 
   @Autowired

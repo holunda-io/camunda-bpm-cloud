@@ -19,7 +19,7 @@ zuul:
   routes:
     eventservice:
       path: /eventservice/**
-      serviceId: eventservice
+      serviceId: workloadservice
     simpleprocess:
       path: /simpleprocess/**
       serviceId: simpleprocess

@@ -1,6 +1,7 @@
 package org.camunda.bpm.extension.cloud.event.service.acceptor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.camunda.bpm.extension.cloud.event.service.EventCache;
 import org.camunda.bpm.extension.cloud.event.service.acceptor.command.CreateTaskCommand;
 import org.camunda.bpm.extension.cloud.event.service.rest.Task;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
-
 @RestController
 @Slf4j
 public class EventAcceptorResource {
@@ -21,12 +20,21 @@ public class EventAcceptorResource {
   @Autowired
   private EventCache eventCache;
 
+  @Autowired
+  private CommandGateway commandGateway;
+
+  /*
+  public EventAcceptorResource(EventCache eventCache, CommandGateway commandGateway){
+    this.eventCache = eventCache;
+    this.commandGateway = commandGateway;
+  }*/
+
   @RequestMapping(consumes = "application/json", produces = "application/json", value = "/task", method = RequestMethod.POST)
   public HttpEntity<String> eventReceived(@RequestBody(required = true) final TaskEvent taskEvent) {
     if (taskEvent.getEventType().equals("CREATED")) {
       CreateTaskCommand createTaskCommand = new CreateTaskCommand();
       BeanUtils.copyProperties(taskEvent, createTaskCommand);
-      apply(createTaskCommand);
+      commandGateway.send(createTaskCommand);
     } else if (taskEvent.getEventType().equals("COMPLETED")) {
       eventCache.removeEvent(Task.from(taskEvent));
     } else {
