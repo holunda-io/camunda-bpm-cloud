@@ -15,7 +15,6 @@ DOCKER_IP=${DOCKER_IP:-0.0.0.0}
 docker-compose stop
 docker-compose rm -f
 
-
 # Start the mysql service
 docker-compose up -d mysql
 
@@ -45,7 +44,8 @@ done
 
 
 # Start the other containers
-docker-compose up -d
+#docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.elk.yml up -d
 
 # Attach to the log output of the cluster
 docker-compose logs
