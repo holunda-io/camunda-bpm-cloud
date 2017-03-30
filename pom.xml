@@ -35,8 +35,6 @@
     <camunda-springboot.version>1.3.0</camunda-springboot.version>
     <camunda-reactor.version>1.2</camunda-reactor.version>
 
-    <spring-cloud.version>Brixton.SR4</spring-cloud.version>
-
     <lombok.version>1.16.10</lombok.version>
   </properties>
 
