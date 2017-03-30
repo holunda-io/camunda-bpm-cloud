@@ -20,7 +20,7 @@ public class TaskResource {
   @RequestMapping(produces = "application/json", value = "/task", method = RequestMethod.GET)
   public HttpEntity<Collection<Task>> getTasks() {
     final Collection<Task> events = eventCache.getEvents();
-    return new HttpEntity<Collection<Task>>(events);
+    return new HttpEntity<>(events);
   }
 
   @RequestMapping(produces = "application/json", value = "/task/{taskId}/complete", method = RequestMethod.POST)

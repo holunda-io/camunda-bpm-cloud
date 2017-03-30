@@ -16,7 +16,7 @@ public class EventCache {
   private HashMap<String, Task> eventCash;
 
   public EventCache() {
-    this.eventCash = new HashMap<String, Task>();
+    this.eventCash = new HashMap<>();
   }
 
   public EventCache(HashMap<String, Task> eventCash) {

@@ -52,7 +52,7 @@ class ProcessDefinitionsHytrixCommand extends HystrixCommand<List<ProcessDefinit
   @Override
   protected List<ProcessDefinition> getFallback() {
     LOGGER.error("Retrieving process definitions failed.");
-    return new ArrayList<ProcessDefinition>();
+    return new ArrayList<>();
   }
 
 }

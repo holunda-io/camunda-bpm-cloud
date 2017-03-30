@@ -31,16 +31,20 @@ public class EventAcceptorResource {
 
   @RequestMapping(consumes = "application/json", produces = "application/json", value = "/task", method = RequestMethod.POST)
   public HttpEntity<String> eventReceived(@RequestBody(required = true) final TaskEvent taskEvent) {
-    if (taskEvent.getEventType().equals("CREATED")) {
-      CreateTaskCommand createTaskCommand = new CreateTaskCommand();
-      BeanUtils.copyProperties(taskEvent, createTaskCommand);
-      commandGateway.send(createTaskCommand);
-    } else if (taskEvent.getEventType().equals("COMPLETED")) {
-      eventCache.removeEvent(Task.from(taskEvent));
-    } else {
-      log.info("Task with unknown eventType {} received {}", taskEvent.getEventType(), taskEvent);
+    switch (taskEvent.getEventType()) {
+      case "CREATED":
+        CreateTaskCommand createTaskCommand = new CreateTaskCommand();
+        BeanUtils.copyProperties(taskEvent, createTaskCommand);
+        commandGateway.send(createTaskCommand);
+        break;
+      case "COMPLETED":
+        eventCache.removeEvent(Task.from(taskEvent));
+        break;
+      default:
+        log.info("Task with unknown eventType {} received {}", taskEvent.getEventType(), taskEvent);
+        break;
     }
-    return new HttpEntity<String>("{'status' : 'ok'}");
+    return new HttpEntity<>("{'status' : 'ok'}");
   }
 
 }

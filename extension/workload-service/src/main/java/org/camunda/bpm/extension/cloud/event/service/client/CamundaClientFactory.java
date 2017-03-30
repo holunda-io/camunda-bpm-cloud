@@ -1,21 +1,17 @@
 package org.camunda.bpm.extension.cloud.event.service.client;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
+import com.google.common.collect.Maps;
 import feign.hystrix.HystrixFeign;
+import feign.slf4j.Slf4jLogger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Maps;
-
-import feign.Feign;
-import feign.codec.Encoder;
-import feign.slf4j.Slf4jLogger;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Component
 @Slf4j

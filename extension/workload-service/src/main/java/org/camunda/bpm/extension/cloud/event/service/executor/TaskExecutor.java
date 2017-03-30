@@ -33,7 +33,7 @@ public class TaskExecutor {
     log.info("Trying to get tasks from queue");
     final Collection<Task> events = eventCache.getEvents(TaskStateEnum.PENDING_TO_COMPLETE);
     log.info("Found {} pending tasks", events.size());
-    events.stream().forEach(e -> completeTask(e));
+    events.stream().forEach(this::completeTask);
   }
 
   private void completeTask(final Task task) {

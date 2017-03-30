@@ -26,7 +26,7 @@ public class ProcessResource {
 
   @RequestMapping(produces = "application/json", value = "/process-definition", method = RequestMethod.GET)
   public HttpEntity<Collection<ProcessDefinition>> getProcessDefinitions() {
-    Collection<ProcessDefinition> processDefinitions = new ArrayList<ProcessDefinition>();
+    Collection<ProcessDefinition> processDefinitions = new ArrayList<>();
     getProcessEngines().forEach((ServiceInstance s) -> {
       camundaRestClient.getProcessDefinitions(s.getUri().toString()).forEach((ProcessDefinition processDefinition) -> {
         // processDefinition.setEngineUrl(s.getUri().toString());
@@ -35,12 +35,12 @@ public class ProcessResource {
         processDefinitions.add(processDefinition);
       });
     });
-    return new HttpEntity<Collection<ProcessDefinition>>(processDefinitions);
+    return new HttpEntity<>(processDefinitions);
   }
 
   private List<ServiceInstance> getProcessEngines() {
     List<String> services = discoveryClient.getServices();
-    List<ServiceInstance> camundaEngines = new ArrayList<ServiceInstance>();
+    List<ServiceInstance> camundaEngines = new ArrayList<>();
     for (String service : services) {
       ServiceInstance serviceInstance = discoveryClient.getInstances(service).get(0);
       if (serviceInstance.getMetadata().get("engine") != null

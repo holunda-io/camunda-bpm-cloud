@@ -9,7 +9,7 @@ public enum TaskStateEnum {
 
   private TaskStateEnum state;
 
-  private TaskStateEnum()
+  TaskStateEnum()
   {
     state = this;
   }
