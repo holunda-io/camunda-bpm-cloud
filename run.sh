@@ -2,6 +2,41 @@
 
 set -e
 
+usage() {
+  echo -n "$(basename $0) [OPTION]...
+
+This script starts up all backend containters of camunda bpm cloud.
+
+ Options:
+  -e, --elk    start additional ELK container collecting logs from cloud services
+
+
+"
+}
+
+# read command line options
+while [ "$1" != '' ];
+  do
+    case $1 in
+      -h|--help) usage >&2; exit ;;
+      -e|--elk)
+        ELK=1
+        ;;
+        *)
+        # unknown option
+        ;;
+    esac
+    shift
+done
+
+# Determine, whether to start with or without ELK-Stack
+if [[ ELK -eq 1 ]];
+  then
+    DOCKER_COMPOSE="docker-compose -f docker-compose.yml -f docker-compose.elk.yml"
+  else
+    DOCKER_COMPOSE="docker-compose"
+fi
+
 # Build the project and docker images
 # mvn clean install
 
@@ -12,8 +47,11 @@ export DOCKER_IP=$(docker-machine ip $(docker-machine active))
 DOCKER_IP=${DOCKER_IP:-0.0.0.0}
 
 # Remove existing containers
-docker-compose stop
-docker-compose rm -f
+#docker-compose stop
+${DOCKER_COMPOSE} stop
+
+#docker-compose rm -f
+${DOCKER_COMPOSE}  rm -f
 
 # Start the mysql service
 docker-compose up -d mysql
@@ -45,7 +83,7 @@ done
 
 # Start the other containers
 #docker-compose up -d
-docker-compose -f docker-compose.yml -f docker-compose.elk.yml up -d
+${DOCKER_COMPOSE} up -d
 
 # Attach to the log output of the cluster
 docker-compose logs
