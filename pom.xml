@@ -28,7 +28,7 @@
     <!-- for camunda -->
     <version.java>${java.version}</version.java>
 
-    <spring-boot.version>1.4.5.RELEASE</spring-boot.version>
+    <spring-boot.version>1.4.3.RELEASE</spring-boot.version>
     <spring-cloud.version>Brixton.SR5</spring-cloud.version>
 
     <camunda.version>7.5.0</camunda.version>
