@@ -28,7 +28,7 @@
     <!-- for camunda -->
     <version.java>${java.version}</version.java>
 
-    <spring-boot.version>1.4.2.RELEASE</spring-boot.version>
+    <spring-boot.version>1.4.3.RELEASE</spring-boot.version>
     <spring-cloud.version>Brixton.SR5</spring-cloud.version>
 
     <camunda.version>7.5.0</camunda.version>
@@ -36,6 +36,7 @@
     <camunda-reactor.version>1.2</camunda-reactor.version>
 
     <lombok.version>1.16.10</lombok.version>
+    <logstash-logback-encoder.version>4.9</logstash-logback-encoder.version>
   </properties>
 
   <dependencyManagement>
@@ -97,6 +98,13 @@
         <version>${project.version}</version>
         <scope>test</scope>
       </dependency>
+
+      <dependency>
+        <groupId>net.logstash.logback</groupId>
+        <artifactId>logstash-logback-encoder</artifactId>
+        <version>${logstash-logback-encoder.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
