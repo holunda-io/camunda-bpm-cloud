@@ -24,7 +24,7 @@ public class TaskCommandAPI {
   private CommandGateway commandGateway;
 
   @RequestMapping(consumes = "application/json", produces = "application/json", value = "/task", method = RequestMethod.POST)
-  public HttpEntity<String> taskCommandMessageReceived(@RequestBody(required = true) final TaskCommandMessage taskCommandMessage) {
+  public HttpEntity<String> receiveTaskCommandMessage(@RequestBody(required = true) final TaskCommandMessage taskCommandMessage) {
     switch (taskCommandMessage.getEventType()) {
       case "CREATED":
         CreateTaskCommand createTaskCommand = new CreateTaskCommand();

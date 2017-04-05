@@ -62,8 +62,9 @@ This will start the services:
 * discovery
 * config
 * edge
+* workloadservice
 * simpleprocess
-* trivialservice
+* trivialprocess
 
 In order to start the Cloud Tasklist please run:
 
@@ -82,10 +83,10 @@ Start all containers with
 
 **Restarting a single container**
 
-    docker-compose stop camundabpmcloud_eventservice_1
-    mvn clean install -f extension/event-service/ -PdockerBuild
-    docker-compose up -d eventservice
-    docker logs -f camundabpmcloud_eventservice_1
+    docker-compose stop camundabpmcloud_workloadservice_1
+    mvn clean install -f extension/workload-service/ -PdockerBuild
+    docker-compose up -d workloadservice
+    docker logs -f camundabpmcloud_workloadservice_1
 
 ## Components
 
@@ -97,17 +98,23 @@ The EurekaServer starts up and serves as service-registry.
 
 When the ConfigServer is started, it registers itself as _CONFIGSERVER_ at EurekaServer.
 
-### Event service
+### Workload service
 
-The EventService registers itself as _EVENTSERVICE_ at EurekaServer and provides .
+The WorkloadService registers itself as _WORKLOADSERVICE_ at EurekaServer and provides
 
 * a REST endpoint for the EventBroadcasters used in ProcessApplications,
-* an in-memory TaskEventCache (currently a HashMap is used for the sake of simplicity) and
+* an in-memory TaskQueryObjectCache (currently a HashMap is used for the sake of simplicity) and
 * a REST endpoint for the external task list (stripped down camunda REST-API having one additional field _engineUrl_).
+
+#### Internal structure of the workload service
+
+The workload service is implemented using the Axon framework.
+
+![Details of the workload-service](./docs/images/workload-service.png "Details of the workload-service")
     
 ### Edge Service (zuul)
 
-The edge service acts as a reverse proxy to access the event service from outside of the cloud.
+The edge service acts as a reverse proxy to access the workload service from outside of the cloud.
 
 ### Cloud Tasklist
 
@@ -116,9 +123,9 @@ The Cloud task list is a SpringBoot Application containing a task list and a com
 
 ## Example Scenarios
 
-* If an instance of a process is created, the SimpleProcess and/or TrivialProcess broadcast TaskEvents for every task that is created, completed or deleted to the EventService.
-* The EventService caches the TaskEvents using its HashMap.
-* The Cloud tasklist queries the EventService for all cached TaskEvents.
+* If an instance of a process is created, the SimpleProcess and/or TrivialProcess broadcast TaskEvents for every task that is created, completed or deleted to the WorkloadService.
+* The WorkloadService caches the Tasks using its HashMap.
+* The Cloud tasklist queries the WorkloadService for all cached Tasks.
 * By clicking on a task, details of the task are shown and a complete button is present.
 * When using the complete button, the task list sends a request to complete the task directly to the engine identified by the task.engineUrl field.
 

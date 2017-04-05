@@ -20,10 +20,8 @@ public class TaskQueryAPI {
 
   @RequestMapping(produces = "application/json", value = "/task", method = RequestMethod.GET)
   public HttpEntity<Collection<TaskQueryObject>> getTasks() {
-    final Collection<TaskQueryObject> events = taskQueryObjectCache.getEvents();
-    return new HttpEntity<>(events);
+    final Collection<TaskQueryObject> taskQueryObjects = taskQueryObjectCache.getEvents();
+    return new HttpEntity<>(taskQueryObjects);
   }
-
-
 
 }
