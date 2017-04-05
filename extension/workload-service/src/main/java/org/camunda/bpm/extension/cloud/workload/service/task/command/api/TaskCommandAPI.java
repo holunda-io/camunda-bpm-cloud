@@ -2,11 +2,10 @@ package org.camunda.bpm.extension.cloud.workload.service.task.command.api;
 
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObjectStateEnum;
-import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObject;
-import org.camunda.bpm.extension.cloud.workload.service.task.query.repository.TaskQueryObjectCache;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CompleteTaskCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CreateTaskCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.command.MarkTaskForCompletionCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.query.repository.TaskQueryObjectCache;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -46,13 +45,9 @@ public class TaskCommandAPI {
 
   @RequestMapping(produces = "application/json", value = "/task/{taskId}/complete", method = RequestMethod.POST)
   public HttpEntity<String> markTaskForCompletion(@PathVariable("taskId") final String taskId, @RequestBody final String body) {
-
-    log.info("Marking task for completion: {}", taskId);
-    final TaskQueryObject event = taskQueryObjectCache.getEvent(taskId);
-    if (event != null && event.getEventType() == TaskQueryObjectStateEnum.CREATED) {
-      event.setEventType(event.getEventType().next());
-    }
-
+    MarkTaskForCompletionCommand markTaskForCompletionCommand = new MarkTaskForCompletionCommand();
+    markTaskForCompletionCommand.setTaskId(taskId);
+    commandGateway.send(markTaskForCompletionCommand);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
