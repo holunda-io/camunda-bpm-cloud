@@ -1,13 +1,14 @@
-package org.camunda.bpm.extension.cloud.event.service.rest;
+package org.camunda.bpm.extension.cloud.workload.service.task.query;
 
 import lombok.Builder;
 import lombok.Data;
-import org.camunda.bpm.extension.cloud.event.service.acceptor.TaskEvent;
-import org.camunda.bpm.extension.cloud.event.service.domain.TaskCreatedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.api.TaskCommandMessage;
+import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCompletedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCreatedEvent;
 
 @Data
 @Builder
-public class Task {
+public class TaskQueryObject {
 
   private String assignee;
   private String caseDefinitionId;
@@ -17,7 +18,7 @@ public class Task {
   private String dueDate;
   private String formKey;
   private String engineId;
-  private TaskStateEnum eventType;
+  private TaskQueryObjectStateEnum eventType;
   private String name;
   private String owner;
   private String priority;
@@ -26,8 +27,29 @@ public class Task {
   private String taskDefinitionKey;
   private String taskId;
 
-  public static Task from(TaskEvent taskEvent){
-    return Task.builder()
+  public static TaskQueryObject from(TaskCommandMessage taskCommandMessage){
+    return TaskQueryObject.builder()
+      .assignee(taskCommandMessage.getAssignee())
+      .caseDefinitionId(taskCommandMessage.getCaseDefinitionId())
+      .caseExecutionId(taskCommandMessage.getCaseExecutionId())
+      .createTime(taskCommandMessage.getCreateTime())
+      .description(taskCommandMessage.getDescription())
+      .dueDate(taskCommandMessage.getDueDate())
+      .formKey(taskCommandMessage.getFormKey())
+      .engineId(taskCommandMessage.getEngineId())
+      .eventType(TaskQueryObjectStateEnum.valueOf(taskCommandMessage.getEventType()))
+      .name(taskCommandMessage.getName())
+      .owner(taskCommandMessage.getOwner())
+      .priority(taskCommandMessage.getPriority())
+      .processInstanceId(taskCommandMessage.getProcessInstanceId())
+      .tenantId(taskCommandMessage.getTenantId())
+      .taskDefinitionKey(taskCommandMessage.getTaskDefinitionKey())
+      .taskId(taskCommandMessage.getTaskId())
+      .build();
+  }
+
+  public static TaskQueryObject from(TaskCreatedEvent taskEvent){
+    return TaskQueryObject.builder()
       .assignee(taskEvent.getAssignee())
       .caseDefinitionId(taskEvent.getCaseDefinitionId())
       .caseExecutionId(taskEvent.getCaseExecutionId())
@@ -36,7 +58,7 @@ public class Task {
       .dueDate(taskEvent.getDueDate())
       .formKey(taskEvent.getFormKey())
       .engineId(taskEvent.getEngineId())
-      .eventType(TaskStateEnum.valueOf(taskEvent.getEventType()))
+      .eventType(TaskQueryObjectStateEnum.valueOf(taskEvent.getEventType()))
       .name(taskEvent.getName())
       .owner(taskEvent.getOwner())
       .priority(taskEvent.getPriority())
@@ -47,8 +69,8 @@ public class Task {
       .build();
   }
 
-  public static Task from(TaskCreatedEvent taskEvent){
-    return Task.builder()
+  public static TaskQueryObject from(TaskCompletedEvent taskEvent){
+    return TaskQueryObject.builder()
       .assignee(taskEvent.getAssignee())
       .caseDefinitionId(taskEvent.getCaseDefinitionId())
       .caseExecutionId(taskEvent.getCaseExecutionId())
@@ -57,7 +79,7 @@ public class Task {
       .dueDate(taskEvent.getDueDate())
       .formKey(taskEvent.getFormKey())
       .engineId(taskEvent.getEngineId())
-      .eventType(TaskStateEnum.valueOf(taskEvent.getEventType()))
+      .eventType(TaskQueryObjectStateEnum.valueOf(taskEvent.getEventType()))
       .name(taskEvent.getName())
       .owner(taskEvent.getOwner())
       .priority(taskEvent.getPriority())

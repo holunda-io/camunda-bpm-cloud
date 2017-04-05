@@ -1,4 +1,4 @@
-package org.camunda.bpm.extension.cloud.event.service;
+package org.camunda.bpm.extension.cloud.workload.service;
 
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventsourcing.eventstore.EmbeddedEventStore;

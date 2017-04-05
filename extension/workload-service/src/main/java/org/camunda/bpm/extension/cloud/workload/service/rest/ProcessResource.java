@@ -1,7 +1,7 @@
-package org.camunda.bpm.extension.cloud.event.service.rest;
+package org.camunda.bpm.extension.cloud.workload.service.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.extension.cloud.event.service.client.CamundaNativeRestClient;
+import org.camunda.bpm.extension.cloud.workload.service.camunda.client.CamundaNativeRestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

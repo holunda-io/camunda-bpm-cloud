@@ -1,9 +1,9 @@
-package org.camunda.bpm.extension.cloud.event.service.acceptor;
+package org.camunda.bpm.extension.cloud.workload.service.task.command.api;
 
 import lombok.Data;
 
 @Data
-public class TaskEvent {
+public class TaskCommandMessage {
 
   private String assignee;
   private String caseDefinitionId;

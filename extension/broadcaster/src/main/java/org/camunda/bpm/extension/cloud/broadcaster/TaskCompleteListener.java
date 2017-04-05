@@ -32,7 +32,7 @@ public class TaskCompleteListener implements TaskListener {
     final String formKey = formService.getTaskFormKey(delegateTask.getProcessDefinitionId(),
         delegateTask.getTaskDefinitionKey());
     client.broadcastEvent(delegateTask, EventType.COMPLETED, formKey);
-    log.info("Task completed: {}", delegateTask.getTaskDefinitionKey());
+    log.info("Task completed: {}", delegateTask.getId());
   }
 
 }

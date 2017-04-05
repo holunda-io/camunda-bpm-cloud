@@ -1,4 +1,4 @@
-package org.camunda.bpm.extension.cloud.event.service;
+package org.camunda.bpm.extension.cloud.workload.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

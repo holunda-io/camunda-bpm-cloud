@@ -1,10 +1,10 @@
-package org.camunda.bpm.extension.cloud.event.service.acceptor.command;
+package org.camunda.bpm.extension.cloud.workload.service.task.command.command;
 
 import lombok.Data;
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
 @Data
-public class CreateTaskCommand {
+public class CompleteTaskCommand {
 
   private String assignee;
   private String caseDefinitionId;

@@ -1,4 +1,4 @@
-package org.camunda.bpm.extension.cloud.event.service.client;
+package org.camunda.bpm.extension.cloud.workload.service.camunda.client;
 
 import feign.Headers;
 import feign.Param;

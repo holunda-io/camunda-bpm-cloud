@@ -1,20 +1,20 @@
-package org.camunda.bpm.extension.cloud.event.service.rest;
+package org.camunda.bpm.extension.cloud.workload.service.task.query;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public enum TaskStateEnum {
+public enum TaskQueryObjectStateEnum {
 
   CREATED, PENDING_TO_COMPLETE, COMPLETED_SENT, COMPLETED;
 
-  private TaskStateEnum state;
+  private TaskQueryObjectStateEnum state;
 
-  TaskStateEnum()
+  TaskQueryObjectStateEnum()
   {
     state = this;
   }
 
-  public TaskStateEnum next(){
+  public TaskQueryObjectStateEnum next(){
 
     switch (state)
     {

@@ -1,4 +1,4 @@
-package org.camunda.bpm.extension.cloud.event.service.domain;
+package org.camunda.bpm.extension.cloud.workload.service.task.common;
 
 import lombok.Data;
 

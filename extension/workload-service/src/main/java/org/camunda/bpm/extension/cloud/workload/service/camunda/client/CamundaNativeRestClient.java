@@ -1,9 +1,9 @@
-package org.camunda.bpm.extension.cloud.event.service.client;
+package org.camunda.bpm.extension.cloud.workload.service.camunda.client;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 
-import org.camunda.bpm.extension.cloud.event.service.rest.ProcessDefinition;
+import org.camunda.bpm.extension.cloud.workload.service.rest.ProcessDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
