@@ -103,7 +103,7 @@ When the ConfigServer is started, it registers itself as _CONFIGSERVER_ at Eurek
 The WorkloadService registers itself as _WORKLOADSERVICE_ at EurekaServer and provides
 
 * a REST endpoint for the EventBroadcasters used in ProcessApplications,
-* an in-memory H2 database to store the tasks for query access (`TaskQueryObjectRepository`) and
+* a H2 database to store the tasks for query access (`TaskQueryObjectRepository`) and
 * a REST endpoint for the external task list (stripped down camunda REST-API having one additional field _engineUrl_).
 
 #### Internal structure of the workload service
@@ -124,7 +124,7 @@ The Cloud task list is a SpringBoot Application containing a task list and a com
 ## Example Scenarios
 
 * If an instance of a process is created, the SimpleProcess and/or TrivialProcess broadcast TaskEvents for every task that is created, completed or deleted to the WorkloadService.
-* The WorkloadService caches the Tasks using its HashMap.
+* The WorkloadService caches the Tasks using its database.
 * The Cloud tasklist queries the WorkloadService for all cached Tasks.
 * By clicking on a task, details of the task are shown and a complete button is present.
 * When using the complete button, the task list sends a request to complete the task directly to the engine identified by the task.engineUrl field.
