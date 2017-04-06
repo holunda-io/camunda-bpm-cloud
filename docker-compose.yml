@@ -24,6 +24,12 @@ services:
   trivialprocess:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   mysql:
     image: mysql:latest
     environment:

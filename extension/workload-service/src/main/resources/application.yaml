@@ -12,3 +12,11 @@ eureka:
 endpoints:
   info:
     enabled: true
+
+axon:
+  amqp:
+    exchange: TaskEvents
+
+spring:
+  rabbitmq:
+    host: rabbitmq

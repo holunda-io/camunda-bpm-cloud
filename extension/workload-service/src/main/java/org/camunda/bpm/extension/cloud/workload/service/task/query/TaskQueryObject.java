@@ -1,12 +1,19 @@
 package org.camunda.bpm.extension.cloud.workload.service.task.query;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.api.TaskCommandMessage;
 import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCompletedEvent;
 import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCreatedEvent;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+
+@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class TaskQueryObject {
 
@@ -18,6 +25,7 @@ public class TaskQueryObject {
   private String dueDate;
   private String formKey;
   private String engineId;
+  @Enumerated(EnumType.STRING)
   private TaskQueryObjectStateEnum eventType;
   private String name;
   private String owner;
@@ -25,6 +33,7 @@ public class TaskQueryObject {
   private String processInstanceId;
   private String tenantId;
   private String taskDefinitionKey;
+  @Id
   private String taskId;
 
   public static TaskQueryObject from(TaskCommandMessage taskCommandMessage){

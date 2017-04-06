@@ -9,9 +9,11 @@ import org.axonframework.spring.stereotype.Aggregate;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CompleteTaskCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CreateTaskCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.MarkTaskForCompletionCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.command.SendTaskForCompletionCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCompletedEvent;
 import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCreatedEvent;
 import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskMarkedForCompletionEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskSentToBeCompletedEvent;
 import org.springframework.beans.BeanUtils;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
@@ -49,6 +51,14 @@ public class TaskAggregate {
     apply(taskMarkedForCompletionEvent);
   }
 
+  @CommandHandler
+  public void on(SendTaskForCompletionCommand sendTaskForCompletionCommand) {
+    log.info("SendTaskForCompletionCommand received: {}", sendTaskForCompletionCommand);
+    TaskSentToBeCompletedEvent taskSentToBeCompletedEvent = new TaskSentToBeCompletedEvent();
+    BeanUtils.copyProperties(sendTaskForCompletionCommand, taskSentToBeCompletedEvent);
+    apply(taskSentToBeCompletedEvent);
+  }
+
   @EventSourcingHandler
   public void on(TaskCreatedEvent taskCreatedEvent) {
     this.taskId = taskCreatedEvent.getTaskId();
@@ -62,5 +72,10 @@ public class TaskAggregate {
   @EventSourcingHandler
   public void on(TaskMarkedForCompletionEvent taskMarkedForCompletionEvent) {
     this.taskId = taskMarkedForCompletionEvent.getTaskId();
+  }
+
+  @EventSourcingHandler
+  public void on(TaskSentToBeCompletedEvent taskSentToBeCompletedEvent) {
+    this.taskId = taskSentToBeCompletedEvent.getTaskId();
   }
 }

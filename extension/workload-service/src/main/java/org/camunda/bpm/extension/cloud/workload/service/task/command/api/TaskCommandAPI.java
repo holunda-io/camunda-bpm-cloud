@@ -5,25 +5,24 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CompleteTaskCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CreateTaskCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.command.MarkTaskForCompletionCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.query.repository.TaskQueryObjectCache;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
 public class TaskCommandAPI {
 
   @Autowired
-  private TaskQueryObjectCache taskQueryObjectCache;
-
-  @Autowired
   private CommandGateway commandGateway;
 
-  @RequestMapping(consumes = "application/json", produces = "application/json", value = "/task", method = RequestMethod.POST)
+  @PostMapping(consumes = "application/json", produces = "application/json", value = "/task")
   public HttpEntity<String> receiveTaskCommandMessage(@RequestBody(required = true) final TaskCommandMessage taskCommandMessage) {
     switch (taskCommandMessage.getEventType()) {
       case "CREATED":
@@ -43,7 +42,7 @@ public class TaskCommandAPI {
     return new HttpEntity<>("{'status' : 'ok'}");
   }
 
-  @RequestMapping(produces = "application/json", value = "/task/{taskId}/complete", method = RequestMethod.POST)
+  @PostMapping(produces = "application/json", value = "/task/{taskId}/complete")
   public HttpEntity<String> markTaskForCompletion(@PathVariable("taskId") final String taskId, @RequestBody final String body) {
     MarkTaskForCompletionCommand markTaskForCompletionCommand = new MarkTaskForCompletionCommand();
     markTaskForCompletionCommand.setTaskId(taskId);

@@ -103,7 +103,7 @@ When the ConfigServer is started, it registers itself as _CONFIGSERVER_ at Eurek
 The WorkloadService registers itself as _WORKLOADSERVICE_ at EurekaServer and provides
 
 * a REST endpoint for the EventBroadcasters used in ProcessApplications,
-* an in-memory TaskQueryObjectCache (currently a HashMap is used for the sake of simplicity) and
+* an in-memory H2 database to store the tasks for query access (`TaskQueryObjectRepository`) and
 * a REST endpoint for the external task list (stripped down camunda REST-API having one additional field _engineUrl_).
 
 #### Internal structure of the workload service
