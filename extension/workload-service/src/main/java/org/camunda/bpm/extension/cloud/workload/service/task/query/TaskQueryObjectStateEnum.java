@@ -5,28 +5,26 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public enum TaskQueryObjectStateEnum {
 
-  CREATED, PENDING_TO_COMPLETE, COMPLETED_SENT, COMPLETED;
-
-  private TaskQueryObjectStateEnum state;
-
-  TaskQueryObjectStateEnum()
-  {
-    state = this;
-  }
-
-  public TaskQueryObjectStateEnum next(){
-
-    switch (state)
-    {
-      case CREATED:
-        return PENDING_TO_COMPLETE;
-      case PENDING_TO_COMPLETE:
-        return COMPLETED_SENT;
-      case COMPLETED_SENT:
-        return COMPLETED;
+  CREATED {
+    public TaskQueryObjectStateEnum next() {
+      return PENDING_TO_COMPLETE;
     }
+  },
+  PENDING_TO_COMPLETE {
+    public TaskQueryObjectStateEnum next() {
+      return COMPLETED_SENT;
+    }
+  },
+  COMPLETED_SENT {
+    public TaskQueryObjectStateEnum next() {
+      return COMPLETED;
+    }
+  },
+  COMPLETED {
+    public TaskQueryObjectStateEnum next() {
+      return COMPLETED;
+    }
+  };
 
-    return COMPLETED;
-  }
-
+  public abstract TaskQueryObjectStateEnum next();
 }
