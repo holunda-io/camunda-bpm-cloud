@@ -87,6 +87,19 @@ Start all containers with
     mvn clean install -f extension/workload-service/ -PdockerBuild
     docker-compose up -d workloadservice
     docker logs -f camundabpmcloud_workloadservice_1
+    
+**Analyse logs using ELK**
+
+In order to have a more detailed insight on what is happening inside the private cloud, you can use
+```
+./runs.sh -e
+```
+to start-up an additional Docker container hosting
+* **E**lasticsearch
+* **L**ogstash
+* **K**ibana
+
+All other containers are configured to send their logs via tcp to the configured tcp input channel of Logstash, if it is available. Logstash outputs them to the Elasticsearch installation within the same Docker container to [index](http://localhost:9200/_search?pretty) them. These indexes can be analysed using the [Kibana dashboard](http://localhost:5601/app/kibana).
 
 ## Components
 
