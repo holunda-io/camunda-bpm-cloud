@@ -1,4 +1,5 @@
 <img src="https://www.holisticon.de/wp-content/uploads/2013/05/holisticon-logo-hamburg.gif" align="right" />
+
 # Camunda BPM Cloud
 
 [![Travis CI](https://travis-ci.org/holisticon/camunda-bpm-cloud.svg?branch=master)](https://travis-ci.org/holisticon/camunda-bpm-cloud)
@@ -30,6 +31,9 @@ In order to achive maximum decoupling from the engines to the business services 
 
 ### Edge Service
 In order to provide a single point of integration for a common task list (displaying the united workload of all process engines) an edge service should be provided.
+
+### Current state of implementation
+![Current state of implementation](./docs/images/overview.png "Current state of implementation")
 
 ## Runtime and Deployment strategy
 In order to automate the runtime deployment docker shoould be used as a container for any component.
