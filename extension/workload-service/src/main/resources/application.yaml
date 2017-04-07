@@ -1,0 +1,22 @@
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+  client:
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+
+endpoints:
+  info:
+    enabled: true
+
+axon:
+  amqp:
+    exchange: TaskEvents
+
+spring:
+  rabbitmq:
+    host: rabbitmq

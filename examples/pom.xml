@@ -16,6 +16,7 @@
     <module>simple-process</module>
     <module>trivial-process</module>
     <module>cloud-tasklist</module>
+    <module>elk-container</module>
   </modules>
 
   <dependencies>

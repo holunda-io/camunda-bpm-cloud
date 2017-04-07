@@ -15,8 +15,8 @@ services:
     ports:
       - "8082:8082"
 
-  eventservice:
-    image: camunda-bpm-cloud/camunda-bpm-cloud-event-service
+  workloadservice:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-workload-service
 
   simpleprocess:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
@@ -25,10 +25,10 @@ services:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
 
   rabbitmq:
-    image: rabbitmq:3.6.6
-    environment:
-      - RABBITMQ_DEFAULT_USER=root
-      - RABBITMQ_DEFAULT_PASS=root
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   mysql:
     image: mysql:5.7.17

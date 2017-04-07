@@ -40,6 +40,14 @@
       <artifactId>camunda-engine-rest</artifactId>
       <classifier>classes</classifier>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
