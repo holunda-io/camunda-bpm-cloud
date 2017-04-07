@@ -11,6 +11,7 @@ import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObje
 import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObjectStateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 @Slf4j
 @Component
@@ -20,26 +21,20 @@ public class TaskQueryObjectUpdater {
   TaskQueryObjectRepository taskQueryObjectRepository;
 
   @EventHandler
-  public void on(TaskCompletedEvent taskCompletedEvent){
-    taskQueryObjectRepository.delete(taskCompletedEvent.getTaskId());
-    log.info("TaskCompletedEvent received for task with taskId: {}", taskCompletedEvent.getTaskId());
+  public void on(TaskCreatedEvent taskCreatedEvent){
+    taskQueryObjectRepository.save(TaskQueryObject.from(taskCreatedEvent));
+    log.info("TaskCreatedEvent received for task with taskId: {}", taskCreatedEvent.getTaskId());
   }
 
   @EventHandler
   public void on(TaskMarkedForCompletionEvent taskMarkedForCompletionEvent){
     log.info("TaskMarkedForCompletionEvent received for task with taskId: {}", taskMarkedForCompletionEvent.getTaskId());
     final TaskQueryObject task = taskQueryObjectRepository.findOne(taskMarkedForCompletionEvent.getTaskId());
-    if (task != null && task.getEventType() == TaskQueryObjectStateEnum.CREATED) {
+    if (taskIsCompletable(task)) {
       task.setEventType(task.getEventType().next());
       taskQueryObjectRepository.save(task);
       log.info(task.toString());
     }
-  }
-
-  @EventHandler
-  public void on(TaskCreatedEvent taskCreatedEvent){
-    taskQueryObjectRepository.save(TaskQueryObject.from(taskCreatedEvent));
-    log.info("TaskCreatedEvent received for task with taskId: {}", taskCreatedEvent.getTaskId());
   }
 
   @EventHandler
@@ -49,6 +44,18 @@ public class TaskQueryObjectUpdater {
     taskQueryObjectRepository.save(task);
     log.info("TaskSentToBeCompletedEvent received for task with taskId: {}", taskSentToBeCompletedEvent.getTaskId());
     log.info(task.toString());
+  }
+
+  @EventHandler
+  public void on(TaskCompletedEvent taskCompletedEvent){
+    taskQueryObjectRepository.delete(taskCompletedEvent.getTaskId());
+    log.info("TaskCompletedEvent received for task with taskId: {}", taskCompletedEvent.getTaskId());
+  }
+
+  private boolean taskIsCompletable(TaskQueryObject task) {
+    Assert.notNull(task);
+    Assert.state(task.getEventType() == TaskQueryObjectStateEnum.CREATED, "task must be in state CREATED, but was: " + task.getEventType());
+    return true;
   }
 
 }
