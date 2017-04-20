@@ -11,24 +11,23 @@ import org.junit.Test;
 
 public class TaskMarkedForCompletionEventTest {
 
-  FixtureConfiguration fixture;
+  FixtureConfiguration<TaskAggregate> fixture;
 
   @Before
   public void setUp() {
-    fixture = new AggregateTestFixture(TaskAggregate.class);
+    fixture = new AggregateTestFixture<TaskAggregate>(TaskAggregate.class);
   }
 
   @Test
   public void fooEventIsFired() {
     String taskId = "foo";
     TaskCreatedEvent taskCreatedEvent = TaskCreatedEventFixture.fooTaskCreatedEvent();
-    MarkTaskForCompletionCommand markTaskForCompletionCommand = markTaskForCompletionCommandWithTaskId("foo");
-    TaskMarkedForCompletionEvent taskMarkedForCompletionEvent = TaskMarkedForCompletionFixture.fooTaskMarkedForCompletion();
+    MarkTaskForCompletionCommand markTaskForCompletionCommand = markTaskForCompletionCommandWithTaskId(taskId);
+    TaskMarkedForCompletionEvent taskMarkedForCompletionEvent = TaskMarkedForCompletionFixture
+        .fooTaskMarkedForCompletion();
 
-    fixture.given(taskCreatedEvent)
-      .when(markTaskForCompletionCommand)
-      .expectSuccessfulHandlerExecution()
-      .expectEvents(taskMarkedForCompletionEvent);
+    fixture.given(taskCreatedEvent).when(markTaskForCompletionCommand).expectSuccessfulHandlerExecution()
+        .expectEvents(taskMarkedForCompletionEvent);
   }
 
   private MarkTaskForCompletionCommand markTaskForCompletionCommandWithTaskId(String taskId) {

@@ -13,11 +13,11 @@ import org.junit.Test;
 
 public class TaskCompletedEventTest {
 
-  FixtureConfiguration fixture;
+  FixtureConfiguration<TaskAggregate> fixture;
 
   @Before
   public void setUp() {
-    fixture = new AggregateTestFixture(TaskAggregate.class);
+    fixture = new AggregateTestFixture<TaskAggregate>(TaskAggregate.class);
   }
 
   @Test

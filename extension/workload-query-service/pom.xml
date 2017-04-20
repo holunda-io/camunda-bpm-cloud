@@ -16,6 +16,14 @@
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
+      <artifactId>camunda-bpm-cloud-workload-model</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+
+
     <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
