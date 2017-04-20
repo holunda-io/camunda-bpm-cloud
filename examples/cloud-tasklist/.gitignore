@@ -1,3 +1,7 @@
 node_modules
+node
 .tmp
+.classpath
+.project
+.settings
 src/main/resources/static
