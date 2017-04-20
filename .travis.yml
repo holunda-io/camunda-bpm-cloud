@@ -6,7 +6,7 @@ jdk:
   - oraclejdk8
 
 env:
-  - NODE_VERSION=0.12
+  - NODE_VERSION=6
 
 install: true
 
