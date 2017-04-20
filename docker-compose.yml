@@ -17,8 +17,14 @@ services:
     ports:
       - "8082:8082"
 
-  workloadservice:
-    image: camunda-bpm-cloud/camunda-bpm-cloud-workload-service
+  workloadcommandservice:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-workload-command-service
+    depends_on:
+      - configserver
+      - discovery
+
+  workloadqueryservice:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-workload-query-service
     depends_on:
       - configserver
       - discovery

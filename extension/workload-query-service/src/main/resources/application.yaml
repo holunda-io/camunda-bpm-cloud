@@ -1,0 +1,33 @@
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+  client:
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+
+endpoints:
+  info:
+    enabled: true
+
+axon:
+  amqp:
+    exchange: TaskEvents
+
+spring:
+  rabbitmq:
+    host: rabbitmq
+  datasource:
+    url: jdbc:mysql://mysql:3306/eventstore
+    username: camunda
+    password: camunda
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
