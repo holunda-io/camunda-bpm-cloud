@@ -6,11 +6,11 @@ services:
       - "8761:8761"
 
   configserver:
-    image: camunda-bpm-cloud/camunda-bpm-cloud-config-service
+    image: hyness/spring-cloud-config-server:1.3.0.RELEASE
     ports:
       - "8888:8888"
-    depends_on:
-      - discovery
+    volumes:
+      - ./configuration/configserver.yml:/config/application.yml
 
   edgeservice:
     image: camunda-bpm-cloud/camunda-bpm-cloud-edge-service

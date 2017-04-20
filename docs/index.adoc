@@ -1,0 +1,3 @@
+# Camunda BPM Cloud
+
+include::infrastructure/configserver.adoc[]
