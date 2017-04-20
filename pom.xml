@@ -21,6 +21,9 @@
     <module>test</module>
     <module>examples</module>
     <module>extension</module>
+    <module>infrastructure/edge-service</module>
+    <module>infrastructure/config-service</module>
+    <module>infrastructure/discovery-service</module>
   </modules>
 
   <properties>

@@ -9,6 +9,8 @@ services:
     image: camunda-bpm-cloud/camunda-bpm-cloud-config-service
     ports:
       - "8888:8888"
+    depends_on:
+      - discovery
 
   edgeservice:
     image: camunda-bpm-cloud/camunda-bpm-cloud-edge-service
@@ -17,12 +19,19 @@ services:
 
   workloadservice:
     image: camunda-bpm-cloud/camunda-bpm-cloud-workload-service
+    depends_on:
+      - configserver
+      - discovery
 
   simpleprocess:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
+    depends_on:
+      - start_dependencies
 
   trivialprocess:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-trivial-process
+    depends_on:
+      - start_dependencies
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -41,3 +50,13 @@ services:
       - "3306:3306"
     volumes:
       - ./sql/:/docker-entrypoint-initdb.d
+
+  # see https://github.com/dadarek/docker-wait-for-dependencies
+  start_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - mysql
+      - rabbitmq
+      - discovery
+      - configserver
+    command: mysql:3306 rabbitmq:5672 rabbitmq:15672 discovery:8761 configserver:8888

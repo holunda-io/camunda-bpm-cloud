@@ -17,7 +17,7 @@ zuul:
   debug:
     request: true
   routes:
-    eventservice:
+    workloadservice:
       path: /eventservice/**
       serviceId: workloadservice
     simpleprocess:

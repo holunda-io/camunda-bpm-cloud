@@ -12,7 +12,7 @@
   <artifactId>camunda-bpm-cloud-workload-service</artifactId>
 
   <properties>
-    <axon.version>3.0.2</axon.version>
+    <axon.version>3.0.4</axon.version>
   </properties>
 
   <dependencies>
