@@ -20,3 +20,14 @@ axon:
 spring:
   rabbitmq:
     host: rabbitmq
+  datasource:
+    url: jdbc:mysql://mysql:3306/eventstore
+    username: camunda
+    password: camunda
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true

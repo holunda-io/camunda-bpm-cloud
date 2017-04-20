@@ -29,3 +29,17 @@ done
 echo "=============================================="
 echo "   Done setting up camunda process databases  "
 echo "=============================================="
+
+echo "=============================================="
+echo "  Setting up database: eventstore"
+echo "=============================================="
+
+mysql -uroot -p$MYSQL_ROOT_PASSWORD << EOF
+CREATE database eventstore;
+GRANT ALL ON eventstore.* TO camunda;
+FLUSH PRIVILEGES;
+EOF
+
+echo "=============================================="
+echo "   Done setting up axon eventstore database   "
+echo "=============================================="
