@@ -9,7 +9,7 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>camunda-bpm-cloud-workload-service</artifactId>
+  <artifactId>camunda-bpm-cloud-workload-query-service</artifactId>
 
   <properties>
     <axon.version>3.0.4</axon.version>

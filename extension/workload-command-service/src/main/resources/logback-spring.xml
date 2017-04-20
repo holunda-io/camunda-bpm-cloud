@@ -7,7 +7,7 @@
   <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <destination>elk:4560</destination>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-      <customFields>{"service_name":"workload-service"}</customFields>
+      <customFields>{"service_name":"workload-command-service"}</customFields>
     </encoder>
   </appender>
 

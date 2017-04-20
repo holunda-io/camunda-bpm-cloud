@@ -16,10 +16,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableEurekaClient
 @EnableFeignClients
 @EnableScheduling
-public class WorkloadServiceApplication {
+public class WorkloadQueryServiceApplication {
 
   public static void main(String... args) {
-    SpringApplication.run(WorkloadServiceApplication.class, args);
+    SpringApplication.run(WorkloadQueryServiceApplication.class, args);
   }
 
   @Bean
