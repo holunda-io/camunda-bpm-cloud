@@ -1,9 +1,22 @@
 sudo: false
+
 language: java
+
 jdk:
   - oraclejdk8
+
+env:
+  - NODE_VERSION=6
+
 install: true
+
+install:
+  - nvm install $NODE_VERSION
+
 cache:
   directories:
     - $HOME/.m2
-script: ./mvnw clean install
+
+script:
+    - nvm use $NODE_VERSION
+    - ./mvnw clean install

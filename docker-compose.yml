@@ -7,18 +7,26 @@ services:
 
   configserver:
     image: hyness/spring-cloud-config-server:1.3.0.RELEASE
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
     ports:
       - "8888:8888"
     volumes:
-      - ./configuration/configserver.yml:/config/application.yml
+      - ./configuration:/config
 
   edgeservice:
     image: camunda-bpm-cloud/camunda-bpm-cloud-edge-service
     ports:
       - "8082:8082"
 
-  workloadservice:
-    image: camunda-bpm-cloud/camunda-bpm-cloud-workload-service
+  workloadcommandservice:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-workload-command-service
+    depends_on:
+      - configserver
+      - discovery
+
+  workloadqueryservice:
+    image: camunda-bpm-cloud/camunda-bpm-cloud-workload-query-service
     depends_on:
       - configserver
       - discovery

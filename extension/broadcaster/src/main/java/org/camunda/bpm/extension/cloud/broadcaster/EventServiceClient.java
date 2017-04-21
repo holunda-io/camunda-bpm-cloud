@@ -44,7 +44,9 @@ public class EventServiceClient {
    *          form key of the task.
    */
   public void broadcastEvent(final DelegateTask task, final EventType eventType, final String formKey) {
-    final InstanceInfo instance = discoveryClient.getNextServerFromEureka("workloadservice", false);
+    // TODO: 1. replace by workloadcommandservice as soon as it is separated from the query service
+    // TODO: 2. remove the REST call completely and replace it by the axon command to the exchange
+    final InstanceInfo instance = discoveryClient.getNextServerFromEureka("workloadqueryservice", false);
 
     final String url = instance.getHomePageUrl() + "/task";
 
