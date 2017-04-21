@@ -1,0 +1,13 @@
+## Config Server
+
+The spring cloud config server is our central configuration instance.
+It serves yaml/property configs based on application name and active profile.
+
+See link:http://cloud.spring.io/spring-cloud-config/spring-cloud-config.html[Spring Cloud Config Server] for documentation.
+
+In our environment, we use the link:https://github.com/hyness/spring-cloud-config-server[hyness/spring-cloud-server] Docker image,
+which is configured to use the local `configuration` folder as source. Check the `docker-compose.yml`.
+
+When you need to change configs, just modify the files in that directory and the changes are applied
+on the next request. No need to rebuild/restart the configserver.
+
