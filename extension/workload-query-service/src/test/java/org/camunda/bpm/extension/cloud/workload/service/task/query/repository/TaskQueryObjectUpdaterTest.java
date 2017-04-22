@@ -1,13 +1,13 @@
 package org.camunda.bpm.extension.cloud.workload.service.task.query.repository;
 
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCompletedEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCreatedEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskMarkedForCompletionEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskSentToBeCompletedEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.fixture.TaskCompletedEventFixture;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.fixture.TaskCreatedEventFixture;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.fixture.TaskMarkedForCompletionFixture;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.fixture.TaskSentToBeCompletedEventFixture;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskCompletedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskCreatedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskMarkedForCompletionEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskSentToBeCompletedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.fixture.TaskCompletedEventFixture;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.fixture.TaskCreatedEventFixture;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.fixture.TaskMarkedForCompletionFixture;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.fixture.TaskSentToBeCompletedEventFixture;
 import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObject;
 import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObjectStateEnum;
 import org.camunda.bpm.extension.cloud.workload.service.task.query.fixture.TaskQueryObjectFixture;
@@ -18,7 +18,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TaskQueryObjectUpdaterTest {

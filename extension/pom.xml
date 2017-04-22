@@ -12,10 +12,10 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>broadcaster</module>
+    <module>lib/broadcaster</module>
+    <module>lib/workload-model</module>
     <module>workload-query-service</module>
     <module>workload-command-service</module>
-    <module>workload-model</module>
   </modules>
 
   <dependencies>
@@ -24,13 +24,13 @@
       <artifactId>camunda-bpm-cloud-test</artifactId>
     </dependency>
   </dependencies>
-  
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.camunda.bpm.extension.cloud</groupId>
         <artifactId>workload-model</artifactId>
-        
+
       </dependency>
     </dependencies>
   </dependencyManagement>

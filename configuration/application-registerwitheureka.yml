@@ -1,0 +1,11 @@
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${camunda.bpm.cloud.hostname.discovery}:8761/eureka/
+

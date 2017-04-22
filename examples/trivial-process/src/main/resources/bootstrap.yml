@@ -1,0 +1,9 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: trivialprocess
+  cloud:
+    config:
+      uri: http://configserver:8888

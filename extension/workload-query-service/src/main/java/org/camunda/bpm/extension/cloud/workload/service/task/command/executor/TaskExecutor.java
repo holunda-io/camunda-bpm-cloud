@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.camunda.bpm.extension.cloud.workload.service.camunda.client.CamundaClientFactory;
 import org.camunda.bpm.extension.cloud.workload.service.camunda.client.CamundaRestClient;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.command.SendTaskForCompletionCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.SendTaskForCompletionCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObject;
 import org.camunda.bpm.extension.cloud.workload.service.task.query.TaskQueryObjectStateEnum;
 import org.camunda.bpm.extension.cloud.workload.service.task.query.repository.TaskQueryObjectRepository;
