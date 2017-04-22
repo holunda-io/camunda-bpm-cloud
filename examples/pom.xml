@@ -17,6 +17,7 @@
     <module>trivial-process</module>
     <module>cloud-tasklist</module>
     <module>elk-container</module>
+    <module>configserver-spike</module>
   </modules>
 
   <dependencies>

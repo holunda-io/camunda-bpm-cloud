@@ -1,0 +1,15 @@
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+
+endpoints:
+  info:
+    enabled: true
+
+camunda.bpm.cloud:
+  hostname:
+    mysql: mysql
+    discovery: discovery
+    configserver: configserver
+    rabbitmq: rabbitmq

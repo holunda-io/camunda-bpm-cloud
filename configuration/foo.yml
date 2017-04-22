@@ -1,8 +1,0 @@
-foo: Hello World
-a:
-  b:
-    c:
-      - a1
-      - a2
-      - b3
-      - b4

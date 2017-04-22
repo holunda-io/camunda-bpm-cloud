@@ -2,8 +2,8 @@ package org.camunda.bpm.extension.cloud.workload.service.task.query;
 
 import lombok.*;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.api.TaskCommandMessage;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCompletedEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCreatedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskCompletedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskCreatedEvent;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

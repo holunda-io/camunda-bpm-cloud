@@ -1,0 +1,9 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: workloadqueryservice
+  cloud:
+    config:
+      uri: http://configserver:8888

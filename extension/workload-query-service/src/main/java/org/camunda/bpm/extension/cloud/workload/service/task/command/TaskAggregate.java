@@ -6,14 +6,15 @@ import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CompleteTaskCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.command.CreateTaskCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.command.MarkTaskForCompletionCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.command.SendTaskForCompletionCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCompletedEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskCreatedEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskMarkedForCompletionEvent;
-import org.camunda.bpm.extension.cloud.workload.service.task.common.TaskSentToBeCompletedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.CompleteTaskCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.CreateTaskCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.MarkTaskForCompletionCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.command.SendTaskForCompletionCommand;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskCompletedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskCreatedEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskMarkedForCompletionEvent;
+import org.camunda.bpm.extension.cloud.workload.service.task.event.TaskSentToBeCompletedEvent;
+
 import org.springframework.beans.BeanUtils;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
