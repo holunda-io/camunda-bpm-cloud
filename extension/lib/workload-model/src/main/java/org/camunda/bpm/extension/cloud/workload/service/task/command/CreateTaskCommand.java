@@ -1,23 +1,31 @@
 package org.camunda.bpm.extension.cloud.workload.service.task.command;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
+import java.util.Date;
+
 @Data
-public class CreateTaskCommand {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateTaskCommand implements TaskCommand {
 
   private String assignee;
   private String caseDefinitionId;
   private String caseExecutionId;
-  private String createTime;
+  private Date createTime;
   private String description;
-  private String dueDate;
+  private Date dueDate;
   private String formKey;
   private String engineId;
   private String eventType;
   private String name;
   private String owner;
-  private String priority;
+  private int priority;
   private String processInstanceId;
   private String tenantId;
   private String taskDefinitionKey;

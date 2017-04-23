@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * Command for sending events using hystrix.
  */
 @Slf4j
+@Deprecated
 public class BroadcastEventCommand extends HystrixCommand<String> {
 
   private final String url;

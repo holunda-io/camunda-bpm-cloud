@@ -6,24 +6,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MarkTaskForCompletionCommand implements TaskCommand {
+public class DeleteTaskCommand implements TaskCommand {
 
   private String assignee;
   private String caseDefinitionId;
   private String caseExecutionId;
-  private String createTime;
+  private Date createTime;
   private String description;
-  private String dueDate;
+  private Date dueDate;
   private String formKey;
   private String engineId;
   private String eventType;
   private String name;
   private String owner;
-  private String priority;
+  private int priority;
   private String processInstanceId;
   private String tenantId;
   private String taskDefinitionKey;
