@@ -1,3 +1,15 @@
 spring:
   profiles:
     include: camunda, registerwitheureka
+  rabbitmq:
+    host: ${camunda.bpm.cloud.hostname.rabbitmq}
+    #username: guest
+    #password: guest
+
+camunda:
+  bpm:
+    cloud:
+      amqp:
+        queue: task-event
+        exchange: task-event-exchange
+

@@ -1,10 +1,16 @@
 package org.camunda.bpm.extension.cloud.workload.service.task.command;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
 @Data
-public class SendTaskForCompletionCommand {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class SendTaskForCompletionCommand implements TaskCommand {
 
   private String assignee;
   private String caseDefinitionId;

@@ -4,9 +4,7 @@ axon:
 
 spring:
   profiles:
-    include: registerwitheureka
-  rabbitmq:
-    host: ${camunda.bpm.cloud.hostname.rabbitmq}
+    include: registerwitheureka, amqp
   datasource:
     url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore
     username: camunda
