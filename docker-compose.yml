@@ -34,6 +34,8 @@ services:
 
   simpleprocess:
     image: camunda-bpm-cloud/camunda-bpm-cloud-example-simple-process
+    links:
+      - rabbitmq
     depends_on:
       - start_dependencies
 

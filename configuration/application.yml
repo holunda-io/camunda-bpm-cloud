@@ -15,6 +15,4 @@ camunda:
         discovery: discovery
         configserver: configserver
         rabbitmq: rabbitmq
-      amqp:
-        queue: task-event
-        exchange: task-event-exchange
+

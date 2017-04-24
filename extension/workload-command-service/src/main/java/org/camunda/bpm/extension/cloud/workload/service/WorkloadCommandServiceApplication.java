@@ -1,7 +1,11 @@
 package org.camunda.bpm.extension.cloud.workload.service;
 
-import org.springframework.amqp.core.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableEurekaClient
 @EnableFeignClients
 @EnableScheduling
+@EnableRabbit
 public class WorkloadCommandServiceApplication {
 
   public static void main(String... args) {
@@ -32,25 +37,25 @@ public class WorkloadCommandServiceApplication {
     };
   }
 
+  //@Value("${camunda.bpm.cloud.amqp.queue}")
+  public static final String queueName = "task-event";
+
+  //@Value("${camunda.bpm.cloud.amqp.exchange}")
+  public static final String exchangeName = queueName + "-exchange";
+
   @Bean
-  public org.springframework.amqp.core.Exchange exchange(){
-    return ExchangeBuilder.fanoutExchange("TaskEvents").build();
+  Queue queue() {
+    return new Queue(queueName, true);
   }
 
   @Bean
-  public Queue queue(){
-    return QueueBuilder.durable("TaskEvents").build();
+  TopicExchange exchange() {
+    return new TopicExchange(exchangeName);
   }
 
   @Bean
-  public Binding binding() {
-    return BindingBuilder.bind(queue()).to(exchange()).with("*").noargs();
+  Binding binding(Queue queue, TopicExchange exchange) {
+    return BindingBuilder.bind(queue).to(exchange).with(queueName);
   }
 
-  @Autowired
-  private void configure(AmqpAdmin admin) {
-    admin.declareExchange(exchange());
-    admin.declareQueue(queue());
-    admin.declareBinding(binding());
-  }
 }

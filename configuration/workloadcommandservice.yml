@@ -2,9 +2,9 @@ spring:
   profiles:
     include: registerwitheureka
   rabbitmq:
-    host: ${camunda.bpm.cloud.hostname.rabbitmq}
-    username: guest
-    password: guest
+      host: ${camunda.bpm.cloud.hostname.rabbitmq}
+      #username: guest
+      #password: guest
   datasource:
     url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore
     username: camunda
@@ -16,3 +16,11 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: true
+
+camunda:
+  bpm:
+    cloud:
+      amqp:
+        queue: task-event
+        exchange: task-event-exchange
+

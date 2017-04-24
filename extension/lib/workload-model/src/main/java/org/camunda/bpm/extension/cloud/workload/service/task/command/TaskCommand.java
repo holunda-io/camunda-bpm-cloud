@@ -5,5 +5,4 @@ public interface TaskCommand {
 
   String getTaskId();
 
-
 }
