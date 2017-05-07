@@ -36,6 +36,11 @@ public class ConfigserverSpikeApplication implements CommandLineRunner {
   @Value("${spring.datasource.url}")
   private String dbUrl;
 
+  @Value("${spring.rabbitmq.host}")
+  private String rabbitUrl;
+
+
+
   private Map<String, Object> properties() {
     Map<String, Object> map = new HashMap();
 
@@ -59,5 +64,6 @@ public class ConfigserverSpikeApplication implements CommandLineRunner {
     properties().entrySet().forEach(System.out::println);
 
     System.out.println("dbUrl=" + dbUrl);
+    System.out.println("rabbitUrl=" + rabbitUrl);
   }
 }

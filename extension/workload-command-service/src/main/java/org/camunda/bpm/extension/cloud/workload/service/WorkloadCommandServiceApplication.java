@@ -1,11 +1,13 @@
 package org.camunda.bpm.extension.cloud.workload.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableFeignClients
 @EnableScheduling
 @EnableRabbit
+@Slf4j
 public class WorkloadCommandServiceApplication {
 
   public static void main(String... args) {
@@ -37,11 +40,21 @@ public class WorkloadCommandServiceApplication {
     };
   }
 
-  //@Value("${camunda.bpm.cloud.amqp.queue}")
-  public static final String queueName = "task-event";
+  @Value("${camunda.bpm.cloud.amqp.queue}")
+  private String queueName;
 
-  //@Value("${camunda.bpm.cloud.amqp.exchange}")
-  public static final String exchangeName = queueName + "-exchange";
+  @Value("${camunda.bpm.cloud.amqp.exchange}")
+  private String exchangeName;
+
+  @Value("${spring.rabbitmq.host}")
+  private String amqpHost;
+
+  @Bean
+  CommandLineRunner onStart() {
+    return strings -> {
+      log.error("connecting to amqp: {}", amqpHost);
+    };
+  }
 
   @Bean
   Queue queue() {
