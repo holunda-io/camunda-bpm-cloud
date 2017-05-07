@@ -4,7 +4,7 @@ spring:
   rabbitmq:
       host: ${camunda.bpm.cloud.hostname.rabbitmq}
   datasource:
-    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore
+    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore?useSSL=false
     username: camunda
     password: camunda
   jpa:
@@ -22,3 +22,6 @@ camunda:
         queue: task-event
         exchange: task-event-exchange
 
+axon:
+  amqp:
+    exchange: ${camunda.bpm.cloud.amqp.exchange}

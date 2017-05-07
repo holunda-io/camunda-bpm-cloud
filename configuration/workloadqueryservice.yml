@@ -6,7 +6,7 @@ spring:
   profiles:
     include: registerwitheureka, amqp
   datasource:
-    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore
+    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore?useSSL=false
     username: camunda
     password: camunda
   jpa:
