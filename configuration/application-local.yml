@@ -1,11 +1,13 @@
 # inherits all properties from application.yml
 # but replaces the hostNames with local addresses
-camunda.bpm.cloud:
-  hostname:
-    mysql: ${DOCKER_IP:localhost}
-    discovery: ${DOCKER_IP:localhost}
-    configserver: ${DOCKER_IP:localhost}
-    rabbitmq: ${DOCKER_IP:localhost}
+camunda:
+  bpm:
+    cloud:
+      hostname:
+        mysql: ${DOCKER_IP:localhost}
+        discovery: ${DOCKER_IP:localhost}
+        configserver: ${DOCKER_IP:localhost}
+        rabbitmq: ${DOCKER_IP:localhost}
 
 eureka:
   instance:

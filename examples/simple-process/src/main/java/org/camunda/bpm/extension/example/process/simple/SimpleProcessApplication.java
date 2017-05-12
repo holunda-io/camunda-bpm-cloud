@@ -8,6 +8,7 @@ import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
 import org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator;
 import org.camunda.bpm.extension.cloud.broadcaster.BroadcasterConfiguration;
+import org.camunda.bpm.extension.cloud.broadcaster.EnableCamundaTaskBroadcast;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.camunda.bpm.extension.reactor.plugin.ReactorProcessEnginePlugin;
 import org.camunda.bpm.spring.boot.starter.SpringBootProcessApplication;
@@ -24,7 +25,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @ProcessApplication
 @EnableEurekaClient
 @EnableScheduling
-@Import(BroadcasterConfiguration.class)
+@EnableCamundaTaskBroadcast
 @Slf4j
 public class SimpleProcessApplication extends SpringBootProcessApplication {
 

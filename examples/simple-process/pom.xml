@@ -27,11 +27,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-reactor-core</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
@@ -44,7 +39,6 @@
     <dependency>
       <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
-      <version>${project.version}</version>
     </dependency>
 
     <dependency>

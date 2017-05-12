@@ -4,25 +4,24 @@ package org.camunda.bpm.extension.cloud.broadcaster.listener;
 import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
+import org.camunda.bpm.extension.cloud.broadcaster.amqp.PublishTaskCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.TaskCommand;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import java.util.Optional;
 
 public abstract class AbstractTaskListener<C extends TaskCommand> implements TaskListener {
 
   @Autowired
-  protected FormService formService;
+  protected PublishTaskCommand publishTaskCommand;
 
   @Autowired
-  protected RabbitTemplate rabbit;
+  protected Optional<FormService> formService;
 
-  @Value(value = "${spring.application.name}")
+  @Value("${spring.application.name}")
   protected String appName;
-
-  @Value("${camunda.bpm.cloud.amqp.queue}")
-  private String queueName;
 
   @Autowired
   public void register(final CamundaEventBus camundaEventBus) {
@@ -30,7 +29,11 @@ public abstract class AbstractTaskListener<C extends TaskCommand> implements Tas
   }
 
   protected String getFormKey(DelegateTask delegateTask) {
-    return formService.getTaskFormKey(
+    if (!formService.isPresent()) {
+      return null;
+    }
+
+    return formService.get().getTaskFormKey(
       delegateTask.getProcessDefinitionId(),
       delegateTask.getTaskDefinitionKey()
     );
@@ -40,8 +43,6 @@ public abstract class AbstractTaskListener<C extends TaskCommand> implements Tas
 
   @Override
   public void notify(DelegateTask delegateTask) {
-    final C command = createCommand(delegateTask);
-
-    rabbit.convertAndSend(queueName, command);
+    publishTaskCommand.accept(createCommand(delegateTask));
   }
 }

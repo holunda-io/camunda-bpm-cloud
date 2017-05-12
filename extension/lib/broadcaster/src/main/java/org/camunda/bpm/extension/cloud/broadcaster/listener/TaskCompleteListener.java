@@ -1,20 +1,11 @@
 package org.camunda.bpm.extension.cloud.broadcaster.listener;
 
-import org.camunda.bpm.engine.FormService;
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
-import org.camunda.bpm.extension.cloud.broadcaster.EventServiceClient;
-import org.camunda.bpm.extension.cloud.broadcaster.EventServiceClient.EventType;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.CompleteTaskCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.DeleteTaskCommand;
-import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 @CamundaSelector(type = "userTask", event = TaskListener.EVENTNAME_COMPLETE)

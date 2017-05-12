@@ -20,47 +20,23 @@
     <dependency>
       <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-engine</artifactId>
+      <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
+      <artifactId>camunda-bpm-cloud-amqp-config</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
+      <artifactId>camunda-bpm-cloud-workload-model</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.camunda.bpm.extension</groupId>
       <artifactId>camunda-bpm-reactor-core</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-amqp</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.camunda.bpm.extension.cloud</groupId>
-      <artifactId>camunda-bpm-cloud-workload-model</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.netflix.hystrix</groupId>
-      <artifactId>hystrix-core</artifactId>
-      <version>1.5.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20160212</version>
-    </dependency>
-    <dependency>
-      <groupId>com.netflix.eureka</groupId>
-      <artifactId>eureka-client</artifactId>
-      <version>RELEASE</version>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.ws.rs</groupId>
-          <artifactId>jsr311-api</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
   </dependencies>
 
 </project>

@@ -1,17 +1,11 @@
 package org.camunda.bpm.extension.cloud.broadcaster.listener;
 
-import org.axonframework.commandhandling.TargetAggregateIdentifier;
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.CreateTaskCommand;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.DeleteTaskCommand;
 import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-
-import lombok.extern.slf4j.Slf4j;
-
-import java.util.Date;
 
 @Component
 @Slf4j

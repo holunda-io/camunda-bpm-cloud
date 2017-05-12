@@ -14,6 +14,9 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class AxonConfiguration {
 
+
+
+
   @Bean
   public SpringAMQPMessageSource myQueueMessageSource(AMQPMessageConverter messageConverter) {
     return new SpringAMQPMessageSource(messageConverter) {

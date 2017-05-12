@@ -15,13 +15,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: true
 
-camunda:
-  bpm:
-    cloud:
-      amqp:
-        queue: task-event
-        exchange: task-event-exchange
-
 axon:
   amqp:
     exchange: ${camunda.bpm.cloud.amqp.exchange}
+  eventhandling:
+    processors:
+

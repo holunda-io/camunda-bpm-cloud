@@ -1,11 +1,13 @@
 package org.camunda.bpm.extension.cloud.workload.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.extension.cloud.amqp.CamundaCloudAmqpConfigurationProperties;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -40,11 +42,9 @@ public class WorkloadCommandServiceApplication {
     };
   }
 
-  @Value("${camunda.bpm.cloud.amqp.queue}")
-  private String queueName;
 
-  @Value("${camunda.bpm.cloud.amqp.exchange}")
-  private String exchangeName;
+  @Autowired
+  private CamundaCloudAmqpConfigurationProperties properties;
 
   @Value("${spring.rabbitmq.host}")
   private String amqpHost;
@@ -54,21 +54,6 @@ public class WorkloadCommandServiceApplication {
     return strings -> {
       log.error("connecting to amqp: {}", amqpHost);
     };
-  }
-
-  @Bean
-  Queue queue() {
-    return new Queue(queueName, true);
-  }
-
-  @Bean
-  TopicExchange exchange() {
-    return new TopicExchange(exchangeName);
-  }
-
-  @Bean
-  Binding binding(Queue queue, TopicExchange exchange) {
-    return BindingBuilder.bind(queue).to(exchange).with(queueName);
   }
 
 }

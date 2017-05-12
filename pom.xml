@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -8,7 +8,7 @@
     <artifactId>camunda-release-parent</artifactId>
     <version>2.5</version>
     <!-- DO NOT REMOVE EMPTY TAG https://issues.apache.org/jira/browse/MNG-4687 -->
-    <relativePath />
+    <relativePath/>
   </parent>
 
   <groupId>org.camunda.bpm.extension.cloud</groupId>
@@ -19,10 +19,11 @@
 
   <modules>
     <module>test</module>
-    <module>examples</module>
     <module>extension</module>
     <module>infrastructure/edge-service</module>
     <module>infrastructure/discovery-service</module>
+    <module>examples</module>
+    <module>spikes</module>
   </modules>
 
   <properties>
@@ -32,6 +33,8 @@
 
     <spring-boot.version>1.4.3.RELEASE</spring-boot.version>
     <spring-cloud.version>Brixton.SR5</spring-cloud.version>
+
+    <axon.version>3.0.4</axon.version>
 
     <camunda.version>7.5.0</camunda.version>
     <camunda-springboot.version>1.3.0</camunda-springboot.version>
@@ -107,6 +110,41 @@
         <version>${logstash-logback-encoder.version}</version>
       </dependency>
 
+      <!-- bpmCloudLibs -->
+      <dependency>
+        <groupId>org.camunda.bpm.extension.cloud</groupId>
+        <artifactId>camunda-bpm-cloud-workload-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.extension.cloud</groupId>
+        <artifactId>camunda-bpm-cloud-amqp-config</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.extension.cloud</groupId>
+        <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <!-- /bpmCloudLibs -->
+
+      <dependency>
+        <groupId>org.axonframework</groupId>
+        <artifactId>axon-spring-boot-starter</artifactId>
+        <version>${axon.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.axonframework</groupId>
+        <artifactId>axon-amqp</artifactId>
+        <version>${axon.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -114,7 +152,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.4</version>
+      <version>3.5</version>
     </dependency>
 
     <dependency>
@@ -134,7 +172,7 @@
           <configuration>
             <archive>
               <manifest>
-                <addDefaultImplementationEntries />
+                <addDefaultImplementationEntries/>
               </manifest>
             </archive>
           </configuration>

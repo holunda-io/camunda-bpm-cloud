@@ -25,6 +25,7 @@ import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 public class TaskAggregate {
 
   @AggregateIdentifier
+  @SuppressWarnings("unused")
   private String taskId;
 
   @CommandHandler

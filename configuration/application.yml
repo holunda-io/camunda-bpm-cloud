@@ -15,4 +15,3 @@ camunda:
         discovery: discovery
         configserver: configserver
         rabbitmq: rabbitmq
-
