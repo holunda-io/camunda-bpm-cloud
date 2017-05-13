@@ -23,7 +23,7 @@
     </dependency>
     <dependency>
       <groupId>org.camunda.bpm</groupId>
-      <artifactId>camunda-enginew</artifactId>
+      <artifactId>camunda-engine</artifactId>
     </dependency>
   </dependencies>
 

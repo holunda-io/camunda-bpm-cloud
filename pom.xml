@@ -20,8 +20,11 @@
   <modules>
     <module>test</module>
     <module>extension</module>
+
     <module>infrastructure/edge-service</module>
     <module>infrastructure/discovery-service</module>
+    <module>infrastructure/elk-container</module>
+
     <module>examples</module>
     <module>spikes</module>
   </modules>
