@@ -37,6 +37,23 @@ public class CamundaCloudAmqpAutoConfiguration {
   }
 
   @Bean
+  Queue eventQueue() {
+    return new Queue(properties.getAmqp().getQueue().getEvent(), true);
+  }
+
+  @Bean
+  TopicExchange eventExchange() {
+    return new TopicExchange(properties.getAmqp().getExchange().getEvent());
+  }
+
+  @Bean
+  Binding eventBinding() {
+    return BindingBuilder.bind(eventQueue())
+      .to(eventExchange())
+      .with(properties.getAmqp().getQueue().getEvent());
+  }
+
+  @Bean
   RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
     final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
     rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());

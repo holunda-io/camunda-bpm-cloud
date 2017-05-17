@@ -1,0 +1,9 @@
+# CBC Properties
+
+"just" takes care of providing properties.
+
+All are prefixed with camunda.bpm.cloud and read from the configserver
+at localhost:8888.
+
+The Configuration is autoconfigured, so once this jar is on the classpath,
+the Properties can be injected where needed.

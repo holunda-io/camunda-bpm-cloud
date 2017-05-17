@@ -31,26 +31,4 @@ public class WorkloadQueryServiceApplication {
       }
     };
   }
-
-  @Bean
-  public org.springframework.amqp.core.Exchange exchange(){
-    return ExchangeBuilder.fanoutExchange("TaskEvents").build();
-  }
-
-  @Bean
-  public Queue queue(){
-    return QueueBuilder.durable("TaskEvents").build();
-  }
-
-  @Bean
-  public Binding binding() {
-    return BindingBuilder.bind(queue()).to(exchange()).with("*").noargs();
-  }
-
-  @Autowired
-  private void configure(AmqpAdmin admin) {
-    admin.declareExchange(exchange());
-    admin.declareQueue(queue());
-    admin.declareBinding(binding());
-  }
 }

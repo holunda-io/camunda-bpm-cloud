@@ -1,12 +1,13 @@
 package org.camunda.bpm.extension.cloud.workload.service;
 
+import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.extension.cloud.amqp.CamundaCloudAmqpConfigurationProperties;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.axonframework.amqp.eventhandling.AMQPMessageConverter;
+import org.axonframework.amqp.eventhandling.spring.SpringAMQPMessageSource;
+import org.camunda.bpm.cloud.properties.CamundaCloudProperties;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -22,8 +23,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients
-@EnableScheduling
 @EnableRabbit
 @Slf4j
 public class WorkloadCommandServiceApplication {
@@ -42,9 +41,22 @@ public class WorkloadCommandServiceApplication {
     };
   }
 
+  @Bean
+  public SpringAMQPMessageSource myQueueMessageSource(AMQPMessageConverter messageConverter) {
+    return new SpringAMQPMessageSource(messageConverter) {
+
+      @RabbitListener(queues = "${camunda.bpm.cloud.amqp.queue.command}")
+      @Override
+      public void onMessage(Message message, Channel channel) throws Exception {
+
+        log.info("receiving: {}#{}", message, channel);
+        super.onMessage(message, channel);
+      }
+    };
+  }
 
   @Autowired
-  private CamundaCloudAmqpConfigurationProperties properties;
+  private CamundaCloudProperties properties;
 
   @Value("${spring.rabbitmq.host}")
   private String amqpHost;

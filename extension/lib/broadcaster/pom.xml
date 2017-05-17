@@ -12,10 +12,6 @@
 
   <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
 
-  <properties>
-
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.camunda.bpm</groupId>

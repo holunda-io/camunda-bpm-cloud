@@ -1,0 +1,3 @@
+# CBC Amqp Config
+
+Common configuration of exchange/queue and binding.

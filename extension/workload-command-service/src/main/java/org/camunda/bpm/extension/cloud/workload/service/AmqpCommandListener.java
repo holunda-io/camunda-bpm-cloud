@@ -25,7 +25,7 @@ public class AmqpCommandListener {
     commandGateway.send(command);
   }
 
-  @RabbitListener(queues = "${camunda.bpm.cloud.amqp.queue}")
+  @RabbitListener(queues = "${camunda.bpm.cloud.amqp.queue.command}")
   public void receiveCommand(final CreateTaskCommand command) {
     sendCommand(command);
   }
