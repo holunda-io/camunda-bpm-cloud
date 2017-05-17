@@ -17,7 +17,7 @@ spring:
 
 axon:
   amqp:
-    exchange: ${camunda.bpm.cloud.amqp.exchange}
-  eventhandling:
-    processors:
+    exchange: ${camunda.bpm.cloud.amqp.exchange.event}
+#  eventhandling:
+#    processors:
 

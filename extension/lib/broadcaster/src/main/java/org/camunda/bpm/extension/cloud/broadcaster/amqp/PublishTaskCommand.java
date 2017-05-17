@@ -1,10 +1,9 @@
 package org.camunda.bpm.extension.cloud.broadcaster.amqp;
 
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.extension.cloud.amqp.CamundaCloudAmqpConfigurationProperties;
+import org.camunda.bpm.cloud.properties.CamundaCloudProperties;
 import org.camunda.bpm.extension.cloud.workload.service.task.command.TaskCommand;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Consumer;
@@ -19,11 +18,11 @@ public class PublishTaskCommand implements Consumer<TaskCommand> {
   private final String routingKey;
   private final String name;
 
-  public PublishTaskCommand(CamundaCloudAmqpConfigurationProperties properties, @Value("${spring.application.name}") String name, RabbitTemplate rabbitTemplate) {
-    this.exchange = properties.getExchange();
-    this.routingKey = properties.getQueue();
+  public PublishTaskCommand(CamundaCloudProperties properties, RabbitTemplate rabbitTemplate) {
+    this.exchange = properties.getAmqp().getExchange().getCommand();
+    this.routingKey = properties.getAmqp().getQueue().getCommand();
 
-    this.name = name;
+    this.name = properties.getName();
 
     this.rabbitTemplate = rabbitTemplate;
   }

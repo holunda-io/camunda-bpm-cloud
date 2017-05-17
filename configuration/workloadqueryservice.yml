@@ -1,7 +1,3 @@
-axon:
-  amqp:
-    exchange: TaskEvents
-
 spring:
   profiles:
     include: registerwitheureka, amqp
@@ -16,3 +12,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: true
+
+axon:
+  amqp:
+    exchange: ${camunda.bpm.cloud.amqp.exchange.event}

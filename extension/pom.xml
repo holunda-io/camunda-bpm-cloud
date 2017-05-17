@@ -12,6 +12,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>lib/properties</module>
     <module>lib/broadcaster</module>
     <module>lib/workload-model</module>
     <module>lib/amqp-config</module>

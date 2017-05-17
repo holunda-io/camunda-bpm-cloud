@@ -15,3 +15,84 @@ camunda:
         discovery: discovery
         configserver: configserver
         rabbitmq: rabbitmq
+
+
+#------------------------------------------------------------------------------
+#
+# The 'local' profile inherits all properties from application.yml
+# but replaces the hostNames with local addresses.
+#
+# Set this as a IDE runconfiguration if you want to run a service against the docker-network from within the IDE.
+#
+---
+spring:
+  profiles: local
+
+camunda:
+  bpm:
+    cloud:
+      hostname:
+        mysql: ${DOCKER_IP:localhost}
+        discovery: ${DOCKER_IP:localhost}
+        configserver: ${DOCKER_IP:localhost}
+        rabbitmq: ${DOCKER_IP:localhost}
+
+eureka:
+  instance:
+    hostname: ${DOCKER_IP:localhost}
+
+
+#------------------------------------------------------------------------------
+#
+# This camunda profile can be re-used by all process engines to  avoid redundancy!
+#
+# Activate via spring.profiles.activate=camunda when implementing a process engine.
+#
+---
+spring:
+  profiles: camunda
+  datasource:
+    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/${spring.application.name}?useSSL=false
+    username: camunda
+    password: camunda
+
+info:
+  app:
+    engine: camunda
+    version: 7.5
+    instance: ${spring.application.name}
+
+eureka:
+  instance:
+    metadata-map:
+      engine: camunda
+
+camunda:
+  bpm:
+    metrics:
+      enabled: false
+    history-level: auto
+    database:
+      schema-update: false
+      type: mysql
+
+#------------------------------------------------------------------------------
+#
+# Common profile shared by all services that should register themselves at the eureka discovery service.
+#
+# Activate via spring.profiles.activate=registerwitheureka when implementing a process engine.
+#
+---
+spring:
+  profiles: registerwitheureka
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${camunda.bpm.cloud.hostname.discovery}:8761/eureka/
+

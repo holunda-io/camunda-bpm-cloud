@@ -116,6 +116,11 @@
       <!-- bpmCloudLibs -->
       <dependency>
         <groupId>org.camunda.bpm.extension.cloud</groupId>
+        <artifactId>camunda-bpm-cloud-properties</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.extension.cloud</groupId>
         <artifactId>camunda-bpm-cloud-workload-model</artifactId>
         <version>${project.version}</version>
       </dependency>

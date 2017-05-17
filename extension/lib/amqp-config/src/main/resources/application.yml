@@ -1,6 +1,0 @@
-camunda:
-  bpm:
-    cloud:
-      amqp:
-        queue: camunda-task
-        exchange: ${camunda.bpm.cloud.amqp.queue}-exchange

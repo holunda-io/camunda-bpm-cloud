@@ -1,5 +1,6 @@
 package org.camunda.bpm.extension.cloud.amqp;
 
+import org.camunda.bpm.cloud.properties.CamundaCloudProperties;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -14,25 +15,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@EnableConfigurationProperties(CamundaCloudAmqpConfigurationProperties.class)
+@EnableConfigurationProperties(CamundaCloudProperties.class)
 public class CamundaCloudAmqpAutoConfiguration {
 
   @Autowired
-  private CamundaCloudAmqpConfigurationProperties properties;
+  private CamundaCloudProperties properties;
 
   @Bean
   Queue queue() {
-    return new Queue(properties.getQueue(), true);
+    return new Queue(properties.getAmqp().getQueue().getCommand(), true);
   }
 
   @Bean
   TopicExchange exchange() {
-    return new TopicExchange(properties.getExchange());
+    return new TopicExchange(properties.getAmqp().getExchange().getCommand());
   }
 
   @Bean
   Binding binding(Queue queue, TopicExchange exchange) {
-    return BindingBuilder.bind(queue).to(exchange).with(properties.getQueue());
+    return BindingBuilder.bind(queue).to(exchange).with(properties.getAmqp().getQueue().getCommand());
   }
 
   @Bean

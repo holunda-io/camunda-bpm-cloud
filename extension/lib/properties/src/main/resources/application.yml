@@ -1,0 +1,12 @@
+camunda:
+  bpm:
+    cloud:
+      name: ${spring.application.name}
+      amqp:
+        prefix: camunda-task
+        queue:
+          command: ${camunda.bpm.cloud.amqp.prefix}-command
+          event: ${camunda.bpm.cloud.amqp.prefix}-event
+        exchange:
+          command: ${camunda.bpm.cloud.amqp.queue.command}-exchange
+          event: ${camunda.bpm.cloud.amqp.queue.event}-exchange
