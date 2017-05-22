@@ -12,8 +12,13 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
+      <groupId>org.camunda.bpm.extension.springboot</groupId>
       <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.extension</groupId>
+      <artifactId>camunda-bpm-reactor-spring-starter</artifactId>
     </dependency>
 
     <dependency>
@@ -22,62 +27,23 @@
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-reactor-core</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>com.netflix.hystrix</groupId>
-      <artifactId>hystrix-core</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.extension.cloud</groupId>
-      <artifactId>camunda-bpm-cloud-test</artifactId>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-eureka</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.ws.rs</groupId>
-          <artifactId>jsr311-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-sleuth</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.uuid</groupId>
-      <artifactId>java-uuid-generator</artifactId>
-      <scope>provided</scope>
-      <version>3.1.2</version>
     </dependency>
 
     <dependency>
@@ -88,23 +54,21 @@
     <dependency>
       <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-test</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-      <type>pom</type>
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
 
-</project>
+<build>
+<plugins>
+  <plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+  </plugin>
+  <plugin>
+    <groupId>com.spotify</groupId>
+    <artifactId>docker-maven-plugin</artifactId>
+  </plugin>
+</plugins>
+</build>
+
+  </project>

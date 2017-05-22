@@ -34,13 +34,13 @@
     <!-- for camunda -->
     <version.java>${java.version}</version.java>
 
-    <spring-boot.version>1.4.3.RELEASE</spring-boot.version>
-    <spring-cloud.version>Brixton.SR5</spring-cloud.version>
+    <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
+    <spring-cloud.version>Camden.SR7</spring-cloud.version>
 
     <axon.version>3.0.4</axon.version>
 
-    <camunda.version>7.5.0</camunda.version>
-    <camunda-springboot.version>1.3.0</camunda-springboot.version>
+    <camunda.version>7.6.0</camunda.version>
+    <camunda-springboot.version>2.1.2</camunda-springboot.version>
     <camunda-reactor.version>1.2</camunda-reactor.version>
 
     <lombok.version>1.16.10</lombok.version>
@@ -84,28 +84,28 @@
 
       <dependency>
         <groupId>org.camunda.bpm.extension</groupId>
+        <artifactId>camunda-bpm-reactor-spring-starter</artifactId>
+        <version>${camunda-reactor.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.camunda.bpm.extension.springboot</groupId>
         <artifactId>camunda-bpm-spring-boot-starter</artifactId>
         <version>${camunda-springboot.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>org.camunda.bpm.extension</groupId>
+        <groupId>org.camunda.bpm.extension.springboot</groupId>
         <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
         <version>${camunda-springboot.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>org.camunda.bpm.extension</groupId>
+        <groupId>org.camunda.bpm.extension.springboot</groupId>
         <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
         <version>${camunda-springboot.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.camunda.bpm.extension.cloud</groupId>
-        <artifactId>camunda-bpm-cloud-test</artifactId>
-        <version>${project.version}</version>
-        <scope>test</scope>
-      </dependency>
 
       <dependency>
         <groupId>net.logstash.logback</groupId>
@@ -133,6 +133,12 @@
         <groupId>org.camunda.bpm.extension.cloud</groupId>
         <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.extension.cloud</groupId>
+        <artifactId>camunda-bpm-cloud-test</artifactId>
+        <version>${project.version}</version>
+        <scope>test</scope>
       </dependency>
       <!-- /bpmCloudLibs -->
 

@@ -12,6 +12,7 @@ import org.camunda.bpm.extension.cloud.broadcaster.EnableCamundaTaskBroadcast;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.camunda.bpm.extension.reactor.plugin.ReactorProcessEnginePlugin;
 import org.camunda.bpm.spring.boot.starter.SpringBootProcessApplication;
+import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,34 +22,14 @@ import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @SpringBootApplication
-@ProcessApplication
+@EnableProcessApplication
 @EnableEurekaClient
 @EnableCamundaTaskBroadcast
 @Slf4j
-public class TrivialProcessApplication extends SpringBootProcessApplication {
+public class TrivialProcessApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(TrivialProcessApplication.class, args);
-  }
-
-  @Bean
-  public static CamundaEventBus camundaEventBus() {
-    return new CamundaEventBus();
-  }
-
-  @Bean
-  public static ReactorProcessEnginePlugin reactorProcessEnginePlugin(CamundaEventBus camundaEventBus) {
-    return new ReactorProcessEnginePlugin(camundaEventBus);
-  }
-
-  @Bean
-  public static ProcessEnginePlugin uuidGenerator() {
-    return new AbstractProcessEnginePlugin(){
-      @Override
-      public void preInit(ProcessEngineConfigurationImpl processEngineConfiguration) {
-        processEngineConfiguration.setIdGenerator(new StrongUuidGenerator());
-      }
-    };
   }
 
   @Autowired

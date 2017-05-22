@@ -59,7 +59,7 @@ spring:
 info:
   app:
     engine: camunda
-    version: 7.5
+    version: 7.6
     instance: ${spring.application.name}
 
 eureka:
@@ -75,6 +75,7 @@ camunda:
     database:
       schema-update: false
       type: mysql
+    id-generator: prefixed
 
 #------------------------------------------------------------------------------
 #
