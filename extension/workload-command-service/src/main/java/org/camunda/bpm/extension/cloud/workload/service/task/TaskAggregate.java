@@ -1,4 +1,4 @@
-package org.camunda.bpm.extension.cloud.workload.service;
+package org.camunda.bpm.extension.cloud.workload.service.task;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package org.camunda.bpm.extension.cloud.workload.service;
+package org.camunda.bpm.extension.cloud.workload.service.listener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
