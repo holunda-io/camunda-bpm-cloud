@@ -5,7 +5,7 @@ We love you to contribute to this project by filing bugs, helping others on the 
 
 ## Creating issues
 
-We use our [issue tracker](https://github.com/camunda/camunda-bpm-spring-boot-starter/issues) for project communication.
+We use our [issue tracker](https://github.com/holisticon/camunda-bpm-cloud/issues) for project communication.
 When using the issue tracker:
 
 * Be descriptive when creating an issue (what, where, when and how does a problem pop up)?
