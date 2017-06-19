@@ -3,7 +3,7 @@ package org.camunda.bpm.extension.cloud.broadcaster.listener;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.DeleteTaskCommand;
+import org.camunda.bpm.extension.cloud.workload.command.DeleteTaskCommand;
 import org.camunda.bpm.extension.reactor.bus.CamundaSelector;
 import org.springframework.stereotype.Component;
 

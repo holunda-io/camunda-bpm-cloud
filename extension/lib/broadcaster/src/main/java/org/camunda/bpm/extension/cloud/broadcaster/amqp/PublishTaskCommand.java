@@ -2,7 +2,7 @@ package org.camunda.bpm.extension.cloud.broadcaster.amqp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.cloud.properties.CamundaCloudProperties;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.TaskCommand;
+import org.camunda.bpm.extension.cloud.workload.command.TaskCommand;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 

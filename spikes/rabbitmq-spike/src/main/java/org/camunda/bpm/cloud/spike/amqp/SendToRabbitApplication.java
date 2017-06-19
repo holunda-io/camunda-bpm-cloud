@@ -3,7 +3,7 @@ package org.camunda.bpm.cloud.spike.amqp;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.extension.cloud.broadcaster.EnableCamundaTaskBroadcast;
 import org.camunda.bpm.extension.cloud.broadcaster.amqp.PublishTaskCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.CreateTaskCommand;
+import org.camunda.bpm.extension.cloud.workload.command.CreateTaskCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

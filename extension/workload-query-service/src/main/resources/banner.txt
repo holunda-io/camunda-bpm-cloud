@@ -1,4 +1,5 @@
 
+
  _    _            _    _                 _   _____                         _____                 _
 | |  | |          | |  | |               | | |  _  |                       /  ___|               (_)
 | |  | | ___  _ __| | _| | ___   __ _  __| | | | | |_   _  ___ _ __ _   _  \ `--.  ___ _ ____   ___  ___ ___
@@ -10,3 +11,4 @@
 
 Application: ${application.title} ${application.formatted-version}
 Spring-Boot: ${spring-boot.formatted-version}
+

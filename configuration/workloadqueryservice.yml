@@ -2,17 +2,18 @@ spring:
   profiles:
     include: registerwitheureka, amqp
   datasource:
-    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore?useSSL=false
-    username: camunda
-    password: camunda
+    url: jdbc:h2:mem:tasks
+    username: sa
+    password: sa
   jpa:
     generate-ddl: true
     hibernate.ddl-auto: create
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
 
-axon:
-  amqp:
-    exchange: ${camunda.bpm.cloud.amqp.exchange.event}
+#axon:
+#  eventhandling:
+#    processors:
+#      - "org.camunda.bpm.extension.cloud.workload.query.service.handler"

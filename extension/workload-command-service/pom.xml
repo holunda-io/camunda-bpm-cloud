@@ -18,6 +18,11 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.camunda.bpm.extension.cloud</groupId>
+      <artifactId>camunda-bpm-cloud-workload-model</artifactId>
+    </dependency>
+
     <!-- camunda-bpm-cloud -->
     <dependency>
       <groupId>org.camunda.bpm.extension.cloud</groupId>

@@ -5,7 +5,7 @@ import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.extension.cloud.broadcaster.amqp.PublishTaskCommand;
-import org.camunda.bpm.extension.cloud.workload.service.task.command.TaskCommand;
+import org.camunda.bpm.extension.cloud.workload.command.TaskCommand;
 import org.camunda.bpm.extension.reactor.bus.CamundaEventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
