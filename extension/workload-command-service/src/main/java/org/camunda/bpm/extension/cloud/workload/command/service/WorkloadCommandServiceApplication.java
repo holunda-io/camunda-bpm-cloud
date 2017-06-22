@@ -4,6 +4,8 @@ import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.amqp.eventhandling.AMQPMessageConverter;
 import org.axonframework.amqp.eventhandling.spring.SpringAMQPMessageSource;
+import org.axonframework.serialization.Serializer;
+import org.axonframework.serialization.json.JacksonSerializer;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -33,6 +35,11 @@ public class WorkloadCommandServiceApplication {
         registry.addMapping("/**");
       }
     };
+  }
+
+  @Bean
+  Serializer serializer() {
+    return new JacksonSerializer();
   }
 
   @Bean
