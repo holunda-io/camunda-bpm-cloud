@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
+@Deprecated
 public class AmqpCommandListener {
 
   private final CommandGateway commandGateway;
