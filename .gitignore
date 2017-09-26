@@ -9,6 +9,7 @@ target/
 *.iml
 .idea
 # ------------ Misc
+.DS_Store
 .java-version
 */src/main/resources/*.png
 *.bak
