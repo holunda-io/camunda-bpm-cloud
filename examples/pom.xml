@@ -18,6 +18,18 @@
     <module>cloud-tasklist</module>
   </modules>
 
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.camunda.bpm.extension.cloud.example</groupId>
+        <artifactId>camunda-bpm-cloud-example-common-process</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.camunda.bpm.extension.cloud</groupId>

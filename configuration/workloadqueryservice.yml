@@ -2,7 +2,7 @@ spring:
   profiles:
     include: registerwitheureka, amqp
   datasource:
-    url: jdbc:h2:mem:tasks
+    url: jdbc:h2:./data/${spring.application.name};AUTO_SERVER=TRUE
     username: sa
     password: sa
   jpa:

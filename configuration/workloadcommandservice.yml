@@ -4,15 +4,15 @@ spring:
   rabbitmq:
       host: ${camunda.bpm.cloud.hostname.rabbitmq}
   datasource:
-    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore?useSSL=false
-    username: camunda
-    password: camunda
+    url: jdbc:h2:./data/${spring.application.name};AUTO_SERVER=TRUE
+    username: sa
+    password: sa
   jpa:
     generate-ddl: true
     hibernate.ddl-auto: create
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
 
 axon:
