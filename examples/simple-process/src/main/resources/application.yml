@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: simpleprocess
+  datasource:
+    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/${spring.application.name}?useSSL=false
+    username: camunda
+    password: camunda
+  rabbitmq:
+    host: ${camunda.bpm.cloud.hostname.rabbitmq}
+
+endpoints:
+  info:
+    enabled: true
+
+info:
+  app:
+    engine: camunda
+    version: 7.6
+    instance: ${spring.application.name}
+
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    metadata-map:
+      engine: camunda
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${camunda.bpm.cloud.hostname.discovery}:8761/eureka/
+
+camunda:
+  bpm:
+    cloud:
+      name: ${spring.application.name}
+      amqp:
+        prefix: camunda-task
+        queue:
+          command: ${camunda.bpm.cloud.amqp.prefix}-command
+          event: ${camunda.bpm.cloud.amqp.prefix}-event
+        exchange:
+          command: ${camunda.bpm.cloud.amqp.queue.command}-exchange
+          event: ${camunda.bpm.cloud.amqp.queue.event}-exchange
+    metrics:
+      enabled: false
+    history-level: auto
+    database:
+      schema-update: true
+      type: mysql
+    id-generator: prefixed

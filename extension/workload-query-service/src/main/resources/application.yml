@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: workloadqueryservice
+  datasource:
+    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/tasks?useSSL=false
+    username: camunda
+    password: camunda
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+
+axon:
+  amqp:
+    exchange: ${camunda.bpm.cloud.amqp.exchange.event}
+
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${camunda.bpm.cloud.hostname.discovery}
+
+
+endpoints:
+  info:
+    enabled: true
+
+camunda:
+  bpm:
+    cloud:
+      name: ${spring.application.name}
+      amqp:
+        prefix: camunda-task
+        queue:
+          command: ${camunda.bpm.cloud.amqp.prefix}-command
+          event: ${camunda.bpm.cloud.amqp.prefix}-event
+        exchange:
+          command: ${camunda.bpm.cloud.amqp.queue.command}-exchange
+          event: ${camunda.bpm.cloud.amqp.queue.event}-exchange
