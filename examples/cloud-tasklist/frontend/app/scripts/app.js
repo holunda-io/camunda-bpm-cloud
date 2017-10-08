@@ -20,7 +20,7 @@ angular
   .service('TaskService', require('./services/task.service.js'))
   .service('ProcessService', require('./services/process.service.js'))
   // constants
-  .constant('EDGE_URI', '/cloud')
+  .constant('EDGE_URI', '/workload')
 
-  // end
+// end
 ;

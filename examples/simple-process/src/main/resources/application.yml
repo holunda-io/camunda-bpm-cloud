@@ -7,10 +7,13 @@ spring:
     password: camunda
   rabbitmq:
     host: ${camunda.bpm.cloud.hostname.rabbitmq}
+    username: pcf
+    password: pcf
+
 
 endpoints:
   info:
-    enabled: true
+    enabled: false
 
 info:
   app:
@@ -24,10 +27,10 @@ eureka:
     metadata-map:
       engine: camunda
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false
+    fetchRegistry: false
     healthcheck:
-      enabled: true
+      enabled: false
     serviceUrl:
       defaultZone: http://${camunda.bpm.cloud.hostname.discovery}:8761/eureka/
 

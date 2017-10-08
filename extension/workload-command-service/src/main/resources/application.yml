@@ -2,7 +2,10 @@ spring:
   application:
     name: workloadcommandservice
   rabbitmq:
-      host: ${camunda.bpm.cloud.hostname.rabbitmq}
+    host: ${camunda.bpm.cloud.hostname.rabbitmq}
+    username: pcf
+    password: pcf
+    dynamic: true
   datasource:
     url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/eventstore?useSSL=false
     username: camunda
@@ -23,17 +26,17 @@ eureka:
   instance:
     hostname: ${spring.application.name}
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false
+    fetchRegistry: false
     healthcheck:
-      enabled: true
+      enabled: false
     serviceUrl:
       defaultZone: http://${camunda.bpm.cloud.hostname.discovery}
 
 
 endpoints:
   info:
-    enabled: true
+    enabled: false
 
 camunda:
   bpm:

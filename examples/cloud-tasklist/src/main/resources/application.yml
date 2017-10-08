@@ -1,10 +1,14 @@
-spring.application.name: cloudtasklist
-server.port: 9001
+spring:
+  application:
+    name: cloudtasklist
+server:
+  port: 9001
 
 zuul:
   debug:
     request: true
   routes:
     tasklist:
-      path: /cloud/**
-      url: http://${DOCKER_IP:localhost}:8082/eventservice/
+      path: /workload/**
+      url: ${workloadqueryservice.url}
+      # http://${DOCKER_IP:localhost}:8082/eventservice/

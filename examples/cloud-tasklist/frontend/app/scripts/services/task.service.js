@@ -3,11 +3,11 @@ module.exports = function ($http, EDGE_URI) {
     'use strict';
 
     function urlForTasks() {
-        return EDGE_URI + '/task';
+        return EDGE_URI + '/tasks';
     }
 
     function urlForTaskComplete(task) {
-        return EDGE_URI + '/task/' + task.taskId + '/complete';
+        return EDGE_URI + '/tasks/' + task.taskId + '/complete';
     }
 
     function all() {

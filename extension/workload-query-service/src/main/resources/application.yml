@@ -12,6 +12,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: true
+  rabbitmq:
+    host: ${camunda.bpm.cloud.hostname.rabbitmq}
+    username: pcf
+    password: pcf
 
 axon:
   amqp:
@@ -21,10 +25,10 @@ eureka:
   instance:
     hostname: ${spring.application.name}
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false
+    fetchRegistry: false
     healthcheck:
-      enabled: true
+      enabled: false
     serviceUrl:
       defaultZone: http://${camunda.bpm.cloud.hostname.discovery}
 

@@ -3,13 +3,12 @@ applications:
 - name: workloadcommandservice
   instances: 1
   buildpack: java_buildpack
+  memory: 1G
+  timeout: 180
   path:  target\camunda-bpm-cloud-workload-command-service-1.0.0-SNAPSHOT.jar
   services:
-    - rabbit
     - workloaddb
-    - configserver
-#    - discovery
   env:
     camunda.bpm.cloud.hostname.mysql: localhost
-    camunda.bpm.cloud.hostname.rabbitmq: localhost
+    camunda.bpm.cloud.hostname.rabbitmq: 192.168.11.1
     camunda.bpm.cloud.hostname.discovery: localhost

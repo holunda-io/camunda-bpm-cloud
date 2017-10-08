@@ -3,13 +3,11 @@ applications:
 - name: simpleprocess
   instances: 1
   buildpack: java_buildpack
+  memory: 1G
   path:  target\camunda-bpm-cloud-example-simple-process-1.0.0-SNAPSHOT.jar
   services:
-    - rabbit
     - simpleprocess
-    - configserver
-#    - discovery
   env:
     camunda.bpm.cloud.hostname.mysql: localhost
-    camunda.bpm.cloud.hostname.rabbitmq: localhost
     camunda.bpm.cloud.hostname.discovery: localhost
+    camunda.bpm.cloud.hostname.rabbitmq: 192.168.11.1
