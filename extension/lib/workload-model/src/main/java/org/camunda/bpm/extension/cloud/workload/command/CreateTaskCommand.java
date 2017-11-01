@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
 import java.util.Date;
@@ -13,6 +14,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTaskCommand implements TaskCommand {
+
+  @NonNull
+  @TargetAggregateIdentifier
+  private String taskId;
 
   private String assignee;
   private String caseDefinitionId;
@@ -30,6 +35,4 @@ public class CreateTaskCommand implements TaskCommand {
   private String tenantId;
   private String taskDefinitionKey;
 
-  @TargetAggregateIdentifier
-  private String taskId;
 }

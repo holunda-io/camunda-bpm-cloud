@@ -5,7 +5,6 @@ import org.camunda.bpm.extension.cloud.workload.query.service.model.TaskQueryObj
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.net.URL;
 import java.util.function.UnaryOperator;
 
 /**
@@ -18,7 +17,7 @@ public class ResolveTaskFormUrl implements UnaryOperator<TaskQueryObject> {
   private final String taskUrlTemplate;
 
   public ResolveTaskFormUrl(final ExtractApplicationName extractApplicationName,
-                            @Value("${camunda.bpm.cloud.taskUrlTemplate}") String taskUrlTemplate) {
+                            @Value("${camunda.bpm.cloud.task-url-template}") String taskUrlTemplate) {
     this.extractApplicationName = extractApplicationName;
     this.taskUrlTemplate = taskUrlTemplate;
   }
@@ -28,7 +27,7 @@ public class ResolveTaskFormUrl implements UnaryOperator<TaskQueryObject> {
   public TaskQueryObject apply(final TaskQueryObject task) {
     String applicationName = extractApplicationName.apply(task.getTaskId());
 
-    task.setTaskFormUrl(new URL(String.format(taskUrlTemplate, applicationName, task.getFormKey(), task.getTaskId())));
+    task.setTaskFormUrl(String.format(taskUrlTemplate, applicationName, task.getFormKey(), task.getTaskId()));
 
     return task;
   }

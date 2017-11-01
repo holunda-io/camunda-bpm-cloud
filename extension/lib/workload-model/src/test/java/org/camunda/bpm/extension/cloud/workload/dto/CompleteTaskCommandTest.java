@@ -1,5 +1,7 @@
-package org.camunda.bpm.extension.cloud.workload.command;
+package org.camunda.bpm.extension.cloud.workload.dto;
 
+import org.camunda.bpm.extension.cloud.workload.command.CompleteTaskCommand;
+import org.camunda.bpm.extension.cloud.workload.rest.CompleteTaskDto;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,7 +15,7 @@ public class CompleteTaskCommandTest {
 
   @Test
   public void fluent_add_variable() throws Exception {
-    CompleteTaskCommand command = CompleteTaskCommand.builder().taskId("1").variable("foo", 1L).build();
+    CompleteTaskDto command = CompleteTaskDto.builder().taskId("1").variable("foo", 1L).build();
 
     assertThat(command.getVariables().get("foo")).isEqualTo(1L);
   }
@@ -27,6 +29,6 @@ public class CompleteTaskCommandTest {
 
   @Test
   public void variables_empty_byDefault() throws Exception {
-    assertThat(CompleteTaskCommand.builder().taskId("1").build().getVariables()).isEmpty();
+    assertThat(CompleteTaskDto.builder().taskId("1").build().getVariables()).isEmpty();
   }
 }

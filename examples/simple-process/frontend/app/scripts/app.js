@@ -18,7 +18,7 @@ angular
   // services
   .service('TaskService', require('./services/task.service.js'))
   // constants
-  .constant('EDGE_URI', '/')
+  .constant('EDGE_URI', '/api')
 
 // end
 ;

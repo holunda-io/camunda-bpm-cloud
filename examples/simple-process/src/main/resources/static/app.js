@@ -19,7 +19,7 @@ angular.module('simpleProcess', ['ui.router', 'ui.bootstrap'])
 // services
 .service('TaskService', require('./services/task.service.js'))
 // constants
-.constant('EDGE_URI', '/workload')
+.constant('EDGE_URI', '/api')
 
 // end
 ;

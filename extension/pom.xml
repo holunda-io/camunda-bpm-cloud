@@ -16,6 +16,7 @@
     <module>lib/broadcaster</module>
     <module>lib/workload-model</module>
     <module>lib/amqp-config</module>
+    <module>lib/process-application</module>
     <module>workload-query-service</module>
     <module>workload-command-service</module>
   </modules>

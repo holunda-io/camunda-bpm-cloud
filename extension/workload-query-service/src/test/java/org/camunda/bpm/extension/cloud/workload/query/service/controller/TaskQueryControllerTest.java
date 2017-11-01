@@ -11,7 +11,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.stubbing.Answer;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class TaskQueryControllerTest {
     when(resolveTaskFormUrl.apply(any())).then((Answer) invocationOnMock -> {
       TaskQueryObject arg = invocationOnMock.getArgumentAt(0, TaskQueryObject.class);
 
-      arg.setTaskFormUrl(new URL(TASK_URL));
+      arg.setTaskFormUrl(TASK_URL);
 
       return arg;
     });
@@ -57,6 +56,6 @@ public class TaskQueryControllerTest {
 
     assertThat(tasks).hasSize(1);
 
-    assertThat(tasks.get(0).getTaskFormUrl()).isEqualTo(new URL(TASK_URL));
+    assertThat(tasks.get(0).getTaskFormUrl()).isEqualTo(TASK_URL);
   }
 }

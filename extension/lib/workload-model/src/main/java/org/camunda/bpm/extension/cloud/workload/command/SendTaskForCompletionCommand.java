@@ -10,6 +10,7 @@ import org.axonframework.commandhandling.TargetAggregateIdentifier;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Deprecated
 public class SendTaskForCompletionCommand implements TaskCommand {
 
   private String assignee;

@@ -12,7 +12,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import java.net.URL;
 
 @Entity
 @Data
@@ -42,7 +41,7 @@ public class TaskQueryObject {
   private String taskDefinitionKey;
 
   @Transient
-  private URL taskFormUrl;
+  private String taskFormUrl;
 
 
   public static TaskQueryObject from(TaskCreatedEvent taskEvent) {

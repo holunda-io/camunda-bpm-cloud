@@ -8,13 +8,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.net.URL;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {ResolveTaskFormUrl.class, ExtractApplicationName.class})
-@TestPropertySource(properties = {"camunda.bpm.cloud.taskUrlTemplate=http://%s.test.scope/%s.html?taskId=%s"})
+@TestPropertySource(properties = {"camunda.bpm.cloud.task-url-template=http://%s.test.scope/%s.html?taskId=%s"})
 public class ResolveTaskFormUrlTest {
 
   @Autowired
@@ -29,6 +27,6 @@ public class ResolveTaskFormUrlTest {
     task = fn.apply(task);
 
     assertThat(task.getTaskFormUrl()).isNotNull();
-    assertThat(task.getTaskFormUrl()).isEqualTo(new URL("http://simple-process.test.scope/simpleTask.html?taskId=simple-process-558ccae1-bef3-11e7-b631-eeee0aff74c9"));
+    assertThat(task.getTaskFormUrl()).isEqualTo("http://simple-process.test.scope/simpleTask.html?taskId=simple-process-558ccae1-bef3-11e7-b631-eeee0aff74c9");
   }
 }
