@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import java.net.URL;
 
 @Entity
 @Data
@@ -18,6 +20,9 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Builder
 public class TaskQueryObject {
+
+  @Id
+  private String taskId;
 
   private String assignee;
   private String caseDefinitionId;
@@ -35,8 +40,9 @@ public class TaskQueryObject {
   private String processInstanceId;
   private String tenantId;
   private String taskDefinitionKey;
-  @Id
-  private String taskId;
+
+  @Transient
+  private URL taskFormUrl;
 
 
   public static TaskQueryObject from(TaskCreatedEvent taskEvent) {

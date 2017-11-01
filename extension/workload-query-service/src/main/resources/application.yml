@@ -21,18 +21,6 @@ axon:
   amqp:
     exchange: ${camunda.bpm.cloud.amqp.exchange.event}
 
-eureka:
-  instance:
-    hostname: ${spring.application.name}
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    healthcheck:
-      enabled: false
-    serviceUrl:
-      defaultZone: http://${camunda.bpm.cloud.hostname.discovery}
-
-
 endpoints:
   info:
     enabled: true
@@ -41,6 +29,7 @@ camunda:
   bpm:
     cloud:
       name: ${spring.application.name}
+      task-url-template: http://%s.local.pcfdev.io/%s.html?taskId=%s
       amqp:
         prefix: camunda-task
         queue:
