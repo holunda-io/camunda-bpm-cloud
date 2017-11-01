@@ -3,7 +3,7 @@ applications:
 - name: workloadcommandservice
   instances: 1
   buildpack: java_buildpack
-  memory: 1G
+  memory: 512M
   timeout: 180
   path:  target\camunda-bpm-cloud-workload-command-service-1.0.0-SNAPSHOT.jar
   services:
