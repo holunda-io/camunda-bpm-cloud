@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Singular;
 import org.axonframework.commandhandling.TargetAggregateIdentifier;
 
-import java.util.Date;
+import java.util.Map;
 
 @Data
 @Builder
@@ -14,22 +16,13 @@ import java.util.Date;
 @NoArgsConstructor
 public class CompleteTaskCommand implements TaskCommand {
 
-  private String assignee;
-  private String caseDefinitionId;
-  private String caseExecutionId;
-  private Date createTime;
-  private String description;
-  private Date dueDate;
-  private String formKey;
-  private String engineId;
-  private String eventType;
-  private String name;
-  private String owner;
-  private int priority;
-  private String processInstanceId;
-  private String tenantId;
-  private String taskDefinitionKey;
-
+  @NonNull
   @TargetAggregateIdentifier
   private String taskId;
+
+  private String assignee;
+
+  @Singular
+  private Map<String, Object> variables;
+
 }
