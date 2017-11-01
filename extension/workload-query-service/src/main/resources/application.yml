@@ -1,8 +1,8 @@
 spring:
   application:
-    name: workloadqueryservice
+    name: workload-query
   datasource:
-    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/tasks?useSSL=false
+    url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/tasklist?useSSL=false
     username: camunda
     password: camunda
   jpa:

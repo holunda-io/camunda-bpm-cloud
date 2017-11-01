@@ -2,7 +2,6 @@ package org.camunda.bpm.extension.configserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,11 +26,10 @@ public class LoadLocalPropertiesSpike implements CommandLineRunner {
   private RestTemplate rest = new RestTemplate();
 
 
-
-
   @Test
+  @SuppressWarnings("unchecked")
   public void name() throws Exception {
-    Map<String,String> config = rest.getForObject("http://localhost:8888/simpleprocess/default", Map.class);
+    Map<String, String> config = rest.getForObject("http://localhost:8888/simpleprocess/default", Map.class);
 
     System.out.printf("-- " + config);
   }

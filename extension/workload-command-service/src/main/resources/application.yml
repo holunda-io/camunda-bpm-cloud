@@ -1,6 +1,6 @@
 spring:
   application:
-    name: workloadcommandservice
+    name: workload-command
   rabbitmq:
     host: ${camunda.bpm.cloud.hostname.rabbitmq}
     username: pcf
@@ -21,18 +21,6 @@ spring:
 axon:
   amqp:
     exchange: ${camunda.bpm.cloud.amqp.exchange.event}
-
-eureka:
-  instance:
-    hostname: ${spring.application.name}
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    healthcheck:
-      enabled: false
-    serviceUrl:
-      defaultZone: http://${camunda.bpm.cloud.hostname.discovery}
-
 
 endpoints:
   info:

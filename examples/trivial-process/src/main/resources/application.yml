@@ -1,6 +1,6 @@
 spring:
   application:
-    name: simple-process
+    name: trivial-process
   datasource:
     url: jdbc:mysql://${camunda.bpm.cloud.hostname.mysql}:3306/${spring.application.name}?useSSL=false
     username: camunda

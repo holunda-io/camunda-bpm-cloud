@@ -1,7 +1,0 @@
-server:
-  port: 9012
-
-spring:
-  cloud:
-    config:
-      uri: http://localhost:8888
