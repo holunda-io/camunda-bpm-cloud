@@ -10,3 +10,4 @@ applications:
   env:
     camunda.bpm.cloud.hostname.mysql: localhost
     camunda.bpm.cloud.hostname.rabbitmq: 192.168.11.1
+    simple-process.url: http://simple-process.local.pcfdev.io

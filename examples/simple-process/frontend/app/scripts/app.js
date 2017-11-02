@@ -21,7 +21,7 @@ angular
   .provider('EDGE_URI', function () {
     return {
       $get: function ($location) {
-        var url = $location.absUrl().substring(0, $location.path().length) + '/api';
+        var url = $location.absUrl().substring(0, $location.absUrl().length - $location.path().length) + '/api';
         return url;
       }
     };

@@ -30,7 +30,8 @@ camunda:
   bpm:
     cloud:
       name: ${spring.application.name}
-      task-url-template: http://%s.local.pcfdev.io/#/%s?taskId=%s
+      # task-url-template: http://%s.local.pcfdev.io/#/%s?taskId=%s
+      task-url-template: /%s/#/%s?taskId=%s
       amqp:
         prefix: camunda-task
         queue:
