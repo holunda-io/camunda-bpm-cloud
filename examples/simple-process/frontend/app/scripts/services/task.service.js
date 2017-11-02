@@ -7,22 +7,18 @@ module.exports = function ($http, EDGE_URI) {
   };
 
 
-  function complete(task) {
-    var url = urlForTaskComplete(task);
-    console.log("completing task", url);
-    return $http.post(url, '{}');
+  function complete(formKey, taskId, payload) {
+    var url = taskUrl(formKey, taskId);
+    console.log("Completing task", formKey, url);
+    return $http.post(url, payload);
   }
 
   function load(formKey, taskId) {
-    return $http.get(urlForLoadTask(formKey, taskId));
+    return $http.get(taskUrl(formKey, taskId));
   }
 
 
-  function urlForTaskComplete(task) {
-    return EDGE_URI + '/tasks/' + task.taskId + '/complete';
-  }
-
-  function urlForLoadTask(formKey, taskId) {
+  function taskUrl(formKey, taskId) {
     return EDGE_URI + '/tasks/' + formKey + '/' + taskId;
   }
 

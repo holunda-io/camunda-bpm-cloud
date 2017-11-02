@@ -56,6 +56,9 @@ module.exports = function ($scope, $stateParams, TaskService) {
   var formKey;
   var taskId;
 
+  $scope.complete = complete;
+  $scope.payload = {};
+
   if ($stateParams.formKey) {
     formKey = $stateParams.formKey;
   }
@@ -65,16 +68,24 @@ module.exports = function ($scope, $stateParams, TaskService) {
   }
 
   if (formKey && taskId) {
+    /*
     TaskService.load(formKey, taskId).then(function success(response) {
       console.log(response);
-      $scope.payload = response.data;
-    }, function error() {});
+      $scope.contextData = response.data;
+    }, function error(response) {
+      console.error("Error during context data retrieval", response.status, response.statusText);
+    });
+    */
+    $scope.taskpayload = {
+      name: "SimpleTask",
+      value: "Hello World!"
+    };
   } else {
-    console.log("Wring params", $stateParams);
+    console.log("Wrong params", $stateParams);
   }
 
   function complete() {
-    TaskService.complete('');
+    TaskService.complete(formKey, taskId, $scope.payload);
   }
 };
 
@@ -89,21 +100,17 @@ module.exports = function ($http, EDGE_URI) {
     load: load
   };
 
-  function complete(task) {
-    var url = urlForTaskComplete(task);
-    console.log("completing task", url);
-    return $http.post(url, '{}');
+  function complete(formKey, taskId, payload) {
+    var url = taskUrl(formKey, taskId);
+    console.log("Completing task", formKey, url);
+    return $http.post(url, payload);
   }
 
   function load(formKey, taskId) {
-    return $http.get(urlForLoadTask(formKey, taskId));
+    return $http.get(taskUrl(formKey, taskId));
   }
 
-  function urlForTaskComplete(task) {
-    return EDGE_URI + '/tasks/' + task.taskId + '/complete';
-  }
-
-  function urlForLoadTask(formKey, taskId) {
+  function taskUrl(formKey, taskId) {
     return EDGE_URI + '/tasks/' + formKey + '/' + taskId;
   }
 };
