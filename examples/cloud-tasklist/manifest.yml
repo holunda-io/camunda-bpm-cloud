@@ -1,9 +1,0 @@
----
-applications:
-- name: cloud-tasklist
-  instances: 1
-  buildpack: java_buildpack
-  memory: 512M
-  path:  target/camunda-bpm-cloud-example-cloud-tasklist-1.0.0-SNAPSHOT.jar
-  env:
-    workloadqueryservice.url: https://workload-query.local.pcfdev.io

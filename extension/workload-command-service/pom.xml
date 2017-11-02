@@ -27,6 +27,7 @@
       <groupId>org.camunda.bpm.extension.cloud</groupId>
       <artifactId>camunda-bpm-cloud-workload-model</artifactId>
     </dependency>
+    
     <!-- /camunda-bpm-cloud -->
 
     <dependency>

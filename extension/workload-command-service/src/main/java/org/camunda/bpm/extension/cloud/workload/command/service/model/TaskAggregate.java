@@ -33,8 +33,6 @@ public class TaskAggregate {
   public TaskAggregate(CreateTaskCommand command) {
     log.info("CreateTaskCommand received: {}", command);
 
-    // TODO: set id here?
-    this.taskId = command.getTaskId();
     TaskCreatedEvent event = new TaskCreatedEvent();
     BeanUtils.copyProperties(command, event);
     apply(event);

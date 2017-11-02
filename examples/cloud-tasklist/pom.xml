@@ -11,26 +11,6 @@
   <artifactId>camunda-bpm-cloud-example-cloud-tasklist</artifactId>
   <packaging>jar</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-zuul</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
   <profiles>
     <profile>
       <id>frontend</id>
@@ -104,12 +84,21 @@
             <executions>
               <execution>
                 <id>copy-resources</id>
-                <phase>package</phase>
+                <phase>process-classes</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
+                  <!-- would be used for webjar
+                  <outputDirectory>
+
+                    ${project.build.directory}/classes/META-INF/resources/webjars/${project.artifactId}/${project.version}
+                  </outputDirectory>
+                  // -->
+                  <outputDirectory>
+                    ${project.build.directory}/classes/static
+                  </outputDirectory>
+
                   <resources>
                     <resource>
                       <directory>${project.build.directory}/grunt</directory>

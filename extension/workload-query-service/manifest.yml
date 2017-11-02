@@ -1,7 +1,7 @@
 ---
 applications:
 - name: workload-query
-  memory: 512M
+  memory: 1G
   instances: 1
   buildpack: java_buildpack
   path:  target/camunda-bpm-cloud-workload-query-service-1.0.0-SNAPSHOT.jar

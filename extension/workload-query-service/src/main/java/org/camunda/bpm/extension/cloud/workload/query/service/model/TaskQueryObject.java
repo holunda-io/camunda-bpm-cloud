@@ -12,6 +12,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import java.util.Date;
 
 @Entity
 @Data
@@ -26,7 +27,7 @@ public class TaskQueryObject {
   private String assignee;
   private String caseDefinitionId;
   private String caseExecutionId;
-  private String createTime;
+  private Date createTime;
   private String description;
   private String dueDate;
   private String formKey;

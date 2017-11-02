@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,7 +16,7 @@ public class TaskCompletedEvent implements TaskEvent {
   private String assignee;
   private String caseDefinitionId;
   private String caseExecutionId;
-  private String createTime;
+  private Date createTime;
   private String description;
   private String dueDate;
   private String formKey;

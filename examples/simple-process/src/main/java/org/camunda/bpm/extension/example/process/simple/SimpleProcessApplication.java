@@ -7,12 +7,9 @@ import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 
 @SpringBootApplication
 @EnableProcessApplication
-@EnableScheduling
 @EnableCamundaTaskBroadcast
 @Slf4j
 public class SimpleProcessApplication {
@@ -24,7 +21,7 @@ public class SimpleProcessApplication {
   @Autowired
   private RuntimeService runtimeService;
 
-  @Scheduled(initialDelay = 20000L, fixedRate = 20000L)
+  //@Scheduled(initialDelay = 20000L, fixedRate = 60000L)
   public void start() {
     log.info("Starting {}", runtimeService.startProcessInstanceByKey("SimpleProcess").getId());
   }

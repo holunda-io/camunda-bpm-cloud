@@ -21,6 +21,12 @@
       <artifactId>camunda-bpm-cloud-amqp-config</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.camunda.bpm.extension.cloud.example</groupId>
+      <artifactId>camunda-bpm-cloud-example-cloud-tasklist</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
     <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
