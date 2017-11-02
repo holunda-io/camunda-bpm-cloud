@@ -17,8 +17,18 @@ angular
   .controller('TaskCtrl', require('./controllers/task.ctrl.js'))
   // services
   .service('TaskService', require('./services/task.service.js'))
-  // constants
-  .constant('EDGE_URI', '/api')
+
+  .provider('EDGE_URI', function () {
+    return {
+      $get: function ($location) {
+        var url = $location.absUrl().substring(0, $location.path().length) + '/api';
+        return url;
+      }
+    };
+  })
+  .run(function (EDGE_URI) {
+    console.log('Application loaded with edge uri', EDGE_URI);
+  })
 
 // end
 ;
