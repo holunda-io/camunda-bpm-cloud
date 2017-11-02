@@ -68,15 +68,23 @@
           <layout>ZIP</layout>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
       </plugin>
+
+      <!-- Frontend build -->
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <version>1.3</version>
+        <configuration>
+          <nodeVersion>v6.9.1</nodeVersion>
+          <npmVersion>3.10.9</npmVersion>
+        </configuration>
         <executions>
+
           <execution>
             <!-- optional: you don't really need execution ids, but it looks nice in your build log. -->
             <id>install node and npm</id>
@@ -86,6 +94,7 @@
             <!-- optional: default phase is "generate-resources" -->
             <phase>generate-resources</phase>
           </execution>
+
           <execution>
             <id>npm install</id>
             <goals>
@@ -95,6 +104,7 @@
               <arguments>install</arguments>
             </configuration>
           </execution>
+
           <execution>
             <id>frontend build</id>
             <phase>compile</phase>
@@ -105,6 +115,7 @@
               <arguments>run dist</arguments>
             </configuration>
           </execution>
+
           <execution>
             <id>frontend test</id>
             <phase>test</phase>
@@ -115,12 +126,43 @@
               <arguments>run test</arguments>
             </configuration>
           </execution>
+
         </executions>
-        <configuration>
-          <nodeVersion>v6.9.1</nodeVersion>
-          <npmVersion>3.10.9</npmVersion>
-        </configuration>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <delimiters>
+            <delimiter>@</delimiter>
+          </delimiters>
+          <useDefaultDelimiters>false</useDefaultDelimiters>
+        </configuration>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/grunt</directory>
+                  <filtering>false</filtering>
+                  <excludes>
+                    <exclude>**/*.woff</exclude>
+                    <exclude>**/*.ttf</exclude>
+                  </excludes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 

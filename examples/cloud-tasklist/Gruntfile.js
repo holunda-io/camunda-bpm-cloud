@@ -13,39 +13,41 @@ module.exports = function (grunt) {
   });
 
   // Configurable paths for the application
-  var appConfig = {
+  var config = {
+    src: 'frontend',
     app: 'frontend/app',
-    dist: 'src/main/resources/static',
-    tmp: 'target/css'
+    dist: 'target/grunt',
+    tmp: 'target/css',
+    moduleName: 'cloudTasklistApp'
   };
 
   // Define the configuration for all the tasks
   grunt.initConfig({
 
     // Project settings
-    yeoman: appConfig,
+    build: config,
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= build.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all', 'newer:jscs:all', 'browserify:dist'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
       },
       index: {
-        files: ['frontend/index.html'],
+        files: ['<%= build.src %>/index.html'],
         tasks: ['copy:dist'],
-        options: { livereload: true }
+        options: {livereload: true}
       },
       views: {
-        files: ['<%= yeoman.app %>/views/{,*/}*.html'],
+        files: ['<%= build.app %>/views/{,*/}*.html'],
         tasks: ['ngtemplates', 'copy:dist'],
-        options: { livereload: true }
+        options: {livereload: true}
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        files: ['<%= build.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
       },
       gruntfile: {
@@ -56,9 +58,9 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '<%= yeoman.tmp %>/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= build.app %>/{,*/}*.html',
+          '<%= build.tmp %>/styles/{,*/}*.css',
+          '<%= build.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -72,37 +74,38 @@ module.exports = function (grunt) {
         livereload: 35729
       },
       proxies: [
-          {
-              context: ['/cloud'],
-              host: process.env.DOCKER_IP || 'localhost',
-              port: 8082,
-              https: false,
-              changeOrigin: false,
-              rewrite: {
-                   '^/cloud': '/eventservice'
-              }
+        {
+          context: ['/cloud'],
+          host: process.env.DOCKER_IP || 'localhost',
+          port: 8082,
+          https: false,
+          changeOrigin: false,
+          rewrite: {
+            '^/cloud': '/eventservice'
           }
+        }
       ],
       dist: {
         options: {
           open: true,
-          base: '<%= yeoman.dist %>',
+          base: '<%= build.dist %>',
           middleware: function (connect, options) {
-              if (!Array.isArray(options.base)) {
-                  options.base = [options.base];
-              }
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
 
-              // Setup the proxy
-              var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
+            // Setup the proxy
+            var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
 
-              // Serve static files.
-              options.base.forEach(function (base) {
-                  middlewares.push(require('st')({
-                	  path: base,
-                	  url: '/',
-                	  index: 'index.html', passthrough: true, gzip: false, cache: false }));
-              });
-              return middlewares;
+            // Serve static files.
+            options.base.forEach(function (base) {
+              middlewares.push(require('st')({
+                path: base,
+                url: '/',
+                index: 'index.html', passthrough: true, gzip: false, cache: false
+              }));
+            });
+            return middlewares;
           }
         }
       }
@@ -117,7 +120,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= build.app %>/scripts/{,*/}*.js'
         ]
       }
     },
@@ -131,7 +134,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= build.app %>/scripts/{,*/}*.js'
         ]
       }
     },
@@ -142,9 +145,9 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= yeoman.tmp %>',
-            '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*',
+            '<%= build.tmp %>',
+            '<%= build.dist %>/{,*/}*',
+            '!<%= build.dist %>/.git{,*/}*',
           ]
         }]
       }
@@ -160,40 +163,41 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.tmp %>/styles/',
+          cwd: '<%= build.tmp %>/styles/',
           src: '{,*/}*.css',
-          dest: '<%= yeoman.dist %>/styles/'
+          dest: '<%= build.dist %>/styles/'
         }]
       }
     },
 
     browserify: {
-        options: {
-            transform: [['babelify', { presets: ['es2015'] }]]
-        },
-        dist: {
-            files: {
-                // if the source file has an extension of es6 then
-                // we change the name of the source file accordingly.
-                // The result file's extension is always .js
-                '<%= yeoman.dist %>/app.js': ['<%= yeoman.app %>/scripts/app.js', '<%= yeoman.app %>/scripts/app.constant.js']
-            }
+      options: {
+        transform: [['babelify', {presets: ['es2015']}]]
+      },
+      dist: {
+        files: {
+          // if the source file has an extension of es6 then
+          // we change the name of the source file accordingly.
+          // The result file's extension is always .js
+          '<%= build.dist %>/app.js': ['<%= build.app %>/scripts/app.js', '<%= build.app %>/scripts/app.constant.js']
         }
+      }
     },
 
     ngtemplates: {
       dist: {
         options: {
-          module: 'cloudTasklistApp',
+          module: '<%= build.moduleName %>',
           htmlmin: {
-                    collapseWhitespace: true,
-                    conservativeCollapse: true,
-                    collapseBooleanAttributes: true,
-                    removeCommentsFromCDATA: true},
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            collapseBooleanAttributes: true,
+            removeCommentsFromCDATA: true
+          },
         },
-        cwd: '<%= yeoman.app %>',
+        cwd: '<%= build.app %>',
         src: 'views/{,*/}*.html',
-        dest: '<%= yeoman.dist %>/templates.js'
+        dest: '<%= build.dist %>/templates.js'
       }
     },
 
@@ -202,27 +206,27 @@ module.exports = function (grunt) {
       dist: {
         files: [
           {
-              src: 'frontend/index.html',
-              dest: '<%= yeoman.dist %>/index.html'
+            src: '<%= build.src %>/index.html',
+            dest: '<%= build.dist %>/index.html'
           },
           {
-              cwd: 'node_modules/bootstrap/dist',
-              src: '**/*',
-              dest: '<%= yeoman.dist %>/bootstrap',
-              expand: true
+            cwd: 'node_modules/bootstrap/dist',
+            src: '**/*',
+            dest: '<%= build.dist %>/bootstrap',
+            expand: true
           },
           {
-              cwd: '<%= yeoman.app %>/images',
-              src: '**/*',
-              dest: '<%= yeoman.dist %>/images',
-              expand: true
+            cwd: '<%= build.app %>/images',
+            src: '**/*',
+            dest: '<%= build.dist %>/images',
+            expand: true
           }
         ]
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '<%= yeoman.tmp %>/styles/',
+        cwd: '<%= build.app %>/styles',
+        dest: '<%= build.tmp %>/styles/',
         src: '{,*/}*.css'
       }
     }
@@ -230,12 +234,12 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function () {
-      return grunt.task.run([
-        'build',
-        'configureProxies:server',
-        'connect:dist',
-        'watch'
-      ]);
+    return grunt.task.run([
+      'build',
+      'configureProxies:server',
+      'connect:dist',
+      'watch'
+    ]);
   });
 
   grunt.registerTask('build', [

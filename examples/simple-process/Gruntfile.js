@@ -13,9 +13,11 @@ module.exports = function (grunt) {
   });
 
   // Configurable paths for the application
-  var appConfig = {
+  var config = {
+    moduleName: 'simpleProcess',
+    src: 'frontend',
     app: 'frontend/app',
-    dist: 'src/main/resources/static',
+    dist: 'target/grunt',
     tmp: 'target/css'
   };
 
@@ -23,12 +25,12 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     // Project settings
-    yeoman: appConfig,
+    build: config,
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= build.app %>/scripts/{,*/}*.js'],
         tasks: ['clean:dist, newer:jshint:all', 'newer:jscs:all', 'ngtemplates', 'browserify:dist', 'copy:dist'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -40,12 +42,12 @@ module.exports = function (grunt) {
         options: {livereload: true}
       },
       views: {
-        files: ['<%= yeoman.app %>/views/{,*/}*.html'],
+        files: ['<%= build.app %>/views/{,*/}*.html'],
         tasks: ['ngtemplates', 'copy:dist'],
         options: {livereload: true}
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        files: ['<%= build.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
       },
       gruntfile: {
@@ -56,9 +58,9 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '<%= yeoman.tmp %>/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= build.app %>/{,*/}*.html',
+          '<%= build.tmp %>/styles/{,*/}*.css',
+          '<%= build.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -86,7 +88,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: true,
-          base: '<%= yeoman.dist %>',
+          base: '<%= build.dist %>',
           middleware: function (connect, options) {
             if (!Array.isArray(options.base)) {
               options.base = [options.base];
@@ -118,7 +120,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= build.app %>/scripts/{,*/}*.js'
         ]
       }
     },
@@ -132,7 +134,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= build.app %>/scripts/{,*/}*.js'
         ]
       }
     },
@@ -143,9 +145,9 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= yeoman.tmp %>',
-            '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*',
+            '<%= build.tmp %>',
+            '<%= build.dist %>/{,*/}*',
+            '!<%= build.dist %>/.git{,*/}*',
           ]
         }]
       }
@@ -161,9 +163,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.tmp %>/styles/',
+          cwd: '<%= build.tmp %>/styles/',
           src: '{,*/}*.css',
-          dest: '<%= yeoman.dist %>/styles/'
+          dest: '<%= build.dist %>/styles/'
         }]
       }
     },
@@ -177,7 +179,7 @@ module.exports = function (grunt) {
           // if the source file has an extension of es6 then
           // we change the name of the source file accordingly.
           // The result file's extension is always .js
-          '<%= yeoman.dist %>/app.js': ['<%= yeoman.app %>/scripts/app.js', '<%= yeoman.app %>/scripts/app.constant.js']
+          '<%= build.dist %>/app.js': ['<%= build.app %>/scripts/app.js', '<%= build.app %>/scripts/app.constant.js']
         }
       }
     },
@@ -185,7 +187,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'simpleProcess',
+          module: '<%= build.moduleName %>',
           htmlmin: {
             collapseWhitespace: true,
             conservativeCollapse: true,
@@ -193,9 +195,9 @@ module.exports = function (grunt) {
             removeCommentsFromCDATA: true
           },
         },
-        cwd: '<%= yeoman.app %>',
+        cwd: '<%= build.app %>',
         src: 'views/{,*/}*.html',
-        dest: '<%= yeoman.dist %>/templates.js'
+        dest: '<%= build.dist %>/templates.js'
       }
     },
 
@@ -204,27 +206,27 @@ module.exports = function (grunt) {
       dist: {
         files: [
           {
-            src: 'frontend/index.html',
-            dest: '<%= yeoman.dist %>/index.html'
+            src: '<%= build.src %>/index.html',
+            dest: '<%= build.dist %>/index.html'
           },
           {
             cwd: 'node_modules/bootstrap/dist',
             src: '**/*',
-            dest: '<%= yeoman.dist %>/bootstrap',
+            dest: '<%= build.dist %>/bootstrap',
             expand: true
           },
           {
-            cwd: '<%= yeoman.app %>/images',
+            cwd: '<%= build.app %>/images',
             src: '**/*',
-            dest: '<%= yeoman.dist %>/images',
+            dest: '<%= build.dist %>/images',
             expand: true
           }
         ]
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '<%= yeoman.tmp %>/styles/',
+        cwd: '<%= build.app %>/styles',
+        dest: '<%= build.tmp %>/styles/',
         src: '{,*/}*.css'
       }
     }
