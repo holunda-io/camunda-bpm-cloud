@@ -1,6 +1,6 @@
 <div class="col-md-8">
   <div class="panel panel-primary">
-    <div class="panel-heading">{{ taskpayload.name }}</div>
+    <div class="panel-heading">{{ contextData.name }}</div>
     <div class="panel-body">
       <form class="form-horizontal" ng-submit="complete()" name="simpleTaskForm">
         <div class="row">
@@ -8,7 +8,7 @@
             <label for="name">Message</label>
           </div>
           <div class="col-md-9">
-            <span>{{ taskpayload.value }}</span>
+            <span>{{ contextData.value }}</span>
           </div>
         </div>
         <div class="row">

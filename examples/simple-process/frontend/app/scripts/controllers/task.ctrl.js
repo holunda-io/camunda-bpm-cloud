@@ -21,7 +21,7 @@ module.exports = function ($scope, $stateParams, $state, TaskService) {
   if (task.formKey && task.taskId) {
 
     TaskService.load(task.formKey, task.taskId).then(function success(response) {
-      console.log(response);
+      console.log('Response', response);
       $scope.contextData = response.data;
     }, function error(response) {
       console.error("Error during context data retrieval", response.status, response.statusText);
