@@ -21,14 +21,18 @@ angular
   .provider('EDGE_URI', function () {
     return {
       $get: function ($location) {
-        var url = $location.absUrl().substring(0, $location.absUrl().length - $location.path().length) + '/api';
-        return url;
+        return edgeUrl($location.absUrl(), $location.url());
       }
     };
+
+    function edgeUrl(absoluteUrl, path) {
+      console.debug('Absolute URL', absoluteUrl);
+      console.debug('URL', path);
+      return absoluteUrl.substring(0, absoluteUrl.length - path.length - 2) + '/api';
+    }
   })
-  .run(function (EDGE_URI) {
+  .run(function (EDGE_URI, $location) {
     console.log('Application loaded with edge uri', EDGE_URI);
   })
-
 // end
 ;
