@@ -12,6 +12,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -19,10 +20,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 @EnableRabbit
+@EnableZuulProxy
 @Slf4j
 public class WorkloadQueryServiceApplication {
 
-  public static void main(String... args) {
+  public static void main(final String... args) {
     SpringApplication.run(WorkloadQueryServiceApplication.class, args);
   }
 
@@ -42,16 +44,16 @@ public class WorkloadQueryServiceApplication {
   }
 
   @Autowired
-  public void configure(EventHandlingConfiguration ehConfig, SpringAMQPMessageSource myMessageSource) {
+  public void configure(final EventHandlingConfiguration ehConfig, final SpringAMQPMessageSource myMessageSource) {
     ehConfig.registerSubscribingEventProcessor("org.camunda.bpm.extension.cloud.workload.query.service.handler", c -> myMessageSource);
   }
 
   @Bean
-  public SpringAMQPMessageSource myMessageSource(Serializer serializer, EventHandlingConfiguration ehConfig) {
+  public SpringAMQPMessageSource myMessageSource(final Serializer serializer, final EventHandlingConfiguration ehConfig) {
     return new SpringAMQPMessageSource(serializer) {
       @RabbitListener(queues = "${camunda.bpm.cloud.amqp.queue.event}")
       @Override
-      public void onMessage(Message message, Channel channel) throws Exception {
+      public void onMessage(final Message message, final Channel channel) throws Exception {
         log.info("receiving event: {}#{}", message, channel);
         super.onMessage(message, channel);
       }

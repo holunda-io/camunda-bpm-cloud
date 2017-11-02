@@ -17,6 +17,7 @@ spring:
     username: pcf
     password: pcf
 
+
 axon:
   amqp:
     exchange: ${camunda.bpm.cloud.amqp.exchange.event}
@@ -38,3 +39,14 @@ camunda:
         exchange:
           command: ${camunda.bpm.cloud.amqp.queue.command}-exchange
           event: ${camunda.bpm.cloud.amqp.queue.event}-exchange
+
+zuul:
+  debug:
+    request: true
+  routes:
+    simple-process:
+      path: /simple-process/**
+      url: ${simple-process.url}
+    workload-query:
+      path: /workload/**
+      url: http://localhost:${server.port}
