@@ -151,3 +151,9 @@ The Cloud task list is a SpringBoot Application containing a task list and a com
 
 * [ASCII banner generator](http://www.network-science.de/ascii/), font: standard
 * [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/spring-cloud-config.html)
+
+
+
+## cf push all:
+
+`for m in `find . -name manifest.yml`; do cf push -f `dirname $m`; done `
