@@ -1,0 +1,18 @@
+---
+applications:
+- name: workload-query
+  memory: 1G
+  instances: 1
+  buildpack: java_buildpack
+  path:  camunda-bpm-cloud-workload-query-backend-1.0.0-SNAPSHOT.jar
+  services:
+    - workload-query-db
+  env:
+    camunda.bpm.cloud.hostname.mysql: localhost
+    camunda.bpm.cloud.hostname.rabbitmq: 192.168.11.1
+    simple-process.url: http://simple-process.local.pcfdev.io
+    trivial-process.url: http://trivial-process.local.pcfdev.io
+
+# copied from
+#  env:
+#    workloadqueryservice.url: https://workload-query.local.pcfdev.io

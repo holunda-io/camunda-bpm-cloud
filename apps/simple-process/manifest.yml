@@ -1,0 +1,12 @@
+---
+applications:
+- name: simple-process
+  instances: 1
+  buildpack: java_buildpack
+  memory: 1G
+  path: camunda-bpm-cloud-example-simple-process-backend-1.0.0-SNAPSHOT.jar
+  services:
+    - simple-process-db
+  env:
+    camunda.bpm.cloud.hostname.mysql: localhost
+    camunda.bpm.cloud.hostname.rabbitmq: 192.168.11.1
