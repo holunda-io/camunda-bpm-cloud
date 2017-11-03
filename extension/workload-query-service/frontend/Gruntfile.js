@@ -14,8 +14,8 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var config = {
-    src: 'frontend',
-    app: 'frontend/app',
+    src: 'src',
+    app: 'src/app',
     dist: 'target/grunt',
     tmp: 'target/css',
     moduleName: 'cloudTasklistApp'

@@ -4,7 +4,7 @@ applications:
   instances: 1
   buildpack: java_buildpack
   memory: 1G
-  path:  target/camunda-bpm-cloud-example-trivial-process-1.0.0-SNAPSHOT.jar
+  path:  backend/target/camunda-bpm-cloud-example-trivial-process-backend-1.0.0-SNAPSHOT.jar
   services:
     - trivial-process-db
   env:

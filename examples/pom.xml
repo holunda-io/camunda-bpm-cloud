@@ -15,7 +15,6 @@
   <modules>
     <module>simple-process</module>
     <module>trivial-process</module>
-    <module>cloud-tasklist</module>
   </modules>
 
   <dependencies>

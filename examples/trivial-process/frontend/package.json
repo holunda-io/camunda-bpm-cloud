@@ -1,5 +1,5 @@
 {
-  "name": "cloudtasklist",
+  "name": "camunda-bpm-cloud-example-trivial-process-frontend",
   "private": true,
   "dependencies": {
     "angular": "1.5.5",

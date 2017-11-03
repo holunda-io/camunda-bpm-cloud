@@ -9,66 +9,20 @@
   </parent>
 
   <artifactId>camunda-bpm-cloud-example-trivial-process</artifactId>
+  <packaging>pom</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.camunda.bpm.extension.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-    </dependency>
+  <modules>
+    <module>frontend</module>
+    <module>backend</module>
+  </modules>
 
-    <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
-      <artifactId>camunda-bpm-reactor-spring-starter</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.extension.cloud</groupId>
-      <artifactId>camunda-bpm-cloud-event-broadcaster</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-eureka</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>net.logstash.logback</groupId>
-      <artifactId>logstash-logback-encoder</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.extension.cloud</groupId>
-      <artifactId>camunda-bpm-cloud-test</artifactId>
-    </dependency>
-  </dependencies>
-
-
-<build>
-<plugins>
-  <plugin>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-maven-plugin</artifactId>
-  </plugin>
-  <plugin>
-    <groupId>com.spotify</groupId>
-    <artifactId>docker-maven-plugin</artifactId>
-  </plugin>
-</plugins>
-</build>
-
-  </project>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>camunda-bpm-cloud-example-trivial-process-frontend</artifactId>
+        <groupId>${project.groupId}</groupId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>

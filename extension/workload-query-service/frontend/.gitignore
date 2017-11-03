@@ -5,3 +5,4 @@ node
 .project
 .settings
 /bin/
+etc/

@@ -15,8 +15,8 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var config = {
     moduleName: 'simpleProcess',
-    src: 'src/main/frontend',
-    app: 'src/main/frontend/app',
+    src: 'src',
+    app: 'src/app',
     dist: 'target/grunt',
     tmp: 'target/css'
   };
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         }
       },
       index: {
-        files: ['src/main/frontend/index.html'],
+        files: ['src/index.html'],
         tasks: ['copy:dist'],
         options: {livereload: true}
       },
