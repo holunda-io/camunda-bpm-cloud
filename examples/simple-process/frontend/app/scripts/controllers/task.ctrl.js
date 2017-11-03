@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function ($scope, $stateParams, $state, TaskService) {
+module.exports = function ($scope, $stateParams, $state, $window, TaskService) {
 
 
   var task = {};
@@ -41,7 +41,14 @@ module.exports = function ($scope, $stateParams, $state, TaskService) {
   }
 
   function complete() {
-    TaskService.complete(task.formKey, task.taskId, $scope.payload);
+    TaskService.complete(task.formKey, task.taskId, $scope.payload).then(
+      function success() {
+        $window.location.href = '/index.html';
+      },
+      function error(response) {
+        console.log("could not complete task", task.taskId, response.status, response.statusText);
+      }
+    );
   }
 
 };
