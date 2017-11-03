@@ -26,7 +26,6 @@
     <module>infrastructure/elk-container</module>
 
     <module>examples</module>
-    <module>spikes</module>
   </modules>
 
   <properties>
@@ -217,6 +216,12 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>with spikes</id>
+      <modules>
+        <module>spikes</module>
+      </modules>
+    </profile>
     <profile>
       <id>dockerBuild</id>
 

@@ -48,6 +48,33 @@ zuul:
     simple-process:
       path: /simple-process/**
       url: ${simple-process.url}
+    trivial-process:
+      path: /trivial-process/**
+      url: ${trivial-process.url}
     workload-query:
       path: /workload/**
       url: http://localhost:${server.port}
+
+ribbon:
+  eureka:
+    enabled: false
+---
+spring:
+  profiles: local
+
+  datasource:
+    url: jdbc:h2:mem:tasklist
+    username: sa
+    password: sa
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+camunda:
+  bpm:
+    cloud:
+      hostname:
+        rabbitmq: localhost

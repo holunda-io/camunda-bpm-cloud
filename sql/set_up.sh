@@ -43,3 +43,17 @@ EOF
 echo "=============================================="
 echo "   Done setting up axon eventstore database   "
 echo "=============================================="
+
+echo "=============================================="
+echo "  Setting up database: tasklist"
+echo "=============================================="
+
+mysql -uroot -p$MYSQL_ROOT_PASSWORD << EOF
+CREATE database tasklist;
+GRANT ALL ON eventstore.* TO camunda;
+FLUSH PRIVILEGES;
+EOF
+
+echo "=============================================="
+echo "   Done setting up axon tasklist database   "
+echo "=============================================="
