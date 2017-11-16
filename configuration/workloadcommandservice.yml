@@ -18,4 +18,3 @@ spring:
 axon:
   amqp:
     exchange: ${camunda.bpm.cloud.amqp.exchange.event}
-
