@@ -19,5 +19,6 @@ tmp/
 ~*
 extension/camunda-bpm-cloud-external-tasklist/node_modules
 *.log
-
+node/
+node_modules/
 /data
