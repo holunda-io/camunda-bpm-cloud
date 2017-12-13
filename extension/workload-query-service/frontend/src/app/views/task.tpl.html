@@ -53,11 +53,10 @@
         <p><strong>Assignee:</strong> {{currentTask.assignee}}</p>
         <p><strong>Priority:</strong> {{currentTask.priority}}</p>
         <p><strong>Process Engine:</strong> {{currentTask.engineId}}</p>
-        <p><strong>Task Id:</strong> {{currentTask.taskDefinitionKey}}</p>
-        <p><strong>Task Definition Key:</strong> {{currentTask.taskDefinitionKey}}</p>
+        <p><strong>Task Id:</strong> {{currentTask.taskId}}</p>
         <p><strong>Form Key:</strong> {{currentTask.formKey}}</p>
-        <p><strong>Form:</strong><a ng-href="{{ currentTask.taskFormUrl }}">{{ currentTask.name }}</a></p>
-        <button type="button" class="btn btn-primary" ng-click="completeTask(currentTask)">Complete Task</button>
+
+        <a class="btn btn-primary" ng-href="{{ currentTask.taskFormUrl }}">Open {{ currentTask.name }} Form</a>
       </div>
     </div>
   </div>

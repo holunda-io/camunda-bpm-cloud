@@ -4,12 +4,14 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+  require('grunt-contrib-jshint')(grunt);
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
     ngtemplates: 'grunt-angular-templates',
     configureProxies: 'grunt-connect-proxy',
-    newer: 'grunt-newer'
+    newer: 'grunt-newer',
+    jshint: 'jshint-stylish'
   });
 
   // Configurable paths for the application
@@ -71,17 +73,17 @@ module.exports = function (grunt) {
         port: 9001,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35729,
       },
       proxies: [
         {
-          context: ['/cloud'],
+          context: ['/workload'],
           host: process.env.DOCKER_IP || 'localhost',
           port: 8082,
           https: false,
           changeOrigin: false,
           rewrite: {
-            '^/cloud': '/eventservice'
+            '^/workload': '/workload'
           }
         }
       ],

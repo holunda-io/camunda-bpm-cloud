@@ -1,14 +1,14 @@
-module.exports = function ($stateProvider, $urlRouterProvider) {
-    'use strict';
+module.exports = function routing($stateProvider, $urlRouterProvider) {
+  'use strict';
 
-    // For any unmatched url, redirect to /
-    $urlRouterProvider.otherwise('/');
+  // For any unmatched url, redirect to /
+  $urlRouterProvider.otherwise('/');
 
-    // Now set up the states
-    $stateProvider
-        .state('main', {
-            url: '/',
-            templateUrl: 'views/task.tpl.html',
-            controller: 'TaskCtrl'
-        });
+  // Now set up the states
+  $stateProvider
+    .state('main', {
+      url: '/',
+      templateUrl: 'views/task.tpl.html',
+      controller: 'TaskCtrl'
+    });
 };
