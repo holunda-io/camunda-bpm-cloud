@@ -33,5 +33,4 @@ module.exports = function taskController($scope, TaskService) {
     return $scope.currentTask !== null && $scope.currentTask.taskId === task.taskId && $scope.currentTask.formKey === task.formKey;
   }
 
-
 };
