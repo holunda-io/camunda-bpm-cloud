@@ -1,11 +1,15 @@
 package org.camunda.bpm.extension.cloud.workload.query.service;
 
+import com.netflix.zuul.ZuulFilter;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.amqp.eventhandling.spring.SpringAMQPMessageSource;
 import org.axonframework.config.EventHandlingConfiguration;
 import org.axonframework.serialization.Serializer;
 import org.axonframework.serialization.json.JacksonSerializer;
+import org.camunda.bpm.extension.cloud.workload.query.service.filter.MarkCompletedCommand;
+import org.camunda.bpm.extension.cloud.workload.query.service.filter.MarkCompletedZuulFilter;
+import org.camunda.bpm.extension.cloud.workload.query.service.model.TaskQueryObjectRepository;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -59,6 +63,11 @@ public class WorkloadQueryServiceApplication {
         super.onMessage(message, channel);
       }
     };
+  }
+
+  @Bean
+  public ZuulFilter markCompletedFilter(final TaskQueryObjectRepository repository, final MarkCompletedCommand command) {
+    return new MarkCompletedZuulFilter(repository, command);
   }
 
   @Bean

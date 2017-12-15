@@ -14,7 +14,7 @@ public class TaskCreateListener extends AbstractTaskListener<CreateTaskCommand> 
 
 
   @Override
-  protected CreateTaskCommand createCommand(DelegateTask task) {
+  protected CreateTaskCommand createCommand(final DelegateTask task) {
     return CreateTaskCommand.builder()
       .taskId(task.getId())
       .taskDefinitionKey(task.getTaskDefinitionKey())
@@ -29,14 +29,14 @@ public class TaskCreateListener extends AbstractTaskListener<CreateTaskCommand> 
       .createTime(task.getCreateTime())
       .dueDate(task.getDueDate())
       .formKey(getFormKey(task))
-      .engineId(appName)
-      .eventType(TaskListener.EVENTNAME_CREATE)
+      .engineId(this.appName)
+      .eventType(task.getEventName())
       .tenantId(task.getTenantId())
       .build();
   }
 
   @Override
-  public void notify(DelegateTask delegateTask) {
+  public void notify(final DelegateTask delegateTask) {
     super.notify(delegateTask);
     log.info("New task created: {}", delegateTask.getTaskDefinitionKey());
   }

@@ -15,15 +15,15 @@ public class TaskQueryController {
   private final TaskQueryObjectRepository repository;
   private final ResolveTaskFormUrl resolveTaskFormUrl;
 
-  public TaskQueryController(TaskQueryObjectRepository repository, ResolveTaskFormUrl resolveTaskFormUrl) {
+  public TaskQueryController(final TaskQueryObjectRepository repository, final ResolveTaskFormUrl resolveTaskFormUrl) {
     this.repository = repository;
     this.resolveTaskFormUrl = resolveTaskFormUrl;
   }
 
   @GetMapping(path = "/tasks", produces = "application/json")
   public List<TaskQueryObject> getAllTasks() {
-    return repository.findAll().stream()
-      .map(resolveTaskFormUrl)
+    return this.repository.findAll().stream()
+      .map(this.resolveTaskFormUrl)
       .collect(Collectors.toList());
   }
 

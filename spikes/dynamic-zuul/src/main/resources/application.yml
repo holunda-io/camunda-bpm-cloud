@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: dynamic-zuul
+
+zuul:
+  debug:
+    request: true
+  trace-request-body: true
+  add-proxy-headers: true
+
+  routes:
+    identity:
+      path: /foo/**
+      url: http://localhost:${server.port}
+    bar:
+      path: /bar/**
+      url: http://localhost:${server.port}/foo
+
+ribbon:
+  eureka:
+    enabled: false
+
+endpoints:
+  enabled: false
+  jmx:
+    enabled: false
+
