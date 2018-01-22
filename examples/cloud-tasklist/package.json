@@ -31,7 +31,7 @@
     "grunt-postcss": "0.8.0",
     "jasmine": "2.4.1",
     "jit-grunt": "^0.9.1",
-    "jquery": "2.2.4",
+    "jquery": "3.0.0",
     "jshint-stylish": "2.2.1",
     "karma": "1.1.1",
     "karma-coverage": "1.1.0",
