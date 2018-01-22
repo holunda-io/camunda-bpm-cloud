@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.netflix.zuul.filters.discovery.PatternServiceRouteMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -59,13 +58,6 @@ public class WorkloadQueryServiceApplication {
         super.onMessage(message, channel);
       }
     };
-  }
-
-  @Bean
-  public PatternServiceRouteMapper serviceRouteMapper() {
-    return new PatternServiceRouteMapper(
-      "(?<name>^.+)-(?<version>v.+$)",
-      "${version}/${name}");
   }
 
 }
