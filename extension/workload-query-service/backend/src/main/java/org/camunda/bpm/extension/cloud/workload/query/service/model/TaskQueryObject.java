@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 import org.camunda.bpm.extension.cloud.workload.event.TaskCompletedEvent;
 import org.camunda.bpm.extension.cloud.workload.event.TaskCreatedEvent;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -45,7 +41,7 @@ public class TaskQueryObject {
   private String taskFormUrl;
 
 
-  public static TaskQueryObject from(TaskCreatedEvent taskEvent) {
+  public static TaskQueryObject from(final TaskCreatedEvent taskEvent) {
     return TaskQueryObject.builder()
       .assignee(taskEvent.getAssignee())
       .caseDefinitionId(taskEvent.getCaseDefinitionId())
@@ -66,7 +62,7 @@ public class TaskQueryObject {
       .build();
   }
 
-  public static TaskQueryObject from(TaskCompletedEvent taskEvent) {
+  public static TaskQueryObject from(final TaskCompletedEvent taskEvent) {
     return TaskQueryObject.builder()
       .assignee(taskEvent.getAssignee())
       .caseDefinitionId(taskEvent.getCaseDefinitionId())

@@ -1,14 +1,10 @@
 package org.camunda.bpm.extension.cloud.workload.command.service;
 
-import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.amqp.eventhandling.AMQPMessageConverter;
-import org.axonframework.amqp.eventhandling.spring.SpringAMQPMessageSource;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.serialization.Serializer;
 import org.axonframework.serialization.json.JacksonSerializer;
 import org.camunda.bpm.extension.cloud.workload.command.TaskCommand;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Slf4j
 public class WorkloadCommandServiceApplication {
 
-  public static void main(String... args) {
+  public static void main(final String... args) {
     SpringApplication.run(WorkloadCommandServiceApplication.class, args);
   }
 
@@ -46,24 +42,10 @@ public class WorkloadCommandServiceApplication {
     return new JacksonSerializer();
   }
 
-  @Bean
-  public SpringAMQPMessageSource myQueueMessageSource(final AMQPMessageConverter messageConverter) {
-    return new SpringAMQPMessageSource(messageConverter) {
-
-      @RabbitListener(queues = "${camunda.bpm.cloud.amqp.queue.command}")
-      @Override
-      public void onMessage(Message message, Channel channel) throws Exception {
-
-        log.info("receiving command: {}#{}", message, channel);
-        super.onMessage(message, channel);
-      }
-    };
-  }
-
   @RabbitListener(queues = "${camunda.bpm.cloud.amqp.queue.command}")
   public void receiveCommand(final TaskCommand command) {
-    log.info("Forwarding Event: {} {}", command.getClass().getSimpleName(), command.toString());
-    commandGateway.send(command);
+    this.commandGateway.send(command);
+    log.info("Received message from command queue: {} {}", command.getClass().getSimpleName(), command.toString());
   }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class TaskCompleteListener extends AbstractTaskListener<CompleteTaskCommand> {
 
   @Override
-  protected CompleteTaskCommand createCommand(DelegateTask task) {
+  protected CompleteTaskCommand createCommand(final DelegateTask task) {
     return CompleteTaskCommand.builder()
       .taskId(task.getId())
       .taskDefinitionKey(task.getTaskDefinitionKey())
@@ -28,14 +28,14 @@ public class TaskCompleteListener extends AbstractTaskListener<CompleteTaskComma
       .createTime(task.getCreateTime())
       .dueDate(task.getDueDate())
       .formKey(getFormKey(task))
-      .engineId(appName)
-      .eventType(TaskListener.EVENTNAME_CREATE)
+      .engineId(this.appName)
+      .eventType(task.getEventName())
       .tenantId(task.getTenantId())
       .build();
   }
 
   @Override
-  public void notify(DelegateTask delegateTask) {
+  public void notify(final DelegateTask delegateTask) {
     super.notify(delegateTask);
     log.info("Task completed: {}", delegateTask.getId());
   }

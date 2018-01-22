@@ -15,6 +15,7 @@
   <modules>
     <module>rabbitmq-spike</module>
     <module>configserver-spike</module>
+    <module>dynamic-zuul</module>
   </modules>
 
   <dependencies>
